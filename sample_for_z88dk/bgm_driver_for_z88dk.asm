@@ -51,6 +51,16 @@ bgmdrv_play::
 		endscope
 
 ; --------------------------------------------------------------------
+		scope	bgmdrv_test
+bgmdrv_check_play::
+		call	bgmdriver_check_playing
+		ld		hl, 0
+		ret		z		; ’âŽ~’†
+		inc		hl
+		ret				; ‰‰‘t’†
+		endscope
+
+; --------------------------------------------------------------------
 		scope	htimi_handler
 htimi_handler::
 		call	bgmdriver_interrupt_handler

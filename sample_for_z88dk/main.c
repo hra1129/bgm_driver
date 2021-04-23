@@ -20,8 +20,10 @@ int main( int argc, char *argv[] ) {
 	bgmdrv_play( "SAMPLE.BIN" );
 
 	printf( "Play SAMPLE.BIN.\n" );
-	getchar();
 
+	while( bgmdrv_check_play() );
+
+	puts( "Finish.\n" );
 	bgmdrv_stop();
 	bgmdrv_term();
 	return 0;

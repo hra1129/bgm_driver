@@ -2571,7 +2571,7 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 004697: 21 9f fd
 
 [	LD DE , H_TIMI_BACKUP] Z80:11cyc, R800:3cyc
-00469a: 11 c7 46
+00469a: 11 d0 46
 
 [	LD BC , 5] Z80:11cyc, R800:3cyc
 00469d: 01 05 00
@@ -2586,7 +2586,7 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 0046a4: 32 9f fd
 
 [	LD HL , HTIMI_HANDLER] Z80:11cyc, R800:3cyc
-0046a7: 21 c4 46
+0046a7: 21 cd 46
 
 [	LD [ H_TIMI + 1 ] , HL] Z80:17cyc, R800:7cyc
 0046aa: 22 a0 fd
@@ -2610,7 +2610,7 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 0046af: f3
 
 [	LD HL , H_TIMI_BACKUP] Z80:11cyc, R800:3cyc
-0046b0: 21 c7 46
+0046b0: 21 d0 46
 
 [	LD DE , H_TIMI] Z80:11cyc, R800:3cyc
 0046b3: 11 9f fd
@@ -2648,32 +2648,56 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 [	ENDSCOPE]
 	Scope path: 
 
+[	SCOPE BGMDRV_TEST]
+	Scope path: BGMDRV_TEST:
+
+[BGMDRV_CHECK_PLAY ::]
+	global label address: 0x0046c4
+
+[	CALL BGMDRIVER_CHECK_PLAYING] Z80:18cyc, R800:5cyc
+0046c4: cd 60 40
+
+[	LD HL , 0] Z80:11cyc, R800:3cyc
+0046c7: 21 00 00
+
+[	RET Z] Z80:12cyc(branch), 6cyc(through), R800:5cyc(branch), 1cyc(through)
+0046ca: c8
+
+[	INC HL] Z80:7cyc, R800:1cyc
+0046cb: 23
+
+[	RET] Z80:11cyc, R800:5cyc
+0046cc: c9
+
+[	ENDSCOPE]
+	Scope path: 
+
 [	SCOPE HTIMI_HANDLER]
 	Scope path: HTIMI_HANDLER:
 
 [HTIMI_HANDLER ::]
-	global label address: 0x0046c4
+	global label address: 0x0046cd
 
 [	CALL BGMDRIVER_INTERRUPT_HANDLER] Z80:18cyc, R800:5cyc
-0046c4: cd d9 40
+0046cd: cd d9 40
 
 [H_TIMI_BACKUP ::]
-	global label address: 0x0046c7
+	global label address: 0x0046d0
 
 [	RET] Z80:11cyc, R800:5cyc
-0046c7: c9
+0046d0: c9
 
 [	RET] Z80:11cyc, R800:5cyc
-0046c8: c9
+0046d1: c9
 
 [	RET] Z80:11cyc, R800:5cyc
-0046c9: c9
+0046d2: c9
 
 [	RET] Z80:11cyc, R800:5cyc
-0046ca: c9
+0046d3: c9
 
 [	RET] Z80:11cyc, R800:5cyc
-0046cb: c9
+0046d4: c9
 
 [	ENDSCOPE]
 	Scope path: 
@@ -2820,6 +2844,7 @@ BGMDRIVER_UPDATE_VIBRATO 17144 ( 0x42f8 )
 BGMDRIVER_VIBRATO_ACTIVE 17163 ( 0x430b )
 BGMDRIVER_VIBRATO_ACTIVE_SKIP 17195 ( 0x432b )
 BGMDRIVER_VOLUME 16894 ( 0x41fe )
+BGMDRV_CHECK_PLAY 18116 ( 0x46c4 )
 BGMDRV_PLAY 18109 ( 0x46bd )
 BGMDRV_RESTORE_HTIMI 18095 ( 0x46af )
 BGMDRV_SETUP_HTIMI 18067 ( 0x4693 )
@@ -2975,11 +3000,11 @@ GTPAD 219 ( 0xdb )
 GTSTICK 213 ( 0xd5 )
 GTTRIG 216 ( 0xd8 )
 HIMEM 64586 ( 0xfc4a )
-HTIMI_HANDLER 18116 ( 0x46c4 )
+HTIMI_HANDLER 18125 ( 0x46cd )
 H_KEYI 64922 ( 0xfd9a )
 H_PHYD 65447 ( 0xffa7 )
 H_TIMI 64927 ( 0xfd9f )
-H_TIMI_BACKUP 18119 ( 0x46c7 )
+H_TIMI_BACKUP 18128 ( 0x46d0 )
 INFO_EFF_FREQ_H 5 ( 0x5 )
 INFO_EFF_FREQ_L 4 ( 0x4 )
 INFO_EFF_VOL 8 ( 0x8 )

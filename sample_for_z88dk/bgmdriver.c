@@ -11,16 +11,17 @@ static const unsigned int bgm_driver_base_address = 0x4000;
 static const unsigned int bgm_data_address = 0x6000;
 
 // zma.sym から値をコピペ
-#define BGMDRV_SETUP_HTIMI			0x4693
-#define BGMDRV_RESTORE_HTIMI		0x46af
-#define BGMDRIVER_PLAY				0x46bd
-#define BGMDRIVER_STOP				0x404b
+void (* bgmdrv_setup_htimi)( void )		= 0x4693;
+void (* bgmdrv_restore_htimi)( void )	= 0x46af;
+void (* bgmdriver_play)( void )			= 0x46bd;
+void (* bgmdrv_stop)( void )			= 0x404b;
+int  (* bgmdrv_check_play)( void )		= 0x46c4;
 
 // --------------------------------------------------------------------
 int bgmdrv_init( void ) {
 	FILE *p_file;
 	char *p;
-	int i;
+	volatile int i;
 
 	// BGMDRV.BIN を 0x4000番地～ に読み込む
 	p_file = fopen( "BGMDRV.BIN", "rb" );
@@ -36,9 +37,7 @@ int bgmdrv_init( void ) {
 	fclose( p_file );
 
 	// 初期化ルーチンを呼ぶ
-	#asm
-		call BGMDRV_SETUP_HTIMI;
-	#endasm
+	bgmdrv_setup_htimi();
 	return 1;
 }
 
@@ -46,9 +45,7 @@ int bgmdrv_init( void ) {
 void bgmdrv_term( void ) {
 
 	// 後始末ルーチンを呼ぶ
-	#asm
-		call BGMDRV_RESTORE_HTIMI;
-	#endasm
+	bgmdrv_restore_htimi();
 }
 
 // --------------------------------------------------------------------
@@ -58,9 +55,7 @@ int bgmdrv_play( const char *p_music_file_name ) {
 	int i;
 
 	// 演奏停止
-	#asm
-		call BGMDRIVER_STOP;
-	#endasm
+	bgmdrv_stop();
 
 	p_file = fopen( p_music_file_name, "rb" );
 	if( p_file == NULL ) {
@@ -74,17 +69,6 @@ int bgmdrv_play( const char *p_music_file_name ) {
 	fclose( p_file );
 
 	// 演奏開始
-	#asm
-		call BGMDRIVER_PLAY;
-	#endasm
+	bgmdriver_play();
 	return 1;
-}
-
-// --------------------------------------------------------------------
-void bgmdrv_stop( void ) {
-
-	// 演奏停止
-	#asm
-		call BGMDRIVER_STOP;
-	#endasm
 }
