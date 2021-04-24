@@ -263,7 +263,6 @@ bgmdriver_mute_psg_loop:
 ; -----------------------------------------------------------------------------
 bgmdriver_play_sound_effect::
 		; 効果音開始のための初期化処理を実施する
-		; page1 を RAM に切り替える
 		push	hl
 		di
 		ld		a, [play_sound_effect_priority]			; 再生中の効果音よりプライオリティが高いか？

@@ -5,8 +5,10 @@
 ; --------------------------------------------------------------------
 
 		include "msx.asm"
+		include "config.txt"
 
-		org		0x4000					; BGMDRV.BIN は 0x4000番地～ に読み込まれることを前提
+		org		start_address					; BGMDRV.BIN は start_address～ に読み込まれることを前提
+
 		include	"bgmdriver.asm"
 
 ; --------------------------------------------------------------------
@@ -20,13 +22,30 @@ bgmdrv_setup_htimi::
 		ld		bc, 5
 		ldir
 
+		if htimi_handler < 0x4000
+			ld		a, [ramad0]
+		elseif htimi_handler < 0x8000
+			ld		a, [ramad1]
+		elseif htimi_handler < 0xC000
+			ld		a, [ramad2]
+		else
+			ld		a, [ramad3]
+		endif
+		ld		[h_timi_new_slot], a
+
 		; 新しい H.TIMIをセットする
-		ld		a, 0xC3					; JP命令
-		ld		[ H_TIMI ], a
-		ld		hl, htimi_handler
-		ld		[ H_TIMI + 1 ], hl
+		ld		hl, H_TIMI_NEW
+		ld		de, H_TIMI
+		ld		bc, 5
+		ldir
 		ei
 		ret
+
+H_TIMI_NEW:
+		rst		0x30
+h_timi_new_slot:
+		db		0
+		dw		htimi_handler
 		endscope
 
 ; --------------------------------------------------------------------
@@ -45,13 +64,43 @@ bgmdrv_restore_htimi::
 ; --------------------------------------------------------------------
 		scope	bgmdrv_play
 bgmdrv_play::
-		ld		hl, 0x6000
+		pop		bc		; 戻りアドレス
+		pop		hl		; 第1引数
+		push	hl
+		push	bc
 		call	bgmdriver_play
 		ret
 		endscope
 
 ; --------------------------------------------------------------------
-		scope	bgmdrv_test
+		scope	bgmdrv_play_se
+bgmdrv_play_se::
+		pop		bc		; 戻りアドレス
+		pop		hl		; 第1引数
+		push	hl
+		push	bc
+		call	bgmdriver_play_sound_effect
+		ret
+		endscope
+
+; --------------------------------------------------------------------
+		scope	bgmdrv_fade_out
+bgmdrv_fade_out::
+		pop		bc		; 戻りアドレス
+		pop		hl		; 第1引数
+		push	hl
+		push	bc
+		ld		a, h
+		ld		a, 255
+		jr		nz, skip1
+		ld		a, l
+skip1:
+		call	bgmdriver_fadeout
+		ret
+		endscope
+
+; --------------------------------------------------------------------
+		scope	bgmdrv_check_play
 bgmdrv_check_play::
 		call	bgmdriver_check_playing
 		ld		hl, 0
@@ -63,7 +112,9 @@ bgmdrv_check_play::
 ; --------------------------------------------------------------------
 		scope	htimi_handler
 htimi_handler::
+		push	af
 		call	bgmdriver_interrupt_handler
+		pop		af
 H_TIMI_BACKUP::
 		ret
 		ret
@@ -71,3 +122,6 @@ H_TIMI_BACKUP::
 		ret
 		ret
 		endscope
+end_address::
+
+driver_size := end_address - start_address

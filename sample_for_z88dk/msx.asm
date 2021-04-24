@@ -126,6 +126,11 @@ EXTROM						:= 0x015F
 ;
 EXBRSA						:= 0xFAF8
 
+RAMAD0						:= 0xF341
+RAMAD1						:= 0xF342
+RAMAD2						:= 0xF343
+RAMAD3						:= 0xF344
+
 ;	BASE SLOT EXTEND INFORMATION
 ;
 EXPTBL0						:= 0xFCC1		; [ext][N/A][N/A][N/A][EXT.SLOT][BASESLOT]	MAIN-ROM slot
