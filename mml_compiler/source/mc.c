@@ -29,6 +29,9 @@ typedef struct {
 	int			ratio;
 	int			size;
 	int			loop_index;
+	int			tie;
+	int			tie_length;
+	int			tie_tone_id;
 } MUSIC_T;
 
 enum {
@@ -191,7 +194,7 @@ static double get_length( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 }
 
 /* ----------------------------------------------------- */
-static void put_length( MUSIC_T *p_music_info, double length, int ratio ) {
+static void put_length( MUSIC_T *p_music_info, double length, int ratio, int with_tie ) {
 	double length_time;
 	int wait_count;
 
@@ -214,14 +217,23 @@ static void put_length( MUSIC_T *p_music_info, double length, int ratio ) {
 	wait_count = (int)length_time;
 	p_music_info->length_error = length_time - (double)wait_count;	/* 誤差を覚えておく */
 	/* 音長を出力 */
-	wait_count--;
-	while( wait_count > 255 ) {
-		p_music_info->p_music_data[ p_music_info->index++ ] = (char)255;
-		p_music_info->size++;
-		wait_count -= 255;
+	if( with_tie ){
+		p_music_info->tie_length += wait_count;
 	}
-	p_music_info->p_music_data[ p_music_info->index++ ] = (char)wait_count;
-	p_music_info->size++;
+	else{
+		wait_count += p_music_info->tie_length;
+		p_music_info->tie = 0;
+		p_music_info->tie_tone_id = 0;
+		p_music_info->tie_length = 0;
+		wait_count--;
+		while( wait_count > 255 ){
+			p_music_info->p_music_data[ p_music_info->index++ ] = (char)255;
+			p_music_info->size++;
+			wait_count -= 255;
+		}
+		p_music_info->p_music_data[ p_music_info->index++ ] = (char)wait_count;
+		p_music_info->size++;
+	}
 }
 
 /* ----------------------------------------------------- */
@@ -242,13 +254,13 @@ static void process_drum_data( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	p_music_info->p_music_data[ p_music_info->index++ ] = tone_id;
 	p_music_info->size++;
 	if( p_music_info->ratio != 8 ) {
-		put_length( p_music_info, length, p_music_info->ratio );
+		put_length( p_music_info, length, p_music_info->ratio, 0 );
 		p_music_info->p_music_data[ p_music_info->index++ ] = BGM_KEYOFF;
 		p_music_info->size++;
-		put_length( p_music_info, length, 8 - p_music_info->ratio );
+		put_length( p_music_info, length, 8 - p_music_info->ratio, 0 );
 	}
 	else {
-		put_length( p_music_info, length, p_music_info->ratio );
+		put_length( p_music_info, length, p_music_info->ratio, 0 );
 	}
 }
 
@@ -294,17 +306,33 @@ static void process_tone_data( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 		with_tai = 0;
 	}
 
-	/* 集めた情報に基づいてデータを書き出す */
-	p_music_info->p_music_data[ p_music_info->index++ ] = tone_id;
-	p_music_info->size++;
-	if( with_tai == 0 && p_music_info->ratio != 8 ) {
-		put_length( p_music_info, length, p_music_info->ratio );
+	if( p_music_info->tie && p_music_info->tie_tone_id != tone_id ){
+		/* 前の音と、今の音の間に & があるが、音程が異なる場合 */
+		put_length( p_music_info, 0, p_music_info->ratio, 0 );
+		p_music_info->tie = 0;
+		p_music_info->tie_tone_id = tone_id;
+		/* 集めた情報に基づいてデータを書き出す */
+		p_music_info->p_music_data[ p_music_info->index++ ] = tone_id;
+		p_music_info->size++;
+	}
+	else if( !p_music_info->tie ){
+		/* 集めた情報に基づいてデータを書き出す */
+		p_music_info->p_music_data[ p_music_info->index++ ] = tone_id;
+		p_music_info->size++;
+	}
+	if( with_tai == 1 ){
+		p_music_info->tie = 1;
+		p_music_info->tie_tone_id = tone_id;
+		put_length( p_music_info, length, p_music_info->ratio, 1 );
+	}
+	else if( with_tai == 0 && p_music_info->ratio != 8 ) {
+		put_length( p_music_info, length, p_music_info->ratio, 0 );
 		p_music_info->p_music_data[ p_music_info->index++ ] = BGM_KEYOFF;
 		p_music_info->size++;
-		put_length( p_music_info, length, 8 - p_music_info->ratio );
+		put_length( p_music_info, length, 8 - p_music_info->ratio, 0 );
 	}
 	else {
-		put_length( p_music_info, length, p_music_info->ratio );
+		put_length( p_music_info, length, p_music_info->ratio, 0 );
 	}
 }
 
@@ -426,7 +454,7 @@ static void process_rest( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	length = get_length( p_music_info, p_text_info );
 	p_music_info->p_music_data[ p_music_info->index++ ] = BGM_REST;
 	p_music_info->size++;
-	put_length( p_music_info, length, 8 );
+	put_length( p_music_info, length, 8, 0 );
 }
 
 /* ----------------------------------------------------- */
@@ -455,6 +483,9 @@ static int compile_music_data( char *p_music_data, TEXT_T *p_text_info, int soun
 	music_info.length_error = 0.;
 	music_info.size = 0;
 	music_info.loop_index = -1;
+	music_info.tie = 0;
+	music_info.tie_length = 0;
+	music_info.tie_tone_id = 0;
 
 	skip_white_space( p_text_info );
 	c = p_text_info->p_text[ p_text_info->index ];

@@ -1,0 +1,3 @@
+﻿cl : コマンド ライン warning D9035: オプション 'Gm' の使用は現在推奨されていません。今後のバージョンからは削除されます。
+  mc.c
+  mc.vcxproj -> C:\Users\hra\Documents\github\bgm_driver\mml_compiler\source\Debug\mc.exe
