@@ -66,6 +66,18 @@ extern void (* bgmdrv_fade_out)( unsigned int speed );
 extern void (* bgmdrv_play_se)( void *p_data );
 
 // --------------------------------------------------------------------
+//	メモリへファイルを読み込む
+//	input)
+//		p_memory ...... 読み込み先メモリのアドレス
+//		p_file_name ... ファイル名
+//		file_size ..... 読み込むサイズ ( 0 にすると、ファイル全体を読む )
+//	output)
+//		0 ... 失敗
+//		1 ... 成功
+// --------------------------------------------------------------------
+int bgmdrv_load_file( void *p_memory, const char *p_file_name, size_t file_size );
+
+// --------------------------------------------------------------------
 //	効果音データ作成用
 #define BGM_SE_FREQ			0
 #define BGM_SE_VOL			1
