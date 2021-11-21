@@ -6,7 +6,7 @@
 
 	include		"msx.asm"
 
-	bsave_header	start_address, end_address, entry_point
+	BSAVE_HEADER	start_address, end_address, entry_point
 
 	org			0xA000
 start_address::

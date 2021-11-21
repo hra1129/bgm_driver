@@ -1,4 +1,4 @@
-Z80 Macro Assembler ZMA v1.0.14
+Z80 Macro Assembler ZMA v1.0.15
 =====================================================
 Programmed by t.hara
 
@@ -25,7 +25,7 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 000001: 00 a0
 
 [	DEFW END_ADDRESS]
-000003: 5c a8
+000003: 69 a8
 
 [	DEFW ENTRY_POINT]
 000005: 00 a0
@@ -46,7 +46,7 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 	global label address: 0x00a003
 
 [	LD HL , BGM001] Z80:11cyc, R800:3cyc
-00a003: 21 d4 a6
+00a003: 21 e1 a6
 
 [	CALL BGMDRIVER_PLAY] Z80:18cyc, R800:5cyc
 00a006: cd 4f a0
@@ -76,10 +76,10 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 	global label address: 0x00a012
 
 [	LD HL , SOUND_EFFECT001] Z80:11cyc, R800:3cyc
-00a012: 21 11 a8
+00a012: 21 1e a8
 
 [	CALL BGMDRIVER_PLAY_SOUND_EFFECT] Z80:18cyc, R800:5cyc
-00a015: cd e7 a0
+00a015: cd f4 a0
 
 [	RET] Z80:11cyc, R800:5cyc
 00a018: c9
@@ -88,10 +88,10 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 	global label address: 0x00a019
 
 [	LD HL , SOUND_EFFECT002] Z80:11cyc, R800:3cyc
-00a019: 21 3d a8
+00a019: 21 4a a8
 
 [	CALL BGMDRIVER_PLAY_SOUND_EFFECT] Z80:18cyc, R800:5cyc
-00a01c: cd e7 a0
+00a01c: cd f4 a0
 
 [	RET] Z80:11cyc, R800:5cyc
 00a01f: c9
@@ -145,7 +145,7 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 	global label address: 0x00a039
 
 [	CALL BGMDRIVER_INTERRUPT_HANDLER] Z80:18cyc, R800:5cyc
-00a039: cd 1a a1
+00a039: cd 27 a1
 
 [H_TIMI_NEXT ::]
 	global label address: 0x00a03c
@@ -176,10 +176,10 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 	global label address: 0x00a041
 
 [	LD HL , PLAY_INFO_CH0] Z80:11cyc, R800:3cyc
-00a041: 21 9b a6
+00a041: 21 a8 a6
 
 [	LD DE , PLAY_INFO_CH0 + 1] Z80:11cyc, R800:3cyc
-00a044: 11 9c a6
+00a044: 11 a9 a6
 
 [	LD BC , INFO_SIZE * 3 - 1] Z80:11cyc, R800:3cyc
 00a047: 01 38 00
@@ -212,10 +212,10 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 00a054: f3
 
 [	LD [ PLAY_BGM_DATA_ADR ] , HL] Z80:17cyc, R800:7cyc
-00a055: 22 8c a6
+00a055: 22 99 a6
 
 [	LD IX , [ PLAY_BGM_DATA_ADR ]] Z80:22cyc, R800:8cyc
-00a058: dd 2a 8c a6
+00a058: dd 2a 99 a6
 
 [	LD E , [ IX + 0 ]] Z80:21cyc, R800:7cyc
 00a05c: dd 5e 00
@@ -227,10 +227,10 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 00a062: 19
 
 [	LD [ PLAY_INFO_CH0 + INFO_PLAY_ADR_L ] , HL] Z80:17cyc, R800:7cyc
-00a063: 22 9b a6
+00a063: 22 a8 a6
 
 [	LD HL , [ PLAY_BGM_DATA_ADR ]] Z80:17cyc, R800:7cyc
-00a066: 2a 8c a6
+00a066: 2a 99 a6
 
 [	LD E , [ IX + 2 ]] Z80:21cyc, R800:7cyc
 00a069: dd 5e 02
@@ -242,10 +242,10 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 00a06f: 19
 
 [	LD [ PLAY_INFO_CH1 + INFO_PLAY_ADR_L ] , HL] Z80:17cyc, R800:7cyc
-00a070: 22 ae a6
+00a070: 22 bb a6
 
 [	LD HL , [ PLAY_BGM_DATA_ADR ]] Z80:17cyc, R800:7cyc
-00a073: 2a 8c a6
+00a073: 2a 99 a6
 
 [	LD E , [ IX + 4 ]] Z80:21cyc, R800:7cyc
 00a076: dd 5e 04
@@ -257,19 +257,19 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 00a07c: 19
 
 [	LD [ PLAY_INFO_CH2 + INFO_PLAY_ADR_L ] , HL] Z80:17cyc, R800:7cyc
-00a07d: 22 c1 a6
+00a07d: 22 ce a6
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
 00a080: af
 
 [	LD [ PLAY_MASTER_VOLUME_SPEED ] , A] Z80:14cyc, R800:6cyc
-00a081: 32 8f a6
+00a081: 32 9c a6
 
 [	LD [ PLAY_MASTER_VOLUME_WAIT ] , A] Z80:14cyc, R800:6cyc
-00a084: 32 8e a6
+00a084: 32 9b a6
 
 [	LD [ PLAY_MASTER_VOLUME ] , A] Z80:14cyc, R800:6cyc
-00a087: 32 90 a6
+00a087: 32 9d a6
 
 [	EI] Z80:5cyc, R800:1cyc
 00a08a: fb
@@ -284,22 +284,22 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 00a08c: f3
 
 [	LD HL , PLAY_INFO_CH0] Z80:11cyc, R800:3cyc
-00a08d: 21 9b a6
+00a08d: 21 a8 a6
 
 [	CALL BGMDRIVER_INIT_PLAY_INFO] Z80:18cyc, R800:5cyc
-00a090: cd 0f a1
+00a090: cd 1c a1
 
 [	LD HL , PLAY_INFO_CH1] Z80:11cyc, R800:3cyc
-00a093: 21 ae a6
+00a093: 21 bb a6
 
 [	CALL BGMDRIVER_INIT_PLAY_INFO] Z80:18cyc, R800:5cyc
-00a096: cd 0f a1
+00a096: cd 1c a1
 
 [	LD HL , PLAY_INFO_CH2] Z80:11cyc, R800:3cyc
-00a099: 21 c1 a6
+00a099: 21 ce a6
 
 [	CALL BGMDRIVER_INIT_PLAY_INFO] Z80:18cyc, R800:5cyc
-00a09c: cd 0f a1
+00a09c: cd 1c a1
 
 [	EI] Z80:5cyc, R800:1cyc
 00a09f: fb
@@ -314,7 +314,7 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 00a0a1: f3
 
 [	LD IX , PLAY_INFO_CH0] Z80:16cyc, R800:4cyc
-00a0a2: dd 21 9b a6
+00a0a2: dd 21 a8 a6
 
 [	LD A , [ IX + INFO_PLAY_ADR_L ]] Z80:21cyc, R800:7cyc
 00a0a6: dd 7e 00
@@ -323,7 +323,7 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 00a0a9: dd b6 01
 
 [	LD IX , PLAY_INFO_CH1] Z80:16cyc, R800:4cyc
-00a0ac: dd 21 ae a6
+00a0ac: dd 21 bb a6
 
 [	OR A , [ IX + INFO_PLAY_ADR_L ]] Z80:21cyc, R800:7cyc
 00a0b0: dd b6 00
@@ -332,7 +332,7 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 00a0b3: dd b6 01
 
 [	LD IX , PLAY_INFO_CH2] Z80:16cyc, R800:4cyc
-00a0b6: dd 21 c1 a6
+00a0b6: dd 21 ce a6
 
 [	OR A , [ IX + INFO_PLAY_ADR_L ]] Z80:21cyc, R800:7cyc
 00a0ba: dd b6 00
@@ -353,16 +353,16 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 00a0c2: f3
 
 [	LD [ PLAY_MASTER_VOLUME_SPEED ] , A] Z80:14cyc, R800:6cyc
-00a0c3: 32 8f a6
+00a0c3: 32 9c a6
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
 00a0c6: af
 
 [	LD [ PLAY_MASTER_VOLUME_WAIT ] , A] Z80:14cyc, R800:6cyc
-00a0c7: 32 8e a6
+00a0c7: 32 9b a6
 
 [	LD [ PLAY_MASTER_VOLUME ] , A] Z80:14cyc, R800:6cyc
-00a0ca: 32 90 a6
+00a0ca: 32 9d a6
 
 [	EI] Z80:5cyc, R800:1cyc
 00a0cd: fb
@@ -376,2171 +376,2133 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 [	DI] Z80:5cyc, R800:2cyc
 00a0cf: f3
 
-[	XOR A , A] Z80:5cyc, R800:1cyc
-00a0d0: af
+[	LD D , 0] Z80:8cyc, R800:2cyc
+00a0d0: 16 00
 
-[	LD D , A] Z80:5cyc, R800:2cyc
-00a0d1: 57
+[	LD HL , BGMPDRIVER_INIT_DATA] Z80:11cyc, R800:3cyc
+00a0d2: 21 e4 a0
 
 [	LD C , PSG_REG_ADR] Z80:8cyc, R800:2cyc
-00a0d2: 0e a0
+00a0d5: 0e a0
 
 [	LD B , 16] Z80:8cyc, R800:2cyc
-00a0d4: 06 10
+00a0d7: 06 10
 
 [BGMDRIVER_MUTE_PSG_LOOP :]
-	label address: 0x00a0d6
+	label address: 0x00a0d9
 
 [	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a0d6: ed 51
+00a0d9: ed 51
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a0d8: 14
+00a0db: 14
+
+[	LD A , [ HL ]] Z80:8cyc, R800:4cyc
+00a0dc: 7e
 
 [	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a0d9: d3 a1
+00a0dd: d3 a1
+
+[	INC HL] Z80:7cyc, R800:1cyc
+00a0df: 23
 
 [	DJNZ BGMDRIVER_MUTE_PSG_LOOP] Z80:14cyc(cond=true), 9cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a0db: 10 f9
-
-[	LD D , 7] Z80:8cyc, R800:2cyc
-00a0dd: 16 07
-
-[	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a0df: ed 51
-
-[	LD A , 0X80 + 0X3F] Z80:8cyc, R800:2cyc
-00a0e1: 3e bf
-
-[	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a0e3: d3 a1
+00a0e0: 10 f7
 
 [	EI] Z80:5cyc, R800:1cyc
-00a0e5: fb
+00a0e2: fb
 
 [	RET] Z80:11cyc, R800:5cyc
-00a0e6: c9
+00a0e3: c9
+
+[BGMPDRIVER_INIT_DATA :]
+	label address: 0x00a0e4
+
+[	DB 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0X80 + 0X3F , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0]
+00a0e4: 00 00 00 00 00 00 00 bf
+00a0ec: 00 00 00 00 00 00 00 00
 
 [BGMDRIVER_PLAY_SOUND_EFFECT ::]
-	global label address: 0x00a0e7
+	global label address: 0x00a0f4
 
 [	PUSH HL] Z80:12cyc, R800:6cyc
-00a0e7: e5
+00a0f4: e5
 
 [	DI] Z80:5cyc, R800:2cyc
-00a0e8: f3
+00a0f5: f3
 
 [	LD A , [ PLAY_SOUND_EFFECT_PRIORITY ]] Z80:14cyc, R800:6cyc
-00a0e9: 3a 8a a6
+00a0f6: 3a 97 a6
 
 [	CP A , [ HL ]] Z80:8cyc, R800:4cyc
-00a0ec: be
+00a0f9: be
 
 [	JP C , BGMDRIVER_PLAY_SOUND_EFFECT_SKIP] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a0ed: da 0c a1
+00a0fa: da 19 a1
 
 [	LD A , [ HL ]] Z80:8cyc, R800:4cyc
-00a0f0: 7e
+00a0fd: 7e
 
 [	LD [ PLAY_SOUND_EFFECT_PRIORITY ] , A] Z80:14cyc, R800:6cyc
-00a0f1: 32 8a a6
+00a0fe: 32 97 a6
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a0f4: 23
+00a101: 23
 
 [	LD [ PLAY_SOUND_EFFECT_ADR ] , HL] Z80:17cyc, R800:7cyc
-00a0f5: 22 88 a6
+00a102: 22 95 a6
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a0f8: af
+00a105: af
 
 [	LD [ PLAY_SOUND_EFFECT_WAIT_COUNT ] , A] Z80:14cyc, R800:6cyc
-00a0f9: 32 83 a6
+00a106: 32 90 a6
 
 [	LD [ PLAY_SOUND_EFFECT_FREQ + 0 ] , A] Z80:14cyc, R800:6cyc
-00a0fc: 32 84 a6
+00a109: 32 91 a6
 
 [	LD [ PLAY_SOUND_EFFECT_FREQ + 1 ] , A] Z80:14cyc, R800:6cyc
-00a0ff: 32 85 a6
+00a10c: 32 92 a6
 
 [	LD [ PLAY_SOUND_EFFECT_NOISE_FREQ ] , A] Z80:14cyc, R800:6cyc
-00a102: 32 86 a6
+00a10f: 32 93 a6
 
 [	LD [ PLAY_SOUND_EFFECT_VOLUME ] , A] Z80:14cyc, R800:6cyc
-00a105: 32 87 a6
+00a112: 32 94 a6
 
 [	INC A] Z80:5cyc, R800:1cyc
-00a108: 3c
+00a115: 3c
 
 [	LD [ PLAY_SOUND_EFFECT_ACTIVE ] , A] Z80:14cyc, R800:6cyc
-00a109: 32 82 a6
+00a116: 32 8f a6
 
 [BGMDRIVER_PLAY_SOUND_EFFECT_SKIP :]
-	label address: 0x00a10c
+	label address: 0x00a119
 
 [	POP HL] Z80:11cyc, R800:5cyc
-00a10c: e1
+00a119: e1
 
 [	EI] Z80:5cyc, R800:1cyc
-00a10d: fb
+00a11a: fb
 
 [	RET] Z80:11cyc, R800:5cyc
-00a10e: c9
+00a11b: c9
 
 [BGMDRIVER_INIT_PLAY_INFO :]
-	label address: 0x00a10f
+	label address: 0x00a11c
 
 [	LD E , L] Z80:5cyc, R800:2cyc
-00a10f: 5d
+00a11c: 5d
 
 [	LD D , H] Z80:5cyc, R800:2cyc
-00a110: 54
+00a11d: 54
 
 [	INC DE] Z80:7cyc, R800:1cyc
-00a111: 13
+00a11e: 13
 
 [	LD BC , INFO_SIZE - 1] Z80:11cyc, R800:3cyc
-00a112: 01 12 00
+00a11f: 01 12 00
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a115: af
+00a122: af
 
 [	LD [ HL ] , A] Z80:8cyc, R800:4cyc
-00a116: 77
+00a123: 77
 
 [	LDIR] Z80:23cyc(BC!=0), 18cyc(BC=0), R800:?cyc(BC!=0), 7cyc(BC=0)
-00a117: ed b0
+00a124: ed b0
 
 [	RET] Z80:11cyc, R800:5cyc
-00a119: c9
+00a126: c9
 
 [BGMDRIVER_INTERRUPT_HANDLER ::]
-	global label address: 0x00a11a
+	global label address: 0x00a127
 
 [	LD IX , PLAY_INFO_CH0] Z80:16cyc, R800:4cyc
-00a11a: dd 21 9b a6
+00a127: dd 21 a8 a6
 
 [	CALL BGMDRIVER_PLAY_CH] Z80:18cyc, R800:5cyc
-00a11e: cd 39 a1
+00a12b: cd 46 a1
 
 [	LD IX , PLAY_INFO_CH1] Z80:16cyc, R800:4cyc
-00a121: dd 21 ae a6
+00a12e: dd 21 bb a6
 
 [	CALL BGMDRIVER_PLAY_CH] Z80:18cyc, R800:5cyc
-00a125: cd 39 a1
+00a132: cd 46 a1
 
 [	LD IX , PLAY_INFO_CH2] Z80:16cyc, R800:4cyc
-00a128: dd 21 c1 a6
+00a135: dd 21 ce a6
 
 [	CALL BGMDRIVER_PLAY_CH] Z80:18cyc, R800:5cyc
-00a12c: cd 39 a1
+00a139: cd 46 a1
 
 [	CALL BGMDRIVER_SOUND_EFFECT] Z80:18cyc, R800:5cyc
-00a12f: cd 59 a4
+00a13c: cd 66 a4
 
 [	CALL BGMDRIVER_FADEOUT_PROC] Z80:18cyc, R800:5cyc
-00a132: cd 1f a4
+00a13f: cd 2c a4
 
 [	CALL BGMDRIVER_MIXER] Z80:18cyc, R800:5cyc
-00a135: cd b4 a4
+00a142: cd c1 a4
 
 [	RET] Z80:11cyc, R800:5cyc
-00a138: c9
+00a145: c9
 
 [BGMDRIVER_PLAY_CH :]
-	label address: 0x00a139
+	label address: 0x00a146
 
 [	LD A , [ IX + INFO_PLAY_ADR_L ]] Z80:21cyc, R800:7cyc
-00a139: dd 7e 00
+00a146: dd 7e 00
 
 [	OR A , [ IX + INFO_PLAY_ADR_H ]] Z80:21cyc, R800:7cyc
-00a13c: dd b6 01
+00a149: dd b6 01
 
 [	RET Z] Z80:12cyc(branch), 6cyc(through), R800:5cyc(branch), 1cyc(through)
-00a13f: c8
+00a14c: c8
 
 [	LD L , [ IX + INFO_WAIT_COUNT_L ]] Z80:21cyc, R800:7cyc
-00a140: dd 6e 02
+00a14d: dd 6e 02
 
 [	LD H , [ IX + INFO_WAIT_COUNT_H ]] Z80:21cyc, R800:7cyc
-00a143: dd 66 03
+00a150: dd 66 03
 
 [	LD A , L] Z80:5cyc, R800:2cyc
-00a146: 7d
+00a153: 7d
 
 [	OR A , H] Z80:5cyc, R800:1cyc
-00a147: b4
+00a154: b4
 
 [	JR Z , BGMDRIVER_CHECK_NEXT_DATA] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a148: 28 0a
+00a155: 28 0a
 
 [	DEC HL] Z80:7cyc, R800:1cyc
-00a14a: 2b
+00a157: 2b
 
 [	LD [ IX + INFO_WAIT_COUNT_L ] , L] Z80:8cyc, R800:4cyc
-00a14b: dd 75 02
+00a158: dd 75 02
 
 [	LD [ IX + INFO_WAIT_COUNT_H ] , H] Z80:8cyc, R800:4cyc
-00a14e: dd 74 03
+00a15b: dd 74 03
 
 [	JP BGMDRIVER_UPDATE_VIBRATO] Z80:11cyc, R800:5cyc
-00a151: c3 39 a3
+00a15e: c3 46 a3
 
 [BGMDRIVER_CHECK_NEXT_DATA :]
-	label address: 0x00a154
+	label address: 0x00a161
 
 [	LD L , [ IX + INFO_PLAY_ADR_L ]] Z80:21cyc, R800:7cyc
-00a154: dd 6e 00
+00a161: dd 6e 00
 
 [	LD H , [ IX + INFO_PLAY_ADR_H ]] Z80:21cyc, R800:7cyc
-00a157: dd 66 01
+00a164: dd 66 01
 
 [	LD A , [ HL ]] Z80:8cyc, R800:4cyc
-00a15a: 7e
+00a167: 7e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a15b: 23
+00a168: 23
 
 [	CP A , 96] Z80:8cyc, R800:2cyc
-00a15c: fe 60
+00a169: fe 60
 
 [	JP C , BGMDRIVER_KEYON] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a15e: da 92 a1
+00a16b: da 9f a1
 
 [	CP A , 101] Z80:8cyc, R800:2cyc
-00a161: fe 65
+00a16e: fe 65
 
 [	JP C , BGMDRIVER_DRUM_KEYON] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a163: da da a1
+00a170: da e7 a1
 
 [	JP Z , BGMDRIVER_KEYOFF] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a166: ca 07 a2
+00a173: ca 14 a2
 
 [	CP A , 103] Z80:8cyc, R800:2cyc
-00a169: fe 67
+00a176: fe 67
 
 [	JP C , BGMDRIVER_REST] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a16b: da 25 a2
+00a178: da 32 a2
 
 [	JP Z , BGMDRIVER_VOLUME] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a16e: ca 3f a2
+00a17b: ca 4c a2
 
 [	CP A , 105] Z80:8cyc, R800:2cyc
-00a171: fe 69
+00a17e: fe 69
 
 [	JP C , BGMDRIVER_SOUND_FONT] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a173: da 4d a2
+00a180: da 5a a2
 
 [	JP Z , BGMDRIVER_JUMP] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a176: ca 16 a3
+00a183: ca 23 a3
 
 [	CP A , 107] Z80:8cyc, R800:2cyc
-00a179: fe 6b
+00a186: fe 6b
 
 [	JP C , BGMDRIVER_PLAY_END] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a17b: da 26 a3
+00a188: da 33 a3
 
 [	JP Z , BGMDRIVER_DRUM1_FONT] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a17e: ca 71 a2
+00a18b: ca 7e a2
 
 [	CP A , 109] Z80:8cyc, R800:2cyc
-00a181: fe 6d
+00a18e: fe 6d
 
 [	JP C , BGMDRIVER_DRUM2_FONT] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a183: da 92 a2
+00a190: da 9f a2
 
 [	JP Z , BGMDRIVER_DRUM3_FONT] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a186: ca b3 a2
+00a193: ca c0 a2
 
 [	CP A , 111] Z80:8cyc, R800:2cyc
-00a189: fe 6f
+00a196: fe 6f
 
 [	JP C , BGMDRIVER_DRUM4_FONT] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a18b: da d4 a2
+00a198: da e1 a2
 
 [	JP Z , BGMDRIVER_DRUM5_FONT] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a18e: ca f5 a2
+00a19b: ca 02 a3
 
 [	RET] Z80:11cyc, R800:5cyc
-00a191: c9
+00a19e: c9
 
 [BGMDRIVER_KEYON :]
-	label address: 0x00a192
+	label address: 0x00a19f
 
 [	LD C , A] Z80:5cyc, R800:2cyc
-00a192: 4f
+00a19f: 4f
 
 [	CALL BGMDRIVER_GET_WAIT_TIME] Z80:18cyc, R800:5cyc
-00a193: cd 09 a4
+00a1a0: cd 16 a4
 
 [	LD [ IX + INFO_WAIT_COUNT_L ] , E] Z80:8cyc, R800:4cyc
-00a196: dd 73 02
+00a1a3: dd 73 02
 
 [	LD [ IX + INFO_WAIT_COUNT_H ] , D] Z80:8cyc, R800:4cyc
-00a199: dd 72 03
+00a1a6: dd 72 03
 
 [	LD [ IX + INFO_PLAY_ADR_L ] , L] Z80:8cyc, R800:4cyc
-00a19c: dd 75 00
+00a1a9: dd 75 00
 
 [	LD [ IX + INFO_PLAY_ADR_H ] , H] Z80:8cyc, R800:4cyc
-00a19f: dd 74 01
+00a1ac: dd 74 01
 
 [	LD A , C] Z80:5cyc, R800:2cyc
-00a1a2: 79
+00a1af: 79
 
 [	RLCA] Z80:5cyc, R800:1cyc
-00a1a3: 07
+00a1b0: 07
 
 [	LD L , A] Z80:5cyc, R800:2cyc
-00a1a4: 6f
+00a1b1: 6f
 
 [	LD H , 0] Z80:8cyc, R800:2cyc
-00a1a5: 26 00
+00a1b2: 26 00
 
 [	LD DE , FREQ_DATA] Z80:11cyc, R800:3cyc
-00a1a7: 11 c2 a5
+00a1b4: 11 cf a5
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a1aa: 19
+00a1b7: 19
 
 [	LD E , [ HL ]] Z80:8cyc, R800:4cyc
-00a1ab: 5e
+00a1b8: 5e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a1ac: 23
+00a1b9: 23
 
 [	LD D , [ HL ]] Z80:8cyc, R800:4cyc
-00a1ad: 56
+00a1ba: 56
 
 [	LD L , [ IX + INFO_SEL_SFONT_L ]] Z80:21cyc, R800:7cyc
-00a1ae: dd 6e 11
+00a1bb: dd 6e 11
 
 [	LD H , [ IX + INFO_SEL_SFONT_H ]] Z80:21cyc, R800:7cyc
-00a1b1: dd 66 12
+00a1be: dd 66 12
 
 [BGMDRIVER_SET_FREQ :]
-	label address: 0x00a1b4
+	label address: 0x00a1c1
 
 [	LD [ IX + INFO_TONE_FREQ_L ] , E] Z80:8cyc, R800:4cyc
-00a1b4: dd 73 06
+00a1c1: dd 73 06
 
 [	LD [ IX + INFO_TONE_FREQ_H ] , D] Z80:8cyc, R800:4cyc
-00a1b7: dd 72 07
+00a1c4: dd 72 07
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a1ba: af
+00a1c7: af
 
 [	LD [ IX + INFO_ENV_STATE ] , A] Z80:8cyc, R800:4cyc
-00a1bb: dd 77 0b
+00a1c8: dd 77 0b
 
 [	LD [ IX + INFO_ENV_VOL ] , A] Z80:8cyc, R800:4cyc
-00a1be: dd 77 0c
+00a1cb: dd 77 0c
 
 [	LD [ IX + INFO_VIB_INDEX ] , A] Z80:8cyc, R800:4cyc
-00a1c1: dd 77 0d
+00a1ce: dd 77 0d
 
 [	LD [ IX + INFO_SOUND_FONT_L ] , L] Z80:8cyc, R800:4cyc
-00a1c4: dd 75 0e
+00a1d1: dd 75 0e
 
 [	LD [ IX + INFO_SOUND_FONT_H ] , H] Z80:8cyc, R800:4cyc
-00a1c7: dd 74 0f
+00a1d4: dd 74 0f
 
 [	LD DE , SFONT_VIB_WAIT] Z80:11cyc, R800:3cyc
-00a1ca: 11 25 00
+00a1d7: 11 25 00
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a1cd: 19
+00a1da: 19
 
 [	LD A , [ HL ]] Z80:8cyc, R800:4cyc
-00a1ce: 7e
+00a1db: 7e
 
 [	LD [ IX + INFO_VIB_WAIT ] , A] Z80:8cyc, R800:4cyc
-00a1cf: dd 77 0a
+00a1dc: dd 77 0a
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a1d2: 23
+00a1df: 23
 
 [	LD A , [ HL ]] Z80:8cyc, R800:4cyc
-00a1d3: 7e
+00a1e0: 7e
 
 [	LD [ IX + INFO_NOISE_FREQ ] , A] Z80:8cyc, R800:4cyc
-00a1d4: dd 77 10
+00a1e1: dd 77 10
 
 [	JP BGMDRIVER_UPDATE_VIBRATO] Z80:11cyc, R800:5cyc
-00a1d7: c3 39 a3
+00a1e4: c3 46 a3
 
 [BGMDRIVER_DRUM_KEYON :]
-	label address: 0x00a1da
+	label address: 0x00a1e7
 
 [	LD C , A] Z80:5cyc, R800:2cyc
-00a1da: 4f
+00a1e7: 4f
 
 [	CALL BGMDRIVER_GET_WAIT_TIME] Z80:18cyc, R800:5cyc
-00a1db: cd 09 a4
+00a1e8: cd 16 a4
 
 [	LD [ IX + INFO_WAIT_COUNT_L ] , E] Z80:8cyc, R800:4cyc
-00a1de: dd 73 02
+00a1eb: dd 73 02
 
 [	LD [ IX + INFO_WAIT_COUNT_H ] , D] Z80:8cyc, R800:4cyc
-00a1e1: dd 72 03
+00a1ee: dd 72 03
 
 [	LD [ IX + INFO_PLAY_ADR_L ] , L] Z80:8cyc, R800:4cyc
-00a1e4: dd 75 00
+00a1f1: dd 75 00
 
 [	LD [ IX + INFO_PLAY_ADR_H ] , H] Z80:8cyc, R800:4cyc
-00a1e7: dd 74 01
+00a1f4: dd 74 01
 
 [	LD A , C] Z80:5cyc, R800:2cyc
-00a1ea: 79
+00a1f7: 79
 
 [	SUB A , 96] Z80:8cyc, R800:2cyc
-00a1eb: d6 60
+00a1f8: d6 60
 
 [	RLCA] Z80:5cyc, R800:1cyc
-00a1ed: 07
+00a1fa: 07
 
 [	LD HL , PLAY_DRUM_FONT1] Z80:11cyc, R800:3cyc
-00a1ee: 21 91 a6
+00a1fb: 21 9e a6
 
 [	ADD A , L] Z80:5cyc, R800:1cyc
-00a1f1: 85
+00a1fe: 85
 
 [	LD L , A] Z80:5cyc, R800:2cyc
-00a1f2: 6f
+00a1ff: 6f
 
 [	LD A , 0] Z80:8cyc, R800:2cyc
-00a1f3: 3e 00
+00a200: 3e 00
 
 [	ADC A , H] Z80:5cyc, R800:1cyc
-00a1f5: 8c
+00a202: 8c
 
 [	LD H , A] Z80:5cyc, R800:2cyc
-00a1f6: 67
+00a203: 67
 
 [	LD E , [ HL ]] Z80:8cyc, R800:4cyc
-00a1f7: 5e
+00a204: 5e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a1f8: 23
+00a205: 23
 
 [	LD D , [ HL ]] Z80:8cyc, R800:4cyc
-00a1f9: 56
+00a206: 56
 
 [	EX DE , HL] Z80:5cyc, R800:1cyc
-00a1fa: eb
+00a207: eb
 
 [	PUSH HL] Z80:12cyc, R800:6cyc
-00a1fb: e5
+00a208: e5
 
 [	LD DE , SFONT_FREQ_L] Z80:11cyc, R800:3cyc
-00a1fc: 11 27 00
+00a209: 11 27 00
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a1ff: 19
+00a20c: 19
 
 [	LD E , [ HL ]] Z80:8cyc, R800:4cyc
-00a200: 5e
+00a20d: 5e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a201: 23
+00a20e: 23
 
 [	LD D , [ HL ]] Z80:8cyc, R800:4cyc
-00a202: 56
+00a20f: 56
 
 [	POP HL] Z80:11cyc, R800:5cyc
-00a203: e1
+00a210: e1
 
 [	JP BGMDRIVER_SET_FREQ] Z80:11cyc, R800:5cyc
-00a204: c3 b4 a1
+00a211: c3 c1 a1
 
 [BGMDRIVER_KEYOFF :]
-	label address: 0x00a207
+	label address: 0x00a214
 
 [	CALL BGMDRIVER_GET_WAIT_TIME] Z80:18cyc, R800:5cyc
-00a207: cd 09 a4
+00a214: cd 16 a4
 
 [	LD [ IX + INFO_WAIT_COUNT_L ] , E] Z80:8cyc, R800:4cyc
-00a20a: dd 73 02
+00a217: dd 73 02
 
 [	LD [ IX + INFO_WAIT_COUNT_H ] , D] Z80:8cyc, R800:4cyc
-00a20d: dd 72 03
+00a21a: dd 72 03
 
 [	LD [ IX + INFO_PLAY_ADR_L ] , L] Z80:8cyc, R800:4cyc
-00a210: dd 75 00
+00a21d: dd 75 00
 
 [	LD [ IX + INFO_PLAY_ADR_H ] , H] Z80:8cyc, R800:4cyc
-00a213: dd 74 01
+00a220: dd 74 01
 
 [	LD A , [ IX + INFO_ENV_STATE ]] Z80:21cyc, R800:7cyc
-00a216: dd 7e 0b
+00a223: dd 7e 0b
 
 [	CP A , 3] Z80:8cyc, R800:2cyc
-00a219: fe 03
+00a226: fe 03
 
 [	JP NC , BGMDRIVER_UPDATE_VIBRATO] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a21b: d2 39 a3
+00a228: d2 46 a3
 
 [	LD [ IX + INFO_ENV_STATE ] , 3] Z80:21cyc, R800:7cyc
-00a21e: dd 36 0b 03
+00a22b: dd 36 0b 03
 
 [	JP BGMDRIVER_UPDATE_VIBRATO] Z80:11cyc, R800:5cyc
-00a222: c3 39 a3
+00a22f: c3 46 a3
 
 [BGMDRIVER_REST :]
-	label address: 0x00a225
+	label address: 0x00a232
 
 [	CALL BGMDRIVER_GET_WAIT_TIME] Z80:18cyc, R800:5cyc
-00a225: cd 09 a4
+00a232: cd 16 a4
 
 [	LD [ IX + INFO_WAIT_COUNT_L ] , E] Z80:8cyc, R800:4cyc
-00a228: dd 73 02
+00a235: dd 73 02
 
 [	LD [ IX + INFO_WAIT_COUNT_H ] , D] Z80:8cyc, R800:4cyc
-00a22b: dd 72 03
+00a238: dd 72 03
 
 [	LD [ IX + INFO_PLAY_ADR_L ] , L] Z80:8cyc, R800:4cyc
-00a22e: dd 75 00
+00a23b: dd 75 00
 
 [	LD [ IX + INFO_PLAY_ADR_H ] , H] Z80:8cyc, R800:4cyc
-00a231: dd 74 01
+00a23e: dd 74 01
 
 [	LD [ IX + INFO_ENV_STATE ] , 4] Z80:21cyc, R800:7cyc
-00a234: dd 36 0b 04
+00a241: dd 36 0b 04
 
 [	LD [ IX + INFO_ENV_VOL ] , 0] Z80:21cyc, R800:7cyc
-00a238: dd 36 0c 00
+00a245: dd 36 0c 00
 
 [	JP BGMDRIVER_UPDATE_VIBRATO] Z80:11cyc, R800:5cyc
-00a23c: c3 39 a3
+00a249: c3 46 a3
 
 [BGMDRIVER_VOLUME :]
-	label address: 0x00a23f
+	label address: 0x00a24c
 
 [	LD A , [ HL ]] Z80:8cyc, R800:4cyc
-00a23f: 7e
+00a24c: 7e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a240: 23
+00a24d: 23
 
 [	LD [ IX + INFO_PLAY_ADR_L ] , L] Z80:8cyc, R800:4cyc
-00a241: dd 75 00
+00a24e: dd 75 00
 
 [	LD [ IX + INFO_PLAY_ADR_H ] , H] Z80:8cyc, R800:4cyc
-00a244: dd 74 01
+00a251: dd 74 01
 
 [	LD [ IX + INFO_TONE_VOL ] , A] Z80:8cyc, R800:4cyc
-00a247: dd 77 09
+00a254: dd 77 09
 
 [	JP BGMDRIVER_CHECK_NEXT_DATA] Z80:11cyc, R800:5cyc
-00a24a: c3 54 a1
+00a257: c3 61 a1
 
 [BGMDRIVER_SOUND_FONT :]
-	label address: 0x00a24d
+	label address: 0x00a25a
 
 [	LD E , [ HL ]] Z80:8cyc, R800:4cyc
-00a24d: 5e
+00a25a: 5e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a24e: 23
+00a25b: 23
 
 [	LD D , [ HL ]] Z80:8cyc, R800:4cyc
-00a24f: 56
+00a25c: 56
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a250: 23
+00a25d: 23
 
 [	LD [ IX + INFO_PLAY_ADR_L ] , L] Z80:8cyc, R800:4cyc
-00a251: dd 75 00
+00a25e: dd 75 00
 
 [	LD [ IX + INFO_PLAY_ADR_H ] , H] Z80:8cyc, R800:4cyc
-00a254: dd 74 01
+00a261: dd 74 01
 
 [	LD HL , [ PLAY_BGM_DATA_ADR ]] Z80:17cyc, R800:7cyc
-00a257: 2a 8c a6
+00a264: 2a 99 a6
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a25a: 19
+00a267: 19
 
 [	LD [ IX + INFO_SEL_SFONT_L ] , L] Z80:8cyc, R800:4cyc
-00a25b: dd 75 11
+00a268: dd 75 11
 
 [	LD [ IX + INFO_SEL_SFONT_H ] , H] Z80:8cyc, R800:4cyc
-00a25e: dd 74 12
+00a26b: dd 74 12
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a261: af
+00a26e: af
 
 [	LD [ IX + INFO_VIB_WAIT ] , A] Z80:8cyc, R800:4cyc
-00a262: dd 77 0a
+00a26f: dd 77 0a
 
 [	LD [ IX + INFO_ENV_STATE ] , A] Z80:8cyc, R800:4cyc
-00a265: dd 77 0b
+00a272: dd 77 0b
 
 [	LD [ IX + INFO_ENV_VOL ] , A] Z80:8cyc, R800:4cyc
-00a268: dd 77 0c
+00a275: dd 77 0c
 
 [	LD [ IX + INFO_VIB_INDEX ] , A] Z80:8cyc, R800:4cyc
-00a26b: dd 77 0d
+00a278: dd 77 0d
 
 [	JP BGMDRIVER_CHECK_NEXT_DATA] Z80:11cyc, R800:5cyc
-00a26e: c3 54 a1
+00a27b: c3 61 a1
 
 [BGMDRIVER_DRUM1_FONT :]
-	label address: 0x00a271
+	label address: 0x00a27e
 
 [	LD E , [ HL ]] Z80:8cyc, R800:4cyc
-00a271: 5e
+00a27e: 5e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a272: 23
+00a27f: 23
 
 [	LD D , [ HL ]] Z80:8cyc, R800:4cyc
-00a273: 56
+00a280: 56
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a274: 23
+00a281: 23
 
 [	LD [ IX + INFO_PLAY_ADR_L ] , L] Z80:8cyc, R800:4cyc
-00a275: dd 75 00
+00a282: dd 75 00
 
 [	LD [ IX + INFO_PLAY_ADR_H ] , H] Z80:8cyc, R800:4cyc
-00a278: dd 74 01
+00a285: dd 74 01
 
 [	LD HL , [ PLAY_BGM_DATA_ADR ]] Z80:17cyc, R800:7cyc
-00a27b: 2a 8c a6
+00a288: 2a 99 a6
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a27e: 19
+00a28b: 19
 
 [	LD [ PLAY_DRUM_FONT1 ] , HL] Z80:17cyc, R800:7cyc
-00a27f: 22 91 a6
+00a28c: 22 9e a6
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a282: af
+00a28f: af
 
 [	LD [ IX + INFO_VIB_WAIT ] , A] Z80:8cyc, R800:4cyc
-00a283: dd 77 0a
+00a290: dd 77 0a
 
 [	LD [ IX + INFO_ENV_STATE ] , A] Z80:8cyc, R800:4cyc
-00a286: dd 77 0b
+00a293: dd 77 0b
 
 [	LD [ IX + INFO_ENV_VOL ] , A] Z80:8cyc, R800:4cyc
-00a289: dd 77 0c
+00a296: dd 77 0c
 
 [	LD [ IX + INFO_VIB_INDEX ] , A] Z80:8cyc, R800:4cyc
-00a28c: dd 77 0d
+00a299: dd 77 0d
 
 [	JP BGMDRIVER_CHECK_NEXT_DATA] Z80:11cyc, R800:5cyc
-00a28f: c3 54 a1
+00a29c: c3 61 a1
 
 [BGMDRIVER_DRUM2_FONT :]
-	label address: 0x00a292
+	label address: 0x00a29f
 
 [	LD E , [ HL ]] Z80:8cyc, R800:4cyc
-00a292: 5e
+00a29f: 5e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a293: 23
+00a2a0: 23
 
 [	LD D , [ HL ]] Z80:8cyc, R800:4cyc
-00a294: 56
+00a2a1: 56
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a295: 23
+00a2a2: 23
 
 [	LD [ IX + INFO_PLAY_ADR_L ] , L] Z80:8cyc, R800:4cyc
-00a296: dd 75 00
+00a2a3: dd 75 00
 
 [	LD [ IX + INFO_PLAY_ADR_H ] , H] Z80:8cyc, R800:4cyc
-00a299: dd 74 01
+00a2a6: dd 74 01
 
 [	LD HL , [ PLAY_BGM_DATA_ADR ]] Z80:17cyc, R800:7cyc
-00a29c: 2a 8c a6
+00a2a9: 2a 99 a6
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a29f: 19
+00a2ac: 19
 
 [	LD [ PLAY_DRUM_FONT2 ] , HL] Z80:17cyc, R800:7cyc
-00a2a0: 22 93 a6
+00a2ad: 22 a0 a6
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a2a3: af
+00a2b0: af
 
 [	LD [ IX + INFO_VIB_WAIT ] , A] Z80:8cyc, R800:4cyc
-00a2a4: dd 77 0a
+00a2b1: dd 77 0a
 
 [	LD [ IX + INFO_ENV_STATE ] , A] Z80:8cyc, R800:4cyc
-00a2a7: dd 77 0b
+00a2b4: dd 77 0b
 
 [	LD [ IX + INFO_ENV_VOL ] , A] Z80:8cyc, R800:4cyc
-00a2aa: dd 77 0c
+00a2b7: dd 77 0c
 
 [	LD [ IX + INFO_VIB_INDEX ] , A] Z80:8cyc, R800:4cyc
-00a2ad: dd 77 0d
+00a2ba: dd 77 0d
 
 [	JP BGMDRIVER_CHECK_NEXT_DATA] Z80:11cyc, R800:5cyc
-00a2b0: c3 54 a1
+00a2bd: c3 61 a1
 
 [BGMDRIVER_DRUM3_FONT :]
-	label address: 0x00a2b3
+	label address: 0x00a2c0
 
 [	LD E , [ HL ]] Z80:8cyc, R800:4cyc
-00a2b3: 5e
+00a2c0: 5e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a2b4: 23
+00a2c1: 23
 
 [	LD D , [ HL ]] Z80:8cyc, R800:4cyc
-00a2b5: 56
+00a2c2: 56
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a2b6: 23
+00a2c3: 23
 
 [	LD [ IX + INFO_PLAY_ADR_L ] , L] Z80:8cyc, R800:4cyc
-00a2b7: dd 75 00
+00a2c4: dd 75 00
 
 [	LD [ IX + INFO_PLAY_ADR_H ] , H] Z80:8cyc, R800:4cyc
-00a2ba: dd 74 01
+00a2c7: dd 74 01
 
 [	LD HL , [ PLAY_BGM_DATA_ADR ]] Z80:17cyc, R800:7cyc
-00a2bd: 2a 8c a6
+00a2ca: 2a 99 a6
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a2c0: 19
+00a2cd: 19
 
 [	LD [ PLAY_DRUM_FONT3 ] , HL] Z80:17cyc, R800:7cyc
-00a2c1: 22 95 a6
+00a2ce: 22 a2 a6
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a2c4: af
+00a2d1: af
 
 [	LD [ IX + INFO_VIB_WAIT ] , A] Z80:8cyc, R800:4cyc
-00a2c5: dd 77 0a
+00a2d2: dd 77 0a
 
 [	LD [ IX + INFO_ENV_STATE ] , A] Z80:8cyc, R800:4cyc
-00a2c8: dd 77 0b
+00a2d5: dd 77 0b
 
 [	LD [ IX + INFO_ENV_VOL ] , A] Z80:8cyc, R800:4cyc
-00a2cb: dd 77 0c
+00a2d8: dd 77 0c
 
 [	LD [ IX + INFO_VIB_INDEX ] , A] Z80:8cyc, R800:4cyc
-00a2ce: dd 77 0d
+00a2db: dd 77 0d
 
 [	JP BGMDRIVER_CHECK_NEXT_DATA] Z80:11cyc, R800:5cyc
-00a2d1: c3 54 a1
+00a2de: c3 61 a1
 
 [BGMDRIVER_DRUM4_FONT :]
-	label address: 0x00a2d4
+	label address: 0x00a2e1
 
 [	LD E , [ HL ]] Z80:8cyc, R800:4cyc
-00a2d4: 5e
+00a2e1: 5e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a2d5: 23
+00a2e2: 23
 
 [	LD D , [ HL ]] Z80:8cyc, R800:4cyc
-00a2d6: 56
+00a2e3: 56
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a2d7: 23
+00a2e4: 23
 
 [	LD [ IX + INFO_PLAY_ADR_L ] , L] Z80:8cyc, R800:4cyc
-00a2d8: dd 75 00
+00a2e5: dd 75 00
 
 [	LD [ IX + INFO_PLAY_ADR_H ] , H] Z80:8cyc, R800:4cyc
-00a2db: dd 74 01
+00a2e8: dd 74 01
 
 [	LD HL , [ PLAY_BGM_DATA_ADR ]] Z80:17cyc, R800:7cyc
-00a2de: 2a 8c a6
+00a2eb: 2a 99 a6
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a2e1: 19
+00a2ee: 19
 
 [	LD [ PLAY_DRUM_FONT4 ] , HL] Z80:17cyc, R800:7cyc
-00a2e2: 22 97 a6
+00a2ef: 22 a4 a6
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a2e5: af
+00a2f2: af
 
 [	LD [ IX + INFO_VIB_WAIT ] , A] Z80:8cyc, R800:4cyc
-00a2e6: dd 77 0a
+00a2f3: dd 77 0a
 
 [	LD [ IX + INFO_ENV_STATE ] , A] Z80:8cyc, R800:4cyc
-00a2e9: dd 77 0b
+00a2f6: dd 77 0b
 
 [	LD [ IX + INFO_ENV_VOL ] , A] Z80:8cyc, R800:4cyc
-00a2ec: dd 77 0c
+00a2f9: dd 77 0c
 
 [	LD [ IX + INFO_VIB_INDEX ] , A] Z80:8cyc, R800:4cyc
-00a2ef: dd 77 0d
+00a2fc: dd 77 0d
 
 [	JP BGMDRIVER_CHECK_NEXT_DATA] Z80:11cyc, R800:5cyc
-00a2f2: c3 54 a1
+00a2ff: c3 61 a1
 
 [BGMDRIVER_DRUM5_FONT :]
-	label address: 0x00a2f5
+	label address: 0x00a302
 
 [	LD E , [ HL ]] Z80:8cyc, R800:4cyc
-00a2f5: 5e
+00a302: 5e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a2f6: 23
+00a303: 23
 
 [	LD D , [ HL ]] Z80:8cyc, R800:4cyc
-00a2f7: 56
+00a304: 56
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a2f8: 23
+00a305: 23
 
 [	LD [ IX + INFO_PLAY_ADR_L ] , L] Z80:8cyc, R800:4cyc
-00a2f9: dd 75 00
+00a306: dd 75 00
 
 [	LD [ IX + INFO_PLAY_ADR_H ] , H] Z80:8cyc, R800:4cyc
-00a2fc: dd 74 01
+00a309: dd 74 01
 
 [	LD HL , [ PLAY_BGM_DATA_ADR ]] Z80:17cyc, R800:7cyc
-00a2ff: 2a 8c a6
+00a30c: 2a 99 a6
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a302: 19
+00a30f: 19
 
 [	LD [ PLAY_DRUM_FONT5 ] , HL] Z80:17cyc, R800:7cyc
-00a303: 22 99 a6
+00a310: 22 a6 a6
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a306: af
+00a313: af
 
 [	LD [ IX + INFO_VIB_WAIT ] , A] Z80:8cyc, R800:4cyc
-00a307: dd 77 0a
+00a314: dd 77 0a
 
 [	LD [ IX + INFO_ENV_STATE ] , A] Z80:8cyc, R800:4cyc
-00a30a: dd 77 0b
+00a317: dd 77 0b
 
 [	LD [ IX + INFO_ENV_VOL ] , A] Z80:8cyc, R800:4cyc
-00a30d: dd 77 0c
+00a31a: dd 77 0c
 
 [	LD [ IX + INFO_VIB_INDEX ] , A] Z80:8cyc, R800:4cyc
-00a310: dd 77 0d
+00a31d: dd 77 0d
 
 [	JP BGMDRIVER_CHECK_NEXT_DATA] Z80:11cyc, R800:5cyc
-00a313: c3 54 a1
+00a320: c3 61 a1
 
 [BGMDRIVER_JUMP :]
-	label address: 0x00a316
+	label address: 0x00a323
 
 [	LD E , [ HL ]] Z80:8cyc, R800:4cyc
-00a316: 5e
+00a323: 5e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a317: 23
+00a324: 23
 
 [	LD D , [ HL ]] Z80:8cyc, R800:4cyc
-00a318: 56
+00a325: 56
 
 [	LD HL , [ PLAY_BGM_DATA_ADR ]] Z80:17cyc, R800:7cyc
-00a319: 2a 8c a6
+00a326: 2a 99 a6
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a31c: 19
+00a329: 19
 
 [	LD [ IX + INFO_PLAY_ADR_L ] , L] Z80:8cyc, R800:4cyc
-00a31d: dd 75 00
+00a32a: dd 75 00
 
 [	LD [ IX + INFO_PLAY_ADR_H ] , H] Z80:8cyc, R800:4cyc
-00a320: dd 74 01
+00a32d: dd 74 01
 
 [	JP BGMDRIVER_CHECK_NEXT_DATA] Z80:11cyc, R800:5cyc
-00a323: c3 54 a1
+00a330: c3 61 a1
 
 [BGMDRIVER_PLAY_END :]
-	label address: 0x00a326
+	label address: 0x00a333
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a326: af
+00a333: af
 
 [	LD [ IX + INFO_PLAY_ADR_L ] , A] Z80:8cyc, R800:4cyc
-00a327: dd 77 00
+00a334: dd 77 00
 
 [	LD [ IX + INFO_PLAY_ADR_H ] , A] Z80:8cyc, R800:4cyc
-00a32a: dd 77 01
+00a337: dd 77 01
 
 [	LD [ IX + INFO_TONE_VOL ] , A] Z80:8cyc, R800:4cyc
-00a32d: dd 77 09
+00a33a: dd 77 09
 
 [	LD [ IX + INFO_ENV_STATE ] , A] Z80:8cyc, R800:4cyc
-00a330: dd 77 0b
+00a33d: dd 77 0b
 
 [	LD [ IX + INFO_ENV_VOL ] , A] Z80:8cyc, R800:4cyc
-00a333: dd 77 0c
+00a340: dd 77 0c
 
 [	JP BGMDRIVER_ENVELOPE_END] Z80:11cyc, R800:5cyc
-00a336: c3 f0 a3
+00a343: c3 fd a3
 
 [BGMDRIVER_UPDATE_VIBRATO :]
-	label address: 0x00a339
+	label address: 0x00a346
 
 [	LD A , [ IX + INFO_VIB_WAIT ]] Z80:21cyc, R800:7cyc
-00a339: dd 7e 0a
+00a346: dd 7e 0a
 
 [	OR A , A] Z80:5cyc, R800:1cyc
-00a33c: b7
+00a349: b7
 
 [	JR Z , BGMDRIVER_VIBRATO_ACTIVE] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a33d: 28 0d
+00a34a: 28 0d
 
 [	DEC A] Z80:5cyc, R800:1cyc
-00a33f: 3d
+00a34c: 3d
 
 [	LD [ IX + INFO_VIB_WAIT ] , A] Z80:8cyc, R800:4cyc
-00a340: dd 77 0a
+00a34d: dd 77 0a
 
 [	LD L , [ IX + INFO_TONE_FREQ_L ]] Z80:21cyc, R800:7cyc
-00a343: dd 6e 06
+00a350: dd 6e 06
 
 [	LD H , [ IX + INFO_TONE_FREQ_H ]] Z80:21cyc, R800:7cyc
-00a346: dd 66 07
+00a353: dd 66 07
 
 [	JP BGMDRIVER_UPDATE_FREQ] Z80:11cyc, R800:5cyc
-00a349: c3 6e a3
+00a356: c3 7b a3
 
 [BGMDRIVER_VIBRATO_ACTIVE :]
-	label address: 0x00a34c
+	label address: 0x00a359
 
 [	LD A , [ IX + INFO_VIB_INDEX ]] Z80:21cyc, R800:7cyc
-00a34c: dd 7e 0d
+00a359: dd 7e 0d
 
 [	LD E , A] Z80:5cyc, R800:2cyc
-00a34f: 5f
+00a35c: 5f
 
 [	INC A] Z80:5cyc, R800:1cyc
-00a350: 3c
+00a35d: 3c
 
 [	AND A , 31] Z80:8cyc, R800:2cyc
-00a351: e6 1f
+00a35e: e6 1f
 
 [	LD [ IX + INFO_VIB_INDEX ] , A] Z80:8cyc, R800:4cyc
-00a353: dd 77 0d
+00a360: dd 77 0d
 
 [	LD D , 0] Z80:8cyc, R800:2cyc
-00a356: 16 00
+00a363: 16 00
 
 [	LD L , [ IX + INFO_SOUND_FONT_L ]] Z80:21cyc, R800:7cyc
-00a358: dd 6e 0e
+00a365: dd 6e 0e
 
 [	LD H , [ IX + INFO_SOUND_FONT_H ]] Z80:21cyc, R800:7cyc
-00a35b: dd 66 0f
+00a368: dd 66 0f
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a35e: 19
+00a36b: 19
 
 [	LD A , [ HL ]] Z80:8cyc, R800:4cyc
-00a35f: 7e
+00a36c: 7e
 
 [	LD L , [ IX + INFO_TONE_FREQ_L ]] Z80:21cyc, R800:7cyc
-00a360: dd 6e 06
+00a36d: dd 6e 06
 
 [	LD H , [ IX + INFO_TONE_FREQ_H ]] Z80:21cyc, R800:7cyc
-00a363: dd 66 07
+00a370: dd 66 07
 
 [	OR A , A] Z80:5cyc, R800:1cyc
-00a366: b7
+00a373: b7
 
 [	JP P , BGMDRIVER_VIBRATO_ACTIVE_SKIP] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a367: f2 6c a3
+00a374: f2 79 a3
 
 [	LD D , 255] Z80:8cyc, R800:2cyc
-00a36a: 16 ff
+00a377: 16 ff
 
 [BGMDRIVER_VIBRATO_ACTIVE_SKIP :]
-	label address: 0x00a36c
+	label address: 0x00a379
 
 [	LD E , A] Z80:5cyc, R800:2cyc
-00a36c: 5f
+00a379: 5f
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a36d: 19
+00a37a: 19
 
 [BGMDRIVER_UPDATE_FREQ :]
-	label address: 0x00a36e
+	label address: 0x00a37b
 
 [	LD [ IX + INFO_EFF_FREQ_L ] , L] Z80:8cyc, R800:4cyc
-00a36e: dd 75 04
+00a37b: dd 75 04
 
 [	LD [ IX + INFO_EFF_FREQ_H ] , H] Z80:8cyc, R800:4cyc
-00a371: dd 74 05
+00a37e: dd 74 05
 
 [	LD L , [ IX + INFO_SOUND_FONT_L ]] Z80:21cyc, R800:7cyc
-00a374: dd 6e 0e
+00a381: dd 6e 0e
 
 [	LD H , [ IX + INFO_SOUND_FONT_H ]] Z80:21cyc, R800:7cyc
-00a377: dd 66 0f
+00a384: dd 66 0f
 
 [	LD D , 0] Z80:8cyc, R800:2cyc
-00a37a: 16 00
+00a387: 16 00
 
 [	LD A , [ IX + INFO_ENV_STATE ]] Z80:21cyc, R800:7cyc
-00a37c: dd 7e 0b
+00a389: dd 7e 0b
 
 [	SUB A , 1] Z80:8cyc, R800:2cyc
-00a37f: d6 01
+00a38c: d6 01
 
 [	JR C , BGMDRIVER_ENVELOPE_AR] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a381: 38 55
+00a38e: 38 55
 
 [	JR Z , BGMDRIVER_ENVELOPE_DR] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a383: 28 39
+00a390: 28 39
 
 [	SUB A , 2] Z80:8cyc, R800:2cyc
-00a385: d6 02
+00a392: d6 02
 
 [	JR C , BGMDRIVER_ENVELOPE_SR] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a387: 38 1d
+00a394: 38 1d
 
 [	JR Z , BGMDRIVER_ENVELOPE_RR] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a389: 28 03
+00a396: 28 03
 
 [	JP BGMDRIVER_ENVELOPE_END] Z80:11cyc, R800:5cyc
-00a38b: c3 f0 a3
+00a398: c3 fd a3
 
 [BGMDRIVER_ENVELOPE_RR :]
-	label address: 0x00a38e
+	label address: 0x00a39b
 
 [	LD A , [ IX + INFO_ENV_VOL ]] Z80:21cyc, R800:7cyc
-00a38e: dd 7e 0c
+00a39b: dd 7e 0c
 
 [	LD E , SFONT_RR] Z80:8cyc, R800:2cyc
-00a391: 1e 24
+00a39e: 1e 24
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a393: 19
+00a3a0: 19
 
 [	LD B , [ HL ]] Z80:8cyc, R800:4cyc
-00a394: 46
+00a3a1: 46
 
 [	SUB A , B] Z80:5cyc, R800:1cyc
-00a395: 90
+00a3a2: 90
 
 [	LD [ IX + INFO_ENV_VOL ] , A] Z80:8cyc, R800:4cyc
-00a396: dd 77 0c
+00a3a3: dd 77 0c
 
 [	JR NC , BGMDRIVER_ENVELOPE_END] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a399: 30 55
+00a3a6: 30 55
 
 [	LD [ IX + INFO_ENV_VOL ] , 0] Z80:21cyc, R800:7cyc
-00a39b: dd 36 0c 00
+00a3a8: dd 36 0c 00
 
 [	LD [ IX + INFO_ENV_STATE ] , 4] Z80:21cyc, R800:7cyc
-00a39f: dd 36 0b 04
+00a3ac: dd 36 0b 04
 
 [	JP BGMDRIVER_ENVELOPE_END] Z80:11cyc, R800:5cyc
-00a3a3: c3 f0 a3
+00a3b0: c3 fd a3
 
 [BGMDRIVER_ENVELOPE_SR :]
-	label address: 0x00a3a6
+	label address: 0x00a3b3
 
 [	LD A , [ IX + INFO_ENV_VOL ]] Z80:21cyc, R800:7cyc
-00a3a6: dd 7e 0c
+00a3b3: dd 7e 0c
 
 [	LD E , SFONT_SR] Z80:8cyc, R800:2cyc
-00a3a9: 1e 23
+00a3b6: 1e 23
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a3ab: 19
+00a3b8: 19
 
 [	LD B , [ HL ]] Z80:8cyc, R800:4cyc
-00a3ac: 46
+00a3b9: 46
 
 [	SUB A , B] Z80:5cyc, R800:1cyc
-00a3ad: 90
+00a3ba: 90
 
 [	LD [ IX + INFO_ENV_VOL ] , A] Z80:8cyc, R800:4cyc
-00a3ae: dd 77 0c
+00a3bb: dd 77 0c
 
 [	JR NC , BGMDRIVER_ENVELOPE_END] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a3b1: 30 3d
+00a3be: 30 3d
 
 [	LD [ IX + INFO_ENV_VOL ] , 0] Z80:21cyc, R800:7cyc
-00a3b3: dd 36 0c 00
+00a3c0: dd 36 0c 00
 
 [	LD [ IX + INFO_ENV_STATE ] , 4] Z80:21cyc, R800:7cyc
-00a3b7: dd 36 0b 04
+00a3c4: dd 36 0b 04
 
 [	JP BGMDRIVER_ENVELOPE_END] Z80:11cyc, R800:5cyc
-00a3bb: c3 f0 a3
+00a3c8: c3 fd a3
 
 [BGMDRIVER_ENVELOPE_DR :]
-	label address: 0x00a3be
+	label address: 0x00a3cb
 
 [	LD A , [ IX + INFO_ENV_VOL ]] Z80:21cyc, R800:7cyc
-00a3be: dd 7e 0c
+00a3cb: dd 7e 0c
 
 [	LD E , SFONT_DR] Z80:8cyc, R800:2cyc
-00a3c1: 1e 21
+00a3ce: 1e 21
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a3c3: 19
+00a3d0: 19
 
 [	LD B , [ HL ]] Z80:8cyc, R800:4cyc
-00a3c4: 46
+00a3d1: 46
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a3c5: 23
+00a3d2: 23
 
 [	LD C , [ HL ]] Z80:8cyc, R800:4cyc
-00a3c6: 4e
+00a3d3: 4e
 
 [	SUB A , B] Z80:5cyc, R800:1cyc
-00a3c7: 90
+00a3d4: 90
 
 [	LD [ IX + INFO_ENV_VOL ] , A] Z80:8cyc, R800:4cyc
-00a3c8: dd 77 0c
+00a3d5: dd 77 0c
 
 [	CP A , C] Z80:5cyc, R800:1cyc
-00a3cb: b9
+00a3d8: b9
 
 [	JR NC , BGMDRIVER_ENVELOPE_END] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a3cc: 30 22
+00a3d9: 30 22
 
 [	LD [ IX + INFO_ENV_VOL ] , C] Z80:8cyc, R800:4cyc
-00a3ce: dd 71 0c
+00a3db: dd 71 0c
 
 [	LD [ IX + INFO_ENV_STATE ] , 2] Z80:21cyc, R800:7cyc
-00a3d1: dd 36 0b 02
+00a3de: dd 36 0b 02
 
 [	JP BGMDRIVER_ENVELOPE_END] Z80:11cyc, R800:5cyc
-00a3d5: c3 f0 a3
+00a3e2: c3 fd a3
 
 [BGMDRIVER_ENVELOPE_AR :]
-	label address: 0x00a3d8
+	label address: 0x00a3e5
 
 [	LD A , [ IX + INFO_ENV_VOL ]] Z80:21cyc, R800:7cyc
-00a3d8: dd 7e 0c
+00a3e5: dd 7e 0c
 
 [	LD E , SFONT_AR] Z80:8cyc, R800:2cyc
-00a3db: 1e 20
+00a3e8: 1e 20
 
 [	ADD HL , DE] Z80:12cyc, R800:1cyc
-00a3dd: 19
+00a3ea: 19
 
 [	LD B , [ HL ]] Z80:8cyc, R800:4cyc
-00a3de: 46
+00a3eb: 46
 
 [	ADD A , B] Z80:5cyc, R800:1cyc
-00a3df: 80
+00a3ec: 80
 
 [	LD [ IX + INFO_ENV_VOL ] , A] Z80:8cyc, R800:4cyc
-00a3e0: dd 77 0c
+00a3ed: dd 77 0c
 
 [	JR NC , BGMDRIVER_ENVELOPE_END] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a3e3: 30 0b
+00a3f0: 30 0b
 
 [	LD [ IX + INFO_ENV_VOL ] , 255] Z80:21cyc, R800:7cyc
-00a3e5: dd 36 0c ff
+00a3f2: dd 36 0c ff
 
 [	LD [ IX + INFO_ENV_STATE ] , 1] Z80:21cyc, R800:7cyc
-00a3e9: dd 36 0b 01
+00a3f6: dd 36 0b 01
 
 [	JP BGMDRIVER_ENVELOPE_END] Z80:11cyc, R800:5cyc
-00a3ed: c3 f0 a3
+00a3fa: c3 fd a3
 
 [BGMDRIVER_ENVELOPE_END :]
-	label address: 0x00a3f0
+	label address: 0x00a3fd
 
 [	LD A , [ IX + INFO_TONE_VOL ]] Z80:21cyc, R800:7cyc
-00a3f0: dd 7e 09
+00a3fd: dd 7e 09
 
 [	XOR A , 15] Z80:8cyc, R800:2cyc
-00a3f3: ee 0f
+00a400: ee 0f
 
 [	LD B , A] Z80:5cyc, R800:2cyc
-00a3f5: 47
+00a402: 47
 
 [	LD A , [ IX + INFO_ENV_VOL ]] Z80:21cyc, R800:7cyc
-00a3f6: dd 7e 0c
+00a403: dd 7e 0c
 
 [	SRL A] Z80:10cyc, R800:2cyc
-00a3f9: cb 3f
+00a406: cb 3f
 
 [	SRL A] Z80:10cyc, R800:2cyc
-00a3fb: cb 3f
+00a408: cb 3f
 
 [	SRL A] Z80:10cyc, R800:2cyc
-00a3fd: cb 3f
+00a40a: cb 3f
 
 [	SRL A] Z80:10cyc, R800:2cyc
-00a3ff: cb 3f
+00a40c: cb 3f
 
 [	SUB A , B] Z80:5cyc, R800:1cyc
-00a401: 90
+00a40e: 90
 
 [	JR NC , BGMDRIVER_CALC_EFF_VOL] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a402: 30 01
+00a40f: 30 01
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a404: af
+00a411: af
 
 [BGMDRIVER_CALC_EFF_VOL :]
-	label address: 0x00a405
+	label address: 0x00a412
 
 [	LD [ IX + INFO_EFF_VOL ] , A] Z80:8cyc, R800:4cyc
-00a405: dd 77 08
+00a412: dd 77 08
 
 [	RET] Z80:11cyc, R800:5cyc
-00a408: c9
+00a415: c9
 
 [BGMDRIVER_GET_WAIT_TIME :]
-	label address: 0x00a409
+	label address: 0x00a416
 
 [	LD DE , 0] Z80:11cyc, R800:3cyc
-00a409: 11 00 00
+00a416: 11 00 00
 
 [BGMDRIVER_GET_WAIT_TIME_LOOP :]
-	label address: 0x00a40c
+	label address: 0x00a419
 
 [	LD A , [ HL ]] Z80:8cyc, R800:4cyc
-00a40c: 7e
+00a419: 7e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a40d: 23
+00a41a: 23
 
 [	INC A] Z80:5cyc, R800:1cyc
-00a40e: 3c
+00a41b: 3c
 
 [	JR NZ , BGMDRIVER_GET_WAIT_TIME_EXIT] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a40f: 20 07
+00a41c: 20 07
 
 [	DEC A] Z80:5cyc, R800:1cyc
-00a411: 3d
+00a41e: 3d
 
 [	ADD A , E] Z80:5cyc, R800:1cyc
-00a412: 83
+00a41f: 83
 
 [	JR NC , BGMDRIVER_GET_WAIT_TIME_LOOP] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a413: 30 f7
+00a420: 30 f7
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a415: 14
+00a422: 14
 
 [	JR BGMDRIVER_GET_WAIT_TIME_LOOP] Z80:13cyc, R800:3cyc
-00a416: 18 f4
+00a423: 18 f4
 
 [BGMDRIVER_GET_WAIT_TIME_EXIT :]
-	label address: 0x00a418
+	label address: 0x00a425
 
 [	DEC A] Z80:5cyc, R800:1cyc
-00a418: 3d
+00a425: 3d
 
 [	ADD A , E] Z80:5cyc, R800:1cyc
-00a419: 83
+00a426: 83
 
 [	LD E , A] Z80:5cyc, R800:2cyc
-00a41a: 5f
+00a427: 5f
 
 [	JR NC , BGMDRIVER_GET_WAIT_TIME_SKIP] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a41b: 30 01
+00a428: 30 01
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a41d: 14
+00a42a: 14
 
 [BGMDRIVER_GET_WAIT_TIME_SKIP :]
-	label address: 0x00a41e
+	label address: 0x00a42b
 
 [	RET] Z80:11cyc, R800:5cyc
-00a41e: c9
+00a42b: c9
 
 [BGMDRIVER_FADEOUT_PROC :]
-	label address: 0x00a41f
+	label address: 0x00a42c
 
 [	LD A , [ PLAY_MASTER_VOLUME_SPEED ]] Z80:14cyc, R800:6cyc
-00a41f: 3a 8f a6
+00a42c: 3a 9c a6
 
 [	OR A , A] Z80:5cyc, R800:1cyc
-00a422: b7
+00a42f: b7
 
 [	RET Z] Z80:12cyc(branch), 6cyc(through), R800:5cyc(branch), 1cyc(through)
-00a423: c8
+00a430: c8
 
 [	LD A , [ PLAY_MASTER_VOLUME_WAIT ]] Z80:14cyc, R800:6cyc
-00a424: 3a 8e a6
+00a431: 3a 9b a6
 
 [	OR A , A] Z80:5cyc, R800:1cyc
-00a427: b7
+00a434: b7
 
 [	JR Z , BGMDRIVER_FADEOUT_SKIP1] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a428: 28 05
+00a435: 28 05
 
 [	DEC A] Z80:5cyc, R800:1cyc
-00a42a: 3d
+00a437: 3d
 
 [	LD [ PLAY_MASTER_VOLUME_WAIT ] , A] Z80:14cyc, R800:6cyc
-00a42b: 32 8e a6
+00a438: 32 9b a6
 
 [	RET] Z80:11cyc, R800:5cyc
-00a42e: c9
+00a43b: c9
 
 [BGMDRIVER_FADEOUT_SKIP1 :]
-	label address: 0x00a42f
+	label address: 0x00a43c
 
 [	LD A , [ PLAY_MASTER_VOLUME_SPEED ]] Z80:14cyc, R800:6cyc
-00a42f: 3a 8f a6
+00a43c: 3a 9c a6
 
 [	LD [ PLAY_MASTER_VOLUME_WAIT ] , A] Z80:14cyc, R800:6cyc
-00a432: 32 8e a6
+00a43f: 32 9b a6
 
 [	LD A , [ PLAY_MASTER_VOLUME ]] Z80:14cyc, R800:6cyc
-00a435: 3a 90 a6
+00a442: 3a 9d a6
 
 [	INC A] Z80:5cyc, R800:1cyc
-00a438: 3c
+00a445: 3c
 
 [	LD [ PLAY_MASTER_VOLUME ] , A] Z80:14cyc, R800:6cyc
-00a439: 32 90 a6
+00a446: 32 9d a6
 
 [	CP A , 15] Z80:8cyc, R800:2cyc
-00a43c: fe 0f
+00a449: fe 0f
 
 [	RET NZ] Z80:12cyc(branch), 6cyc(through), R800:5cyc(branch), 1cyc(through)
-00a43e: c0
+00a44b: c0
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a43f: af
+00a44c: af
 
 [	LD [ PLAY_MASTER_VOLUME_SPEED ] , A] Z80:14cyc, R800:6cyc
-00a440: 32 8f a6
+00a44d: 32 9c a6
 
 [	LD [ PLAY_MASTER_VOLUME ] , A] Z80:14cyc, R800:6cyc
-00a443: 32 90 a6
+00a450: 32 9d a6
 
 [	LD HL , PLAY_INFO_CH0] Z80:11cyc, R800:3cyc
-00a446: 21 9b a6
+00a453: 21 a8 a6
 
 [	CALL BGMDRIVER_INIT_PLAY_INFO] Z80:18cyc, R800:5cyc
-00a449: cd 0f a1
+00a456: cd 1c a1
 
 [	LD HL , PLAY_INFO_CH1] Z80:11cyc, R800:3cyc
-00a44c: 21 ae a6
+00a459: 21 bb a6
 
 [	CALL BGMDRIVER_INIT_PLAY_INFO] Z80:18cyc, R800:5cyc
-00a44f: cd 0f a1
+00a45c: cd 1c a1
 
 [	LD HL , PLAY_INFO_CH2] Z80:11cyc, R800:3cyc
-00a452: 21 c1 a6
+00a45f: 21 ce a6
 
 [	CALL BGMDRIVER_INIT_PLAY_INFO] Z80:18cyc, R800:5cyc
-00a455: cd 0f a1
+00a462: cd 1c a1
 
 [	RET] Z80:11cyc, R800:5cyc
-00a458: c9
+00a465: c9
 
 [BGMDRIVER_SOUND_EFFECT :]
-	label address: 0x00a459
+	label address: 0x00a466
 
 [	LD A , [ PLAY_SOUND_EFFECT_ACTIVE ]] Z80:14cyc, R800:6cyc
-00a459: 3a 82 a6
+00a466: 3a 8f a6
 
 [	OR A , A] Z80:5cyc, R800:1cyc
-00a45c: b7
+00a469: b7
 
 [	RET Z] Z80:12cyc(branch), 6cyc(through), R800:5cyc(branch), 1cyc(through)
-00a45d: c8
+00a46a: c8
 
 [	LD A , [ PLAY_SOUND_EFFECT_WAIT_COUNT ]] Z80:14cyc, R800:6cyc
-00a45e: 3a 83 a6
+00a46b: 3a 90 a6
 
 [	OR A , A] Z80:5cyc, R800:1cyc
-00a461: b7
+00a46e: b7
 
 [	JR Z , BGMDRIVER_SOUND_EFFECT_PROC] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a462: 28 05
+00a46f: 28 05
 
 [	DEC A] Z80:5cyc, R800:1cyc
-00a464: 3d
+00a471: 3d
 
 [	LD [ PLAY_SOUND_EFFECT_WAIT_COUNT ] , A] Z80:14cyc, R800:6cyc
-00a465: 32 83 a6
+00a472: 32 90 a6
 
 [	RET] Z80:11cyc, R800:5cyc
-00a468: c9
+00a475: c9
 
 [BGMDRIVER_SOUND_EFFECT_PROC :]
-	label address: 0x00a469
+	label address: 0x00a476
 
 [	LD HL , [ PLAY_SOUND_EFFECT_ADR ]] Z80:17cyc, R800:7cyc
-00a469: 2a 88 a6
+00a476: 2a 95 a6
 
 [BGMDRIVER_SOUND_EFFECT_LOOP :]
-	label address: 0x00a46c
+	label address: 0x00a479
 
 [	LD A , [ HL ]] Z80:8cyc, R800:4cyc
-00a46c: 7e
+00a479: 7e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a46d: 23
+00a47a: 23
 
 [	LD [ PLAY_SOUND_EFFECT_ADR ] , HL] Z80:17cyc, R800:7cyc
-00a46e: 22 88 a6
+00a47b: 22 95 a6
 
 [	CP A , BGM_SE_VOL] Z80:8cyc, R800:2cyc
-00a471: fe 01
+00a47e: fe 01
 
 [	JP C , BGMDRIVER_SOUND_EFFECT_FREQ_PROC] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a473: da 84 a4
+00a480: da 91 a4
 
 [	JP Z , BGMDRIVER_SOUND_EFFECT_VOLUME_PROC] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a476: ca 92 a4
+00a483: ca 9f a4
 
 [	CP A , BGM_SE_WAIT] Z80:8cyc, R800:2cyc
-00a479: fe 03
+00a486: fe 03
 
 [	JP C , BGMDRIVER_SOUND_EFFECT_NOISE_FREQ_PROC] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a47b: da 9a a4
+00a488: da a7 a4
 
 [	JP Z , BGMDRIVER_SOUND_EFFECT_WAIT_PROC] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a47e: ca a2 a4
+00a48b: ca af a4
 
 [	JP BGMDRIVER_SOUND_EFFECT_END_PROC] Z80:11cyc, R800:5cyc
-00a481: c3 ab a4
+00a48e: c3 b8 a4
 
 [BGMDRIVER_SOUND_EFFECT_FREQ_PROC :]
-	label address: 0x00a484
+	label address: 0x00a491
 
 [	LD E , [ HL ]] Z80:8cyc, R800:4cyc
-00a484: 5e
+00a491: 5e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a485: 23
+00a492: 23
 
 [	LD D , [ HL ]] Z80:8cyc, R800:4cyc
-00a486: 56
+00a493: 56
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a487: 23
+00a494: 23
 
 [	LD [ PLAY_SOUND_EFFECT_ADR ] , HL] Z80:17cyc, R800:7cyc
-00a488: 22 88 a6
+00a495: 22 95 a6
 
 [	LD [ PLAY_SOUND_EFFECT_FREQ ] , DE] Z80:22cyc, R800:8cyc
-00a48b: ed 53 84 a6
+00a498: ed 53 91 a6
 
 [	JP BGMDRIVER_SOUND_EFFECT_LOOP] Z80:11cyc, R800:5cyc
-00a48f: c3 6c a4
+00a49c: c3 79 a4
 
 [BGMDRIVER_SOUND_EFFECT_VOLUME_PROC :]
-	label address: 0x00a492
+	label address: 0x00a49f
 
 [	LD A , [ HL ]] Z80:8cyc, R800:4cyc
-00a492: 7e
+00a49f: 7e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a493: 23
+00a4a0: 23
 
 [	LD [ PLAY_SOUND_EFFECT_VOLUME ] , A] Z80:14cyc, R800:6cyc
-00a494: 32 87 a6
+00a4a1: 32 94 a6
 
 [	JP BGMDRIVER_SOUND_EFFECT_LOOP] Z80:11cyc, R800:5cyc
-00a497: c3 6c a4
+00a4a4: c3 79 a4
 
 [BGMDRIVER_SOUND_EFFECT_NOISE_FREQ_PROC :]
-	label address: 0x00a49a
+	label address: 0x00a4a7
 
 [	LD A , [ HL ]] Z80:8cyc, R800:4cyc
-00a49a: 7e
+00a4a7: 7e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a49b: 23
+00a4a8: 23
 
 [	LD [ PLAY_SOUND_EFFECT_NOISE_FREQ ] , A] Z80:14cyc, R800:6cyc
-00a49c: 32 86 a6
+00a4a9: 32 93 a6
 
 [	JP BGMDRIVER_SOUND_EFFECT_LOOP] Z80:11cyc, R800:5cyc
-00a49f: c3 6c a4
+00a4ac: c3 79 a4
 
 [BGMDRIVER_SOUND_EFFECT_WAIT_PROC :]
-	label address: 0x00a4a2
+	label address: 0x00a4af
 
 [	LD A , [ HL ]] Z80:8cyc, R800:4cyc
-00a4a2: 7e
+00a4af: 7e
 
 [	INC HL] Z80:7cyc, R800:1cyc
-00a4a3: 23
+00a4b0: 23
 
 [	LD [ PLAY_SOUND_EFFECT_ADR ] , HL] Z80:17cyc, R800:7cyc
-00a4a4: 22 88 a6
+00a4b1: 22 95 a6
 
 [	LD [ PLAY_SOUND_EFFECT_WAIT_COUNT ] , A] Z80:14cyc, R800:6cyc
-00a4a7: 32 83 a6
+00a4b4: 32 90 a6
 
 [	RET] Z80:11cyc, R800:5cyc
-00a4aa: c9
+00a4b7: c9
 
 [BGMDRIVER_SOUND_EFFECT_END_PROC :]
-	label address: 0x00a4ab
+	label address: 0x00a4b8
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a4ab: af
+00a4b8: af
 
 [	LD [ PLAY_SOUND_EFFECT_ACTIVE ] , A] Z80:14cyc, R800:6cyc
-00a4ac: 32 82 a6
+00a4b9: 32 8f a6
 
 [	DEC A] Z80:5cyc, R800:1cyc
-00a4af: 3d
+00a4bc: 3d
 
 [	LD [ PLAY_SOUND_EFFECT_PRIORITY ] , A] Z80:14cyc, R800:6cyc
-00a4b0: 32 8a a6
+00a4bd: 32 97 a6
 
 [	RET] Z80:11cyc, R800:5cyc
-00a4b3: c9
+00a4c0: c9
 
 [BGMDRIVER_MIXER :]
-	label address: 0x00a4b4
+	label address: 0x00a4c1
 
 [	LD B , 0] Z80:8cyc, R800:2cyc
-00a4b4: 06 00
+00a4c1: 06 00
 
 [	LD E , 0] Z80:8cyc, R800:2cyc
-00a4b6: 1e 00
+00a4c3: 1e 00
 
 [	LD C , PSG_REG_ADR] Z80:8cyc, R800:2cyc
-00a4b8: 0e a0
+00a4c5: 0e a0
 
 [	LD D , 0] Z80:8cyc, R800:2cyc
-00a4ba: 16 00
+00a4c7: 16 00
 
 [	LD IX , PLAY_INFO_CH0] Z80:16cyc, R800:4cyc
-00a4bc: dd 21 9b a6
+00a4c9: dd 21 a8 a6
 
 [	LD A , [ IX + INFO_EFF_FREQ_L ]] Z80:21cyc, R800:7cyc
-00a4c0: dd 7e 04
+00a4cd: dd 7e 04
 
 [	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a4c3: ed 51
+00a4d0: ed 51
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a4c5: 14
+00a4d2: 14
 
 [	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a4c6: d3 a1
+00a4d3: d3 a1
 
 [	LD A , [ IX + INFO_EFF_FREQ_H ]] Z80:21cyc, R800:7cyc
-00a4c8: dd 7e 05
+00a4d5: dd 7e 05
 
 [	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a4cb: ed 51
+00a4d8: ed 51
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a4cd: 14
+00a4da: 14
 
 [	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a4ce: d3 a1
+00a4db: d3 a1
 
 [	AND A , 0X80] Z80:8cyc, R800:2cyc
-00a4d0: e6 80
+00a4dd: e6 80
 
 [	JR NZ , BGMDRIVER_MIXER_SKIP1_CH0] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a4d2: 20 01
+00a4df: 20 01
 
 [	INC B] Z80:5cyc, R800:1cyc
-00a4d4: 04
+00a4e1: 04
 
 [BGMDRIVER_MIXER_SKIP1_CH0 :]
-	label address: 0x00a4d5
+	label address: 0x00a4e2
 
 [	LD A , [ IX + INFO_NOISE_FREQ ]] Z80:21cyc, R800:7cyc
-00a4d5: dd 7e 10
+00a4e2: dd 7e 10
 
 [	BIT 7 , A] Z80:10cyc, R800:2cyc
-00a4d8: cb 7f
+00a4e5: cb 7f
 
 [	JR Z , BGMDRIVER_MIXER_SKIP2_CH0] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a4da: 28 07
+00a4e7: 28 07
 
 [	AND A , 31] Z80:8cyc, R800:2cyc
-00a4dc: e6 1f
+00a4e9: e6 1f
 
 [	LD [ PLAY_NOISE_FREQ ] , A] Z80:14cyc, R800:6cyc
-00a4de: 32 8b a6
+00a4eb: 32 98 a6
 
 [	LD E , 8] Z80:8cyc, R800:2cyc
-00a4e1: 1e 08
+00a4ee: 1e 08
 
 [BGMDRIVER_MIXER_SKIP2_CH0 :]
-	label address: 0x00a4e3
+	label address: 0x00a4f0
 
 [	LD IX , PLAY_INFO_CH1] Z80:16cyc, R800:4cyc
-00a4e3: dd 21 ae a6
+00a4f0: dd 21 bb a6
 
 [	LD A , [ IX + INFO_EFF_FREQ_L ]] Z80:21cyc, R800:7cyc
-00a4e7: dd 7e 04
+00a4f4: dd 7e 04
 
 [	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a4ea: ed 51
+00a4f7: ed 51
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a4ec: 14
+00a4f9: 14
 
 [	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a4ed: d3 a1
+00a4fa: d3 a1
 
 [	LD A , [ IX + INFO_EFF_FREQ_H ]] Z80:21cyc, R800:7cyc
-00a4ef: dd 7e 05
+00a4fc: dd 7e 05
 
 [	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a4f2: ed 51
+00a4ff: ed 51
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a4f4: 14
+00a501: 14
 
 [	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a4f5: d3 a1
+00a502: d3 a1
 
 [	AND A , 0X80] Z80:8cyc, R800:2cyc
-00a4f7: e6 80
+00a504: e6 80
 
 [	JR NZ , BGMDRIVER_MIXER_SKIP1_CH1] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a4f9: 20 02
+00a506: 20 02
 
 [	INC B] Z80:5cyc, R800:1cyc
-00a4fb: 04
+00a508: 04
 
 [	INC B] Z80:5cyc, R800:1cyc
-00a4fc: 04
+00a509: 04
 
 [BGMDRIVER_MIXER_SKIP1_CH1 :]
-	label address: 0x00a4fd
+	label address: 0x00a50a
 
 [	LD A , [ IX + INFO_NOISE_FREQ ]] Z80:21cyc, R800:7cyc
-00a4fd: dd 7e 10
+00a50a: dd 7e 10
 
 [	BIT 7 , A] Z80:10cyc, R800:2cyc
-00a500: cb 7f
+00a50d: cb 7f
 
 [	JR Z , BGMDRIVER_MIXER_SKIP2_CH1] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a502: 28 09
+00a50f: 28 09
 
 [	AND A , 31] Z80:8cyc, R800:2cyc
-00a504: e6 1f
+00a511: e6 1f
 
 [	LD [ PLAY_NOISE_FREQ ] , A] Z80:14cyc, R800:6cyc
-00a506: 32 8b a6
+00a513: 32 98 a6
 
 [	LD A , 16] Z80:8cyc, R800:2cyc
-00a509: 3e 10
+00a516: 3e 10
 
 [	ADD A , E] Z80:5cyc, R800:1cyc
-00a50b: 83
+00a518: 83
 
 [	LD E , A] Z80:5cyc, R800:2cyc
-00a50c: 5f
+00a519: 5f
 
 [BGMDRIVER_MIXER_SKIP2_CH1 :]
-	label address: 0x00a50d
+	label address: 0x00a51a
 
 [	LD A , [ PLAY_SOUND_EFFECT_ACTIVE ]] Z80:14cyc, R800:6cyc
-00a50d: 3a 82 a6
+00a51a: 3a 8f a6
 
 [	OR A , A] Z80:5cyc, R800:1cyc
-00a510: b7
+00a51d: b7
 
 [	JR Z , BGMDRIVER_MIXER_TONE_CH2] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a511: 28 2d
+00a51e: 28 2d
 
 [	LD HL , [ PLAY_SOUND_EFFECT_FREQ ]] Z80:17cyc, R800:7cyc
-00a513: 2a 84 a6
+00a520: 2a 91 a6
 
 [	LD A , L] Z80:5cyc, R800:2cyc
-00a516: 7d
+00a523: 7d
 
 [	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a517: ed 51
+00a524: ed 51
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a519: 14
+00a526: 14
 
 [	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a51a: d3 a1
+00a527: d3 a1
 
 [	LD A , H] Z80:5cyc, R800:2cyc
-00a51c: 7c
+00a529: 7c
 
 [	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a51d: ed 51
+00a52a: ed 51
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a51f: 14
+00a52c: 14
 
 [	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a520: d3 a1
+00a52d: d3 a1
 
 [	AND A , 0X80] Z80:8cyc, R800:2cyc
-00a522: e6 80
+00a52f: e6 80
 
 [	JR NZ , BGMDRIVER_MIXER_SKIP0_CH2] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a524: 20 04
+00a531: 20 04
 
 [	INC B] Z80:5cyc, R800:1cyc
-00a526: 04
+00a533: 04
 
 [	INC B] Z80:5cyc, R800:1cyc
-00a527: 04
+00a534: 04
 
 [	INC B] Z80:5cyc, R800:1cyc
-00a528: 04
+00a535: 04
 
 [	INC B] Z80:5cyc, R800:1cyc
-00a529: 04
+00a536: 04
 
 [BGMDRIVER_MIXER_SKIP0_CH2 :]
-	label address: 0x00a52a
+	label address: 0x00a537
 
 [	LD A , [ PLAY_SOUND_EFFECT_NOISE_FREQ ]] Z80:14cyc, R800:6cyc
-00a52a: 3a 86 a6
+00a537: 3a 93 a6
 
 [	BIT 7 , A] Z80:10cyc, R800:2cyc
-00a52d: cb 7f
+00a53a: cb 7f
 
 [	JP Z , BGMDRIVER_MIXER_NOISE_FREQ] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a52f: ca 6c a5
+00a53c: ca 79 a5
 
 [	AND A , 0X3F] Z80:8cyc, R800:2cyc
-00a532: e6 3f
+00a53f: e6 3f
 
 [	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a534: ed 51
+00a541: ed 51
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a536: 14
+00a543: 14
 
 [	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a537: d3 a1
+00a544: d3 a1
 
 [	LD A , 32] Z80:8cyc, R800:2cyc
-00a539: 3e 20
+00a546: 3e 20
 
 [	ADD A , E] Z80:5cyc, R800:1cyc
-00a53b: 83
+00a548: 83
 
 [	LD E , A] Z80:5cyc, R800:2cyc
-00a53c: 5f
+00a549: 5f
 
 [	JP BGMDRIVER_MIXER_MIX] Z80:11cyc, R800:5cyc
-00a53d: c3 74 a5
+00a54a: c3 81 a5
 
 [BGMDRIVER_MIXER_TONE_CH2 :]
-	label address: 0x00a540
+	label address: 0x00a54d
 
 [	LD IX , PLAY_INFO_CH2] Z80:16cyc, R800:4cyc
-00a540: dd 21 c1 a6
+00a54d: dd 21 ce a6
 
 [	LD A , [ IX + INFO_EFF_FREQ_L ]] Z80:21cyc, R800:7cyc
-00a544: dd 7e 04
+00a551: dd 7e 04
 
 [	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a547: ed 51
+00a554: ed 51
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a549: 14
+00a556: 14
 
 [	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a54a: d3 a1
+00a557: d3 a1
 
 [	LD A , [ IX + INFO_EFF_FREQ_H ]] Z80:21cyc, R800:7cyc
-00a54c: dd 7e 05
+00a559: dd 7e 05
 
 [	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a54f: ed 51
+00a55c: ed 51
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a551: 14
+00a55e: 14
 
 [	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a552: d3 a1
+00a55f: d3 a1
 
 [	AND A , 0X80] Z80:8cyc, R800:2cyc
-00a554: e6 80
+00a561: e6 80
 
 [	JR NZ , BGMDRIVER_MIXER_SKIP1_CH2] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a556: 20 04
+00a563: 20 04
 
 [	INC B] Z80:5cyc, R800:1cyc
-00a558: 04
+00a565: 04
 
 [	INC B] Z80:5cyc, R800:1cyc
-00a559: 04
+00a566: 04
 
 [	INC B] Z80:5cyc, R800:1cyc
-00a55a: 04
+00a567: 04
 
 [	INC B] Z80:5cyc, R800:1cyc
-00a55b: 04
+00a568: 04
 
 [BGMDRIVER_MIXER_SKIP1_CH2 :]
-	label address: 0x00a55c
+	label address: 0x00a569
 
 [	LD A , [ IX + INFO_NOISE_FREQ ]] Z80:21cyc, R800:7cyc
-00a55c: dd 7e 10
+00a569: dd 7e 10
 
 [	BIT 7 , A] Z80:10cyc, R800:2cyc
-00a55f: cb 7f
+00a56c: cb 7f
 
 [	JR Z , BGMDRIVER_MIXER_SKIP2_CH2] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a561: 28 09
+00a56e: 28 09
 
 [	AND A , 31] Z80:8cyc, R800:2cyc
-00a563: e6 1f
+00a570: e6 1f
 
 [	LD [ PLAY_NOISE_FREQ ] , A] Z80:14cyc, R800:6cyc
-00a565: 32 8b a6
+00a572: 32 98 a6
 
 [	LD A , 32] Z80:8cyc, R800:2cyc
-00a568: 3e 20
+00a575: 3e 20
 
 [	ADD A , E] Z80:5cyc, R800:1cyc
-00a56a: 83
+00a577: 83
 
 [	LD E , A] Z80:5cyc, R800:2cyc
-00a56b: 5f
+00a578: 5f
 
 [BGMDRIVER_MIXER_SKIP2_CH2 :]
-	label address: 0x00a56c
+	label address: 0x00a579
 
 [BGMDRIVER_MIXER_NOISE_FREQ :]
-	label address: 0x00a56c
+	label address: 0x00a579
 
 [	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a56c: ed 51
+00a579: ed 51
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a56e: 14
+00a57b: 14
 
 [	LD A , [ PLAY_NOISE_FREQ ]] Z80:14cyc, R800:6cyc
-00a56f: 3a 8b a6
+00a57c: 3a 98 a6
 
 [	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a572: d3 a1
+00a57f: d3 a1
 
 [BGMDRIVER_MIXER_MIX :]
-	label address: 0x00a574
+	label address: 0x00a581
 
 [	LD HL , PLAY_MASTER_VOLUME] Z80:11cyc, R800:3cyc
-00a574: 21 90 a6
+00a581: 21 9d a6
 
 [	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a577: ed 51
+00a584: ed 51
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a579: 14
+00a586: 14
 
 [	LD A , E] Z80:5cyc, R800:2cyc
-00a57a: 7b
+00a587: 7b
 
 [	OR A , B] Z80:5cyc, R800:1cyc
-00a57b: b0
+00a588: b0
 
 [	OR A , 0X80] Z80:8cyc, R800:2cyc
-00a57c: f6 80
+00a589: f6 80
 
 [	XOR A , 0X3F] Z80:8cyc, R800:2cyc
-00a57e: ee 3f
+00a58b: ee 3f
 
 [	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a580: d3 a1
+00a58d: d3 a1
 
 [	LD IX , PLAY_INFO_CH0] Z80:16cyc, R800:4cyc
-00a582: dd 21 9b a6
+00a58f: dd 21 a8 a6
 
 [	LD A , [ IX + INFO_EFF_VOL ]] Z80:21cyc, R800:7cyc
-00a586: dd 7e 08
+00a593: dd 7e 08
 
 [	SUB A , [ HL ]] Z80:8cyc, R800:4cyc
-00a589: 96
+00a596: 96
 
 [	JP NC , BGMDRIVER_MIXER_MIX_SKIP1] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a58a: d2 8e a5
+00a597: d2 9b a5
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a58d: af
+00a59a: af
 
 [BGMDRIVER_MIXER_MIX_SKIP1 :]
-	label address: 0x00a58e
+	label address: 0x00a59b
 
 [	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a58e: ed 51
+00a59b: ed 51
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a590: 14
+00a59d: 14
 
 [	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a591: d3 a1
+00a59e: d3 a1
 
 [	LD IX , PLAY_INFO_CH1] Z80:16cyc, R800:4cyc
-00a593: dd 21 ae a6
+00a5a0: dd 21 bb a6
 
 [	LD A , [ IX + INFO_EFF_VOL ]] Z80:21cyc, R800:7cyc
-00a597: dd 7e 08
+00a5a4: dd 7e 08
 
 [	SUB A , [ HL ]] Z80:8cyc, R800:4cyc
-00a59a: 96
+00a5a7: 96
 
 [	JP NC , BGMDRIVER_MIXER_MIX_SKIP2] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a59b: d2 9f a5
+00a5a8: d2 ac a5
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a59e: af
+00a5ab: af
 
 [BGMDRIVER_MIXER_MIX_SKIP2 :]
-	label address: 0x00a59f
+	label address: 0x00a5ac
 
 [	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a59f: ed 51
+00a5ac: ed 51
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a5a1: 14
+00a5ae: 14
 
 [	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a5a2: d3 a1
+00a5af: d3 a1
 
 [	LD A , [ PLAY_SOUND_EFFECT_ACTIVE ]] Z80:14cyc, R800:6cyc
-00a5a4: 3a 82 a6
+00a5b1: 3a 8f a6
 
 [	OR A , A] Z80:5cyc, R800:1cyc
-00a5a7: b7
+00a5b4: b7
 
 [	JR Z , BGMDRIVER_MIXER_VOLUME_CH2] Z80:13cyc(cond=true), 8cyc(cond=false), R800:3cyc(cond=true), 2cyc(cond=false)
-00a5a8: 28 06
+00a5b5: 28 06
 
 [	LD A , [ PLAY_SOUND_EFFECT_VOLUME ]] Z80:14cyc, R800:6cyc
-00a5aa: 3a 87 a6
+00a5b7: 3a 94 a6
 
 [	JP BGMDRIVER_MIXER_VOLUME_CH2_SKIP1] Z80:11cyc, R800:5cyc
-00a5ad: c3 bc a5
+00a5ba: c3 c9 a5
 
 [BGMDRIVER_MIXER_VOLUME_CH2 :]
-	label address: 0x00a5b0
+	label address: 0x00a5bd
 
 [	LD IX , PLAY_INFO_CH2] Z80:16cyc, R800:4cyc
-00a5b0: dd 21 c1 a6
+00a5bd: dd 21 ce a6
 
 [	LD A , [ IX + INFO_EFF_VOL ]] Z80:21cyc, R800:7cyc
-00a5b4: dd 7e 08
+00a5c1: dd 7e 08
 
 [	SUB A , [ HL ]] Z80:8cyc, R800:4cyc
-00a5b7: 96
+00a5c4: 96
 
 [	JP NC , BGMDRIVER_MIXER_MIX_SKIP3] Z80:11cyc, R800:5cyc(cond=true), 3cyc(cond=false)
-00a5b8: d2 bc a5
+00a5c5: d2 c9 a5
 
 [	XOR A , A] Z80:5cyc, R800:1cyc
-00a5bb: af
+00a5c8: af
 
 [BGMDRIVER_MIXER_MIX_SKIP3 :]
-	label address: 0x00a5bc
+	label address: 0x00a5c9
 
 [BGMDRIVER_MIXER_VOLUME_CH2_SKIP1 :]
-	label address: 0x00a5bc
+	label address: 0x00a5c9
 
 [	OUT [ C ] , D] Z80:14cyc, R800:10 or 9cyc
-00a5bc: ed 51
+00a5c9: ed 51
 
 [	INC D] Z80:5cyc, R800:1cyc
-00a5be: 14
+00a5cb: 14
 
 [	OUT [ PSG_REG_WRT ] , A] Z80:12cyc, R800:10 or 9cyc
-00a5bf: d3 a1
+00a5cc: d3 a1
 
 [	RET] Z80:11cyc, R800:5cyc
-00a5c1: c9
+00a5ce: c9
 
 [FREQ_DATA :]
-	label address: 0x00a5c2
+	label address: 0x00a5cf
 
 [	DW 3420 , 3228 , 3047 , 2876 , 2714 , 2562 , 2418 , 2282 , 2154 , 2033 , 1919 , 1811]
-00a5c2: 5c 0d 9c 0c e7 0b 3c 0b
-00a5ca: 9a 0a 02 0a 72 09 ea 08
-00a5d2: 6a 08 f1 07 7f 07 13 07
+00a5cf: 5c 0d 9c 0c e7 0b 3c 0b
+00a5d7: 9a 0a 02 0a 72 09 ea 08
+00a5df: 6a 08 f1 07 7f 07 13 07
 
 [	DW 1710 , 1614 , 1523 , 1438 , 1357 , 1281 , 1209 , 1141 , 1077 , 1016 , 959 , 905]
-00a5da: ae 06 4e 06 f3 05 9e 05
-00a5e2: 4d 05 01 05 b9 04 75 04
-00a5ea: 35 04 f8 03 bf 03 89 03
+00a5e7: ae 06 4e 06 f3 05 9e 05
+00a5ef: 4d 05 01 05 b9 04 75 04
+00a5f7: 35 04 f8 03 bf 03 89 03
 
 [	DW 855 , 807 , 761 , 719 , 678 , 640 , 604 , 570 , 538 , 508 , 479 , 452]
-00a5f2: 57 03 27 03 f9 02 cf 02
-00a5fa: a6 02 80 02 5c 02 3a 02
-00a602: 1a 02 fc 01 df 01 c4 01
+00a5ff: 57 03 27 03 f9 02 cf 02
+00a607: a6 02 80 02 5c 02 3a 02
+00a60f: 1a 02 fc 01 df 01 c4 01
 
 [	DW 427 , 403 , 380 , 359 , 339 , 320 , 302 , 285 , 269 , 254 , 239 , 226]
-00a60a: ab 01 93 01 7c 01 67 01
-00a612: 53 01 40 01 2e 01 1d 01
-00a61a: 0d 01 fe 00 ef 00 e2 00
+00a617: ab 01 93 01 7c 01 67 01
+00a61f: 53 01 40 01 2e 01 1d 01
+00a627: 0d 01 fe 00 ef 00 e2 00
 
 [	DW 213 , 201 , 190 , 179 , 169 , 160 , 151 , 142 , 134 , 127 , 119 , 113]
-00a622: d5 00 c9 00 be 00 b3 00
-00a62a: a9 00 a0 00 97 00 8e 00
-00a632: 86 00 7f 00 77 00 71 00
+00a62f: d5 00 c9 00 be 00 b3 00
+00a637: a9 00 a0 00 97 00 8e 00
+00a63f: 86 00 7f 00 77 00 71 00
 
 [	DW 106 , 100 , 95 , 89 , 84 , 80 , 75 , 71 , 67 , 63 , 59 , 56]
-00a63a: 6a 00 64 00 5f 00 59 00
-00a642: 54 00 50 00 4b 00 47 00
-00a64a: 43 00 3f 00 3b 00 38 00
+00a647: 6a 00 64 00 5f 00 59 00
+00a64f: 54 00 50 00 4b 00 47 00
+00a657: 43 00 3f 00 3b 00 38 00
 
 [	DW 53 , 50 , 47 , 44 , 42 , 40 , 37 , 35 , 33 , 31 , 29 , 28]
-00a652: 35 00 32 00 2f 00 2c 00
-00a65a: 2a 00 28 00 25 00 23 00
-00a662: 21 00 1f 00 1d 00 1c 00
+00a65f: 35 00 32 00 2f 00 2c 00
+00a667: 2a 00 28 00 25 00 23 00
+00a66f: 21 00 1f 00 1d 00 1c 00
 
 [	DW 26 , 25 , 23 , 22 , 21 , 20 , 18 , 17 , 16 , 15 , 14 , 14]
-00a66a: 1a 00 19 00 17 00 16 00
-00a672: 15 00 14 00 12 00 11 00
-00a67a: 10 00 0f 00 0e 00 0e 00
+00a677: 1a 00 19 00 17 00 16 00
+00a67f: 15 00 14 00 12 00 11 00
+00a687: 10 00 0f 00 0e 00 0e 00
 
 [PLAY_SOUND_EFFECT_ACTIVE :]
-	label address: 0x00a682
-
-[	DB 0]
-00a682: 00
-
-[PLAY_SOUND_EFFECT_WAIT_COUNT :]
-	label address: 0x00a683
-
-[	DB 0]
-00a683: 00
-
-[PLAY_SOUND_EFFECT_FREQ :]
-	label address: 0x00a684
-
-[	DW 0]
-00a684: 00 00
-
-[PLAY_SOUND_EFFECT_NOISE_FREQ :]
-	label address: 0x00a686
-
-[	DB 0]
-00a686: 00
-
-[PLAY_SOUND_EFFECT_VOLUME :]
-	label address: 0x00a687
-
-[	DB 0]
-00a687: 00
-
-[PLAY_SOUND_EFFECT_ADR :]
-	label address: 0x00a688
-
-[	DW 0]
-00a688: 00 00
-
-[PLAY_SOUND_EFFECT_PRIORITY :]
-	label address: 0x00a68a
-
-[	DB 255]
-00a68a: ff
-
-[PLAY_NOISE_FREQ :]
-	label address: 0x00a68b
-
-[	DB 0]
-00a68b: 00
-
-[PLAY_BGM_DATA_ADR :]
-	label address: 0x00a68c
-
-[	DW 0]
-00a68c: 00 00
-
-[PLAY_MASTER_VOLUME_WAIT :]
-	label address: 0x00a68e
-
-[	DB 0]
-00a68e: 00
-
-[PLAY_MASTER_VOLUME_SPEED :]
 	label address: 0x00a68f
 
 [	DB 0]
 00a68f: 00
 
-[PLAY_MASTER_VOLUME :]
+[PLAY_SOUND_EFFECT_WAIT_COUNT :]
 	label address: 0x00a690
 
 [	DB 0]
 00a690: 00
 
-[PLAY_DRUM_FONT1 :]
+[PLAY_SOUND_EFFECT_FREQ :]
 	label address: 0x00a691
 
 [	DW 0]
 00a691: 00 00
 
-[PLAY_DRUM_FONT2 :]
+[PLAY_SOUND_EFFECT_NOISE_FREQ :]
 	label address: 0x00a693
 
-[	DW 0]
-00a693: 00 00
+[	DB 0]
+00a693: 00
 
-[PLAY_DRUM_FONT3 :]
+[PLAY_SOUND_EFFECT_VOLUME :]
+	label address: 0x00a694
+
+[	DB 0]
+00a694: 00
+
+[PLAY_SOUND_EFFECT_ADR :]
 	label address: 0x00a695
 
 [	DW 0]
 00a695: 00 00
 
-[PLAY_DRUM_FONT4 :]
+[PLAY_SOUND_EFFECT_PRIORITY :]
 	label address: 0x00a697
 
-[	DW 0]
-00a697: 00 00
+[	DB 255]
+00a697: ff
 
-[PLAY_DRUM_FONT5 :]
+[PLAY_NOISE_FREQ :]
+	label address: 0x00a698
+
+[	DB 0]
+00a698: 00
+
+[PLAY_BGM_DATA_ADR :]
 	label address: 0x00a699
 
 [	DW 0]
 00a699: 00 00
 
-[PLAY_INFO_CH0 :]
+[PLAY_MASTER_VOLUME_WAIT :]
 	label address: 0x00a69b
+
+[	DB 0]
+00a69b: 00
+
+[PLAY_MASTER_VOLUME_SPEED :]
+	label address: 0x00a69c
+
+[	DB 0]
+00a69c: 00
+
+[PLAY_MASTER_VOLUME :]
+	label address: 0x00a69d
+
+[	DB 0]
+00a69d: 00
+
+[PLAY_DRUM_FONT1 :]
+	label address: 0x00a69e
+
+[	DW 0]
+00a69e: 00 00
+
+[PLAY_DRUM_FONT2 :]
+	label address: 0x00a6a0
+
+[	DW 0]
+00a6a0: 00 00
+
+[PLAY_DRUM_FONT3 :]
+	label address: 0x00a6a2
+
+[	DW 0]
+00a6a2: 00 00
+
+[PLAY_DRUM_FONT4 :]
+	label address: 0x00a6a4
+
+[	DW 0]
+00a6a4: 00 00
+
+[PLAY_DRUM_FONT5 :]
+	label address: 0x00a6a6
+
+[	DW 0]
+00a6a6: 00 00
+
+[PLAY_INFO_CH0 :]
+	label address: 0x00a6a8
 
 [REPEAT I , INFO_SIZE]
 	Scope path: @REPEAT1:
 
 	repeat begin
-[	DB 0]
-00a69b: 00
-
-[	DB 0]
-00a69c: 00
-
-[	DB 0]
-00a69d: 00
-
-[	DB 0]
-00a69e: 00
-
-[	DB 0]
-00a69f: 00
-
-[	DB 0]
-00a6a0: 00
-
-[	DB 0]
-00a6a1: 00
-
-[	DB 0]
-00a6a2: 00
-
-[	DB 0]
-00a6a3: 00
-
-[	DB 0]
-00a6a4: 00
-
-[	DB 0]
-00a6a5: 00
-
-[	DB 0]
-00a6a6: 00
-
-[	DB 0]
-00a6a7: 00
-
 [	DB 0]
 00a6a8: 00
 
@@ -2559,18 +2521,6 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 [	DB 0]
 00a6ad: 00
 
-	repeat end
-	Scope path: 
-
-
-
-[PLAY_INFO_CH1 :]
-	label address: 0x00a6ae
-
-[REPEAT I , INFO_SIZE]
-	Scope path: @REPEAT2:
-
-	repeat begin
 [	DB 0]
 00a6ae: 00
 
@@ -2610,6 +2560,18 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 [	DB 0]
 00a6ba: 00
 
+	repeat end
+	Scope path: 
+
+
+
+[PLAY_INFO_CH1 :]
+	label address: 0x00a6bb
+
+[REPEAT I , INFO_SIZE]
+	Scope path: @REPEAT2:
+
+	repeat begin
 [	DB 0]
 00a6bb: 00
 
@@ -2628,18 +2590,6 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 [	DB 0]
 00a6c0: 00
 
-	repeat end
-	Scope path: 
-
-
-
-[PLAY_INFO_CH2 :]
-	label address: 0x00a6c1
-
-[REPEAT I , INFO_SIZE]
-	Scope path: @REPEAT3:
-
-	repeat begin
 [	DB 0]
 00a6c1: 00
 
@@ -2679,6 +2629,18 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 [	DB 0]
 00a6cd: 00
 
+	repeat end
+	Scope path: 
+
+
+
+[PLAY_INFO_CH2 :]
+	label address: 0x00a6ce
+
+[REPEAT I , INFO_SIZE]
+	Scope path: @REPEAT3:
+
+	repeat begin
 [	DB 0]
 00a6ce: 00
 
@@ -2697,6 +2659,45 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 [	DB 0]
 00a6d3: 00
 
+[	DB 0]
+00a6d4: 00
+
+[	DB 0]
+00a6d5: 00
+
+[	DB 0]
+00a6d6: 00
+
+[	DB 0]
+00a6d7: 00
+
+[	DB 0]
+00a6d8: 00
+
+[	DB 0]
+00a6d9: 00
+
+[	DB 0]
+00a6da: 00
+
+[	DB 0]
+00a6db: 00
+
+[	DB 0]
+00a6dc: 00
+
+[	DB 0]
+00a6dd: 00
+
+[	DB 0]
+00a6de: 00
+
+[	DB 0]
+00a6df: 00
+
+[	DB 0]
+00a6e0: 00
+
 	repeat end
 	Scope path: 
 
@@ -2705,300 +2706,300 @@ Define macro {USE_VDP_COMMAND MACRO INTR_CTRL}
 [	INCLUDE ".//bgmdriver.asm"] end
 
 [BGM001 ::]
-	global label address: 0x00a6d4
+	global label address: 0x00a6e1
 
 [	INCLUDE ".//bgm.asm"] begin
 [	DB 0X06 , 0X00 , 0X94 , 0X00 , 0XEA , 0X00 , 0X67 , 0X0F , 0X68 , 0XEB , 0X00 , 0X35 , 0X18 , 0X66 , 0X0F , 0X30]
-00a6d4: 06 00 94 00 ea 00 67 0f
-00a6dc: 68 eb 00 35 18 66 0f 30
+00a6e1: 06 00 94 00 ea 00 67 0f
+00a6e9: 68 eb 00 35 18 66 0f 30
 
 [	DB 0X08 , 0X35 , 0X07 , 0X39 , 0X07 , 0X3C , 0X08 , 0X39 , 0X07 , 0X66 , 0X07 , 0X35 , 0X08 , 0X37 , 0X07 , 0X66]
-00a6e4: 08 35 07 39 07 3c 08 39
-00a6ec: 07 66 07 35 08 37 07 66
+00a6f1: 08 35 07 39 07 3c 08 39
+00a6f9: 07 66 07 35 08 37 07 66
 
 [	DB 0X07 , 0X37 , 0X08 , 0X37 , 0X07 , 0X66 , 0X07 , 0X32 , 0X10 , 0X66 , 0X07 , 0X37 , 0X08 , 0X35 , 0X07 , 0X66]
-00a6f4: 07 37 08 37 07 66 07 32
-00a6fc: 10 66 07 37 08 35 07 66
+00a701: 07 37 08 37 07 66 07 32
+00a709: 10 66 07 37 08 35 07 66
 
 [	DB 0X07 , 0X34 , 0X08 , 0X35 , 0X18 , 0X66 , 0X0F , 0X30 , 0X08 , 0X35 , 0X07 , 0X39 , 0X07 , 0X3C , 0X08 , 0X39]
-00a704: 07 34 08 35 18 66 0f 30
-00a70c: 08 35 07 39 07 3c 08 39
+00a711: 07 34 08 35 18 66 0f 30
+00a719: 08 35 07 39 07 3c 08 39
 
 [	DB 0X07 , 0X66 , 0X07 , 0X35 , 0X08 , 0X35 , 0X07 , 0X66 , 0X07 , 0X35 , 0X08 , 0X35 , 0X07 , 0X66 , 0X07 , 0X35]
-00a714: 07 66 07 35 08 35 07 66
-00a71c: 07 35 08 35 07 66 07 35
+00a721: 07 66 07 35 08 35 07 66
+00a729: 07 35 08 35 07 66 07 35
 
 [	DB 0X3A , 0X30 , 0X05 , 0X3C , 0X05 , 0X3B , 0X05 , 0X3C , 0X06 , 0X40 , 0X05 , 0X3C , 0X05 , 0X3B , 0X05 , 0X3C]
-00a724: 3a 30 05 3c 05 3b 05 3c
-00a72c: 06 40 05 3c 05 3b 05 3c
+00a731: 3a 30 05 3c 05 3b 05 3c
+00a739: 06 40 05 3c 05 3b 05 3c
 
 [	DB 0X06 , 0X30 , 0X05 , 0X3C , 0X05 , 0X3A , 0X05 , 0X3C , 0X06 , 0X40 , 0X05 , 0X3C , 0X05 , 0X3B , 0X05 , 0X3C]
-00a734: 06 30 05 3c 05 3a 05 3c
-00a73c: 06 40 05 3c 05 3b 05 3c
+00a741: 06 30 05 3c 05 3a 05 3c
+00a749: 06 40 05 3c 05 3b 05 3c
 
 [	DB 0X06 , 0X30 , 0X05 , 0X3C , 0X05 , 0X39 , 0X05 , 0X3C , 0X06 , 0X40 , 0X05 , 0X3C , 0X05 , 0X39 , 0X05 , 0X3C]
-00a744: 06 30 05 3c 05 39 05 3c
-00a74c: 06 40 05 3c 05 39 05 3c
+00a751: 06 30 05 3c 05 39 05 3c
+00a759: 06 40 05 3c 05 39 05 3c
 
 [	DB 0X06 , 0X30 , 0X05 , 0X3C , 0X05 , 0X38 , 0X05 , 0X3C , 0X06 , 0X40 , 0X05 , 0X3C , 0X05 , 0X39 , 0X05 , 0X3C]
-00a754: 06 30 05 3c 05 38 05 3c
-00a75c: 06 40 05 3c 05 39 05 3c
+00a761: 06 30 05 3c 05 38 05 3c
+00a769: 06 40 05 3c 05 39 05 3c
 
 [	DB 0X06 , 0X69 , 0X51 , 0X00 , 0X67 , 0X0F , 0X68 , 0X14 , 0X01 , 0X39 , 0X18 , 0X66 , 0X0F , 0X39 , 0X08 , 0X39]
-00a764: 06 69 51 00 67 0f 68 14
-00a76c: 01 39 18 66 0f 39 08 39
+00a771: 06 69 51 00 67 0f 68 14
+00a779: 01 39 18 66 0f 39 08 39
 
 [	DB 0X07 , 0X3C , 0X07 , 0X35 , 0X08 , 0X3C , 0X07 , 0X66 , 0X07 , 0X39 , 0X08 , 0X3A , 0X07 , 0X66 , 0X07 , 0X3A]
-00a774: 07 3c 07 35 08 3c 07 66
-00a77c: 07 39 08 3a 07 66 07 3a
+00a781: 07 3c 07 35 08 3c 07 66
+00a789: 07 39 08 3a 07 66 07 3a
 
 [	DB 0X08 , 0X3A , 0X07 , 0X66 , 0X07 , 0X3A , 0X10 , 0X66 , 0X07 , 0X3A , 0X08 , 0X3A , 0X07 , 0X66 , 0X07 , 0X3A]
-00a784: 08 3a 07 66 07 3a 10 66
-00a78c: 07 3a 08 3a 07 66 07 3a
+00a791: 08 3a 07 66 07 3a 10 66
+00a799: 07 3a 08 3a 07 66 07 3a
 
 [	DB 0X08 , 0X39 , 0X18 , 0X66 , 0X0F , 0X39 , 0X08 , 0X39 , 0X07 , 0X39 , 0X07 , 0X39 , 0X08 , 0X39 , 0X07 , 0X66]
-00a794: 08 39 18 66 0f 39 08 39
-00a79c: 07 39 07 39 08 39 07 66
+00a7a1: 08 39 18 66 0f 39 08 39
+00a7a9: 07 39 07 39 08 39 07 66
 
 [	DB 0X07 , 0X39 , 0X08 , 0X3A , 0X07 , 0X66 , 0X07 , 0X3A , 0X08 , 0X3A , 0X07 , 0X66 , 0X07 , 0X39 , 0X3A , 0X30]
-00a7a4: 07 39 08 3a 07 66 07 3a
-00a7ac: 08 3a 07 66 07 39 3a 30
+00a7b1: 07 39 08 3a 07 66 07 3a
+00a7b9: 08 3a 07 66 07 39 3a 30
 
 [	DB 0X31 , 0X30 , 0X31 , 0X30 , 0X31 , 0X30 , 0X31 , 0X69 , 0XDF , 0X00 , 0X6A]
-00a7b4: 31 30 31 30 31 30 31 69
-00a7bc: df 00 6a
+00a7c1: 31 30 31 30 31 30 31 69
+00a7c9: df 00 6a
 
 [	DB 0X00 , 0X01 , 0X02 , 0X02 , 0X02 , 0X00 , 0XFE , 0XFD , 0XFD , 0XFD , 0XFE , 0X00 , 0X02 , 0X02 , 0X02 , 0X01]
-00a7bf: 00 01 02 02 02 00 fe fd
-00a7c7: fd fd fe 00 02 02 02 01
+00a7cc: 00 01 02 02 02 00 fe fd
+00a7d4: fd fd fe 00 02 02 02 01
 
 [	DB 0X00 , 0XFE , 0XFD , 0XFD , 0XFD , 0XFF , 0X01 , 0X02 , 0X03 , 0X02 , 0X01 , 0XFF , 0XFD , 0XFD , 0XFD , 0XFE]
-00a7cf: 00 fe fd fd fd ff 01 02
-00a7d7: 03 02 01 ff fd fd fd fe
+00a7dc: 00 fe fd fd fd ff 01 02
+00a7e4: 03 02 01 ff fd fd fd fe
 
 [	DB 0XFF , 0X02 , 0XE0 , 0X01 , 0X1E , 0X14 , 0X00 , 0X00 , 0X00 , 0X00 , 0X01 , 0X02 , 0X02 , 0X02 , 0X00 , 0XFE]
-00a7df: ff 02 e0 01 1e 14 00 00
-00a7e7: 00 00 01 02 02 02 00 fe
+00a7ec: ff 02 e0 01 1e 14 00 00
+00a7f4: 00 00 01 02 02 02 00 fe
 
 [	DB 0XFD , 0XFD , 0XFD , 0XFE , 0X00 , 0X02 , 0X02 , 0X02 , 0X01 , 0X00 , 0XFE , 0XFD , 0XFD , 0XFD , 0XFF , 0X01]
-00a7ef: fd fd fd fe 00 02 02 02
-00a7f7: 01 00 fe fd fd fd ff 01
+00a7fc: fd fd fd fe 00 02 02 02
+00a804: 01 00 fe fd fd fd ff 01
 
 [	DB 0X02 , 0X03 , 0X02 , 0X01 , 0XFF , 0XFD , 0XFD , 0XFD , 0XFE , 0X22 , 0X32 , 0XE0 , 0X01 , 0X32 , 0X18 , 0X00]
-00a7ff: 02 03 02 01 ff fd fd fd
-00a807: fe 22 32 e0 01 32 18 00
+00a80c: 02 03 02 01 ff fd fd fd
+00a814: fe 22 32 e0 01 32 18 00
 
 [	DB 0X00 , 0X00]
-00a80f: 00 00
+00a81c: 00 00
 
 [	INCLUDE ".//bgm.asm"] end
 
 [SOUND_EFFECT001 :]
-	label address: 0x00a811
+	label address: 0x00a81e
 
 [	DB 32]
-00a811: 20
+00a81e: 20
 
 [	DB BGM_SE_VOL]
-00a812: 01
+00a81f: 01
 
 [	DB 12]
-00a813: 0c
+00a820: 0c
 
 [	DB BGM_SE_FREQ]
-00a814: 00
+00a821: 00
 
 [	DW 30]
-00a815: 1e 00
+00a822: 1e 00
 
 [	DB BGM_SE_WAIT]
-00a817: 03
+00a824: 03
 
 [	DB 1]
-00a818: 01
+00a825: 01
 
 [	DB BGM_SE_FREQ]
-00a819: 00
+00a826: 00
 
 [	DW 25]
-00a81a: 19 00
+00a827: 19 00
 
 [	DB BGM_SE_WAIT]
-00a81c: 03
+00a829: 03
 
 [	DB 1]
-00a81d: 01
+00a82a: 01
 
 [	DB BGM_SE_FREQ]
-00a81e: 00
+00a82b: 00
 
 [	DW 20]
-00a81f: 14 00
+00a82c: 14 00
 
 [	DB BGM_SE_WAIT]
-00a821: 03
+00a82e: 03
 
 [	DB 1]
-00a822: 01
+00a82f: 01
 
 [	DB BGM_SE_FREQ]
-00a823: 00
+00a830: 00
 
 [	DW 10]
-00a824: 0a 00
+00a831: 0a 00
 
 [	DB BGM_SE_WAIT]
-00a826: 03
+00a833: 03
 
 [	DB 1]
-00a827: 01
+00a834: 01
 
 [	DB BGM_SE_FREQ]
-00a828: 00
+00a835: 00
 
 [	DW 30]
-00a829: 1e 00
+00a836: 1e 00
 
 [	DB BGM_SE_WAIT]
-00a82b: 03
+00a838: 03
 
 [	DB 1]
-00a82c: 01
+00a839: 01
 
 [	DB BGM_SE_FREQ]
-00a82d: 00
+00a83a: 00
 
 [	DW 25]
-00a82e: 19 00
+00a83b: 19 00
 
 [	DB BGM_SE_WAIT]
-00a830: 03
+00a83d: 03
 
 [	DB 1]
-00a831: 01
-
-[	DB BGM_SE_FREQ]
-00a832: 00
-
-[	DW 20]
-00a833: 14 00
-
-[	DB BGM_SE_WAIT]
-00a835: 03
-
-[	DB 1]
-00a836: 01
-
-[	DB BGM_SE_FREQ]
-00a837: 00
-
-[	DW 10]
-00a838: 0a 00
-
-[	DB BGM_SE_WAIT]
-00a83a: 03
-
-[	DB 1]
-00a83b: 01
-
-[	DB BGM_SE_END]
-00a83c: 04
-
-[SOUND_EFFECT002 :]
-	label address: 0x00a83d
-
-[	DB 128]
-00a83d: 80
-
-[	DB BGM_SE_VOL]
 00a83e: 01
 
-[	DB 12]
-00a83f: 0c
+[	DB BGM_SE_FREQ]
+00a83f: 00
+
+[	DW 20]
+00a840: 14 00
+
+[	DB BGM_SE_WAIT]
+00a842: 03
+
+[	DB 1]
+00a843: 01
 
 [	DB BGM_SE_FREQ]
-00a840: 00
+00a844: 00
 
-[	DW 32768]
-00a841: 00 80
-
-[	DB BGM_SE_NOISE_FREQ]
-00a843: 02
-
-[	DB 20 + 0X80]
-00a844: 94
+[	DW 10]
+00a845: 0a 00
 
 [	DB BGM_SE_WAIT]
-00a845: 03
+00a847: 03
 
-[	DB 5]
-00a846: 05
-
-[	DB BGM_SE_NOISE_FREQ]
-00a847: 02
-
-[	DB 8 + 0X80]
-00a848: 88
-
-[	DB BGM_SE_WAIT]
-00a849: 03
-
-[	DB 5]
-00a84a: 05
-
-[	DB BGM_SE_NOISE_FREQ]
-00a84b: 02
-
-[	DB 28 + 0X80]
-00a84c: 9c
-
-[	DB BGM_SE_WAIT]
-00a84d: 03
-
-[	DB 5]
-00a84e: 05
-
-[	DB BGM_SE_NOISE_FREQ]
-00a84f: 02
-
-[	DB 12 + 0X80]
-00a850: 8c
-
-[	DB BGM_SE_WAIT]
-00a851: 03
-
-[	DB 5]
-00a852: 05
-
-[	DB BGM_SE_NOISE_FREQ]
-00a853: 02
-
-[	DB 31 + 0X80]
-00a854: 9f
-
-[	DB BGM_SE_WAIT]
-00a855: 03
-
-[	DB 10]
-00a856: 0a
-
-[	DB BGM_SE_NOISE_FREQ]
-00a857: 02
-
-[	DB 15 + 0X80]
-00a858: 8f
-
-[	DB BGM_SE_WAIT]
-00a859: 03
-
-[	DB 10]
-00a85a: 0a
+[	DB 1]
+00a848: 01
 
 [	DB BGM_SE_END]
-00a85b: 04
+00a849: 04
+
+[SOUND_EFFECT002 :]
+	label address: 0x00a84a
+
+[	DB 128]
+00a84a: 80
+
+[	DB BGM_SE_VOL]
+00a84b: 01
+
+[	DB 12]
+00a84c: 0c
+
+[	DB BGM_SE_FREQ]
+00a84d: 00
+
+[	DW 32768]
+00a84e: 00 80
+
+[	DB BGM_SE_NOISE_FREQ]
+00a850: 02
+
+[	DB 20 + 0X80]
+00a851: 94
+
+[	DB BGM_SE_WAIT]
+00a852: 03
+
+[	DB 5]
+00a853: 05
+
+[	DB BGM_SE_NOISE_FREQ]
+00a854: 02
+
+[	DB 8 + 0X80]
+00a855: 88
+
+[	DB BGM_SE_WAIT]
+00a856: 03
+
+[	DB 5]
+00a857: 05
+
+[	DB BGM_SE_NOISE_FREQ]
+00a858: 02
+
+[	DB 28 + 0X80]
+00a859: 9c
+
+[	DB BGM_SE_WAIT]
+00a85a: 03
+
+[	DB 5]
+00a85b: 05
+
+[	DB BGM_SE_NOISE_FREQ]
+00a85c: 02
+
+[	DB 12 + 0X80]
+00a85d: 8c
+
+[	DB BGM_SE_WAIT]
+00a85e: 03
+
+[	DB 5]
+00a85f: 05
+
+[	DB BGM_SE_NOISE_FREQ]
+00a860: 02
+
+[	DB 31 + 0X80]
+00a861: 9f
+
+[	DB BGM_SE_WAIT]
+00a862: 03
+
+[	DB 10]
+00a863: 0a
+
+[	DB BGM_SE_NOISE_FREQ]
+00a864: 02
+
+[	DB 15 + 0X80]
+00a865: 8f
+
+[	DB BGM_SE_WAIT]
+00a866: 03
+
+[	DB 10]
+00a867: 0a
+
+[	DB BGM_SE_END]
+00a868: 04
 
 [END_ADDRESS ::]
-	global label address: 0x00a85c
+	global label address: 0x00a869
 
 << label >>
 @REPEAT1:I 18 ( 0x12 )
@@ -3075,74 +3076,75 @@ BDOS_FUNC_VERSION 12 ( 0xc )
 BDOS_ON_DISKBASIC 62333 ( 0xf37d )
 BDOS_ON_MSXDOS 5 ( 0x5 )
 BDRCLR 62443 ( 0xf3eb )
-BGM001 42708 ( 0xa6d4 )
-BGMDRIVER_CALC_EFF_VOL 41989 ( 0xa405 )
-BGMDRIVER_CHECK_NEXT_DATA 41300 ( 0xa154 )
+BGM001 42721 ( 0xa6e1 )
+BGMDRIVER_CALC_EFF_VOL 42002 ( 0xa412 )
+BGMDRIVER_CHECK_NEXT_DATA 41313 ( 0xa161 )
 BGMDRIVER_CHECK_PLAYING 41121 ( 0xa0a1 )
-BGMDRIVER_DRUM1_FONT 41585 ( 0xa271 )
-BGMDRIVER_DRUM2_FONT 41618 ( 0xa292 )
-BGMDRIVER_DRUM3_FONT 41651 ( 0xa2b3 )
-BGMDRIVER_DRUM4_FONT 41684 ( 0xa2d4 )
-BGMDRIVER_DRUM5_FONT 41717 ( 0xa2f5 )
-BGMDRIVER_DRUM_KEYON 41434 ( 0xa1da )
-BGMDRIVER_ENVELOPE_AR 41944 ( 0xa3d8 )
-BGMDRIVER_ENVELOPE_DR 41918 ( 0xa3be )
-BGMDRIVER_ENVELOPE_END 41968 ( 0xa3f0 )
-BGMDRIVER_ENVELOPE_RR 41870 ( 0xa38e )
-BGMDRIVER_ENVELOPE_SR 41894 ( 0xa3a6 )
+BGMDRIVER_DRUM1_FONT 41598 ( 0xa27e )
+BGMDRIVER_DRUM2_FONT 41631 ( 0xa29f )
+BGMDRIVER_DRUM3_FONT 41664 ( 0xa2c0 )
+BGMDRIVER_DRUM4_FONT 41697 ( 0xa2e1 )
+BGMDRIVER_DRUM5_FONT 41730 ( 0xa302 )
+BGMDRIVER_DRUM_KEYON 41447 ( 0xa1e7 )
+BGMDRIVER_ENVELOPE_AR 41957 ( 0xa3e5 )
+BGMDRIVER_ENVELOPE_DR 41931 ( 0xa3cb )
+BGMDRIVER_ENVELOPE_END 41981 ( 0xa3fd )
+BGMDRIVER_ENVELOPE_RR 41883 ( 0xa39b )
+BGMDRIVER_ENVELOPE_SR 41907 ( 0xa3b3 )
 BGMDRIVER_FADEOUT 41154 ( 0xa0c2 )
-BGMDRIVER_FADEOUT_PROC 42015 ( 0xa41f )
-BGMDRIVER_FADEOUT_SKIP1 42031 ( 0xa42f )
-BGMDRIVER_GET_WAIT_TIME 41993 ( 0xa409 )
-BGMDRIVER_GET_WAIT_TIME_EXIT 42008 ( 0xa418 )
-BGMDRIVER_GET_WAIT_TIME_LOOP 41996 ( 0xa40c )
-BGMDRIVER_GET_WAIT_TIME_SKIP 42014 ( 0xa41e )
+BGMDRIVER_FADEOUT_PROC 42028 ( 0xa42c )
+BGMDRIVER_FADEOUT_SKIP1 42044 ( 0xa43c )
+BGMDRIVER_GET_WAIT_TIME 42006 ( 0xa416 )
+BGMDRIVER_GET_WAIT_TIME_EXIT 42021 ( 0xa425 )
+BGMDRIVER_GET_WAIT_TIME_LOOP 42009 ( 0xa419 )
+BGMDRIVER_GET_WAIT_TIME_SKIP 42027 ( 0xa42b )
 BGMDRIVER_INITIALIZE 41025 ( 0xa041 )
-BGMDRIVER_INIT_PLAY_INFO 41231 ( 0xa10f )
-BGMDRIVER_INTERRUPT_HANDLER 41242 ( 0xa11a )
-BGMDRIVER_JUMP 41750 ( 0xa316 )
-BGMDRIVER_KEYOFF 41479 ( 0xa207 )
-BGMDRIVER_KEYON 41362 ( 0xa192 )
-BGMDRIVER_MIXER 42164 ( 0xa4b4 )
-BGMDRIVER_MIXER_MIX 42356 ( 0xa574 )
-BGMDRIVER_MIXER_MIX_SKIP1 42382 ( 0xa58e )
-BGMDRIVER_MIXER_MIX_SKIP2 42399 ( 0xa59f )
-BGMDRIVER_MIXER_MIX_SKIP3 42428 ( 0xa5bc )
-BGMDRIVER_MIXER_NOISE_FREQ 42348 ( 0xa56c )
-BGMDRIVER_MIXER_SKIP0_CH2 42282 ( 0xa52a )
-BGMDRIVER_MIXER_SKIP1_CH0 42197 ( 0xa4d5 )
-BGMDRIVER_MIXER_SKIP1_CH1 42237 ( 0xa4fd )
-BGMDRIVER_MIXER_SKIP1_CH2 42332 ( 0xa55c )
-BGMDRIVER_MIXER_SKIP2_CH0 42211 ( 0xa4e3 )
-BGMDRIVER_MIXER_SKIP2_CH1 42253 ( 0xa50d )
-BGMDRIVER_MIXER_SKIP2_CH2 42348 ( 0xa56c )
-BGMDRIVER_MIXER_TONE_CH2 42304 ( 0xa540 )
-BGMDRIVER_MIXER_VOLUME_CH2 42416 ( 0xa5b0 )
-BGMDRIVER_MIXER_VOLUME_CH2_SKIP1 42428 ( 0xa5bc )
+BGMDRIVER_INIT_PLAY_INFO 41244 ( 0xa11c )
+BGMDRIVER_INTERRUPT_HANDLER 41255 ( 0xa127 )
+BGMDRIVER_JUMP 41763 ( 0xa323 )
+BGMDRIVER_KEYOFF 41492 ( 0xa214 )
+BGMDRIVER_KEYON 41375 ( 0xa19f )
+BGMDRIVER_MIXER 42177 ( 0xa4c1 )
+BGMDRIVER_MIXER_MIX 42369 ( 0xa581 )
+BGMDRIVER_MIXER_MIX_SKIP1 42395 ( 0xa59b )
+BGMDRIVER_MIXER_MIX_SKIP2 42412 ( 0xa5ac )
+BGMDRIVER_MIXER_MIX_SKIP3 42441 ( 0xa5c9 )
+BGMDRIVER_MIXER_NOISE_FREQ 42361 ( 0xa579 )
+BGMDRIVER_MIXER_SKIP0_CH2 42295 ( 0xa537 )
+BGMDRIVER_MIXER_SKIP1_CH0 42210 ( 0xa4e2 )
+BGMDRIVER_MIXER_SKIP1_CH1 42250 ( 0xa50a )
+BGMDRIVER_MIXER_SKIP1_CH2 42345 ( 0xa569 )
+BGMDRIVER_MIXER_SKIP2_CH0 42224 ( 0xa4f0 )
+BGMDRIVER_MIXER_SKIP2_CH1 42266 ( 0xa51a )
+BGMDRIVER_MIXER_SKIP2_CH2 42361 ( 0xa579 )
+BGMDRIVER_MIXER_TONE_CH2 42317 ( 0xa54d )
+BGMDRIVER_MIXER_VOLUME_CH2 42429 ( 0xa5bd )
+BGMDRIVER_MIXER_VOLUME_CH2_SKIP1 42441 ( 0xa5c9 )
 BGMDRIVER_MUTE_PSG 41167 ( 0xa0cf )
-BGMDRIVER_MUTE_PSG_LOOP 41174 ( 0xa0d6 )
+BGMDRIVER_MUTE_PSG_LOOP 41177 ( 0xa0d9 )
 BGMDRIVER_PLAY 41039 ( 0xa04f )
-BGMDRIVER_PLAY_CH 41273 ( 0xa139 )
-BGMDRIVER_PLAY_END 41766 ( 0xa326 )
-BGMDRIVER_PLAY_SOUND_EFFECT 41191 ( 0xa0e7 )
-BGMDRIVER_PLAY_SOUND_EFFECT_SKIP 41228 ( 0xa10c )
-BGMDRIVER_REST 41509 ( 0xa225 )
-BGMDRIVER_SET_FREQ 41396 ( 0xa1b4 )
-BGMDRIVER_SOUND_EFFECT 42073 ( 0xa459 )
-BGMDRIVER_SOUND_EFFECT_END_PROC 42155 ( 0xa4ab )
-BGMDRIVER_SOUND_EFFECT_FREQ_PROC 42116 ( 0xa484 )
-BGMDRIVER_SOUND_EFFECT_LOOP 42092 ( 0xa46c )
-BGMDRIVER_SOUND_EFFECT_NOISE_FREQ_PROC 42138 ( 0xa49a )
-BGMDRIVER_SOUND_EFFECT_PROC 42089 ( 0xa469 )
-BGMDRIVER_SOUND_EFFECT_VOLUME_PROC 42130 ( 0xa492 )
-BGMDRIVER_SOUND_EFFECT_WAIT_PROC 42146 ( 0xa4a2 )
-BGMDRIVER_SOUND_FONT 41549 ( 0xa24d )
+BGMDRIVER_PLAY_CH 41286 ( 0xa146 )
+BGMDRIVER_PLAY_END 41779 ( 0xa333 )
+BGMDRIVER_PLAY_SOUND_EFFECT 41204 ( 0xa0f4 )
+BGMDRIVER_PLAY_SOUND_EFFECT_SKIP 41241 ( 0xa119 )
+BGMDRIVER_REST 41522 ( 0xa232 )
+BGMDRIVER_SET_FREQ 41409 ( 0xa1c1 )
+BGMDRIVER_SOUND_EFFECT 42086 ( 0xa466 )
+BGMDRIVER_SOUND_EFFECT_END_PROC 42168 ( 0xa4b8 )
+BGMDRIVER_SOUND_EFFECT_FREQ_PROC 42129 ( 0xa491 )
+BGMDRIVER_SOUND_EFFECT_LOOP 42105 ( 0xa479 )
+BGMDRIVER_SOUND_EFFECT_NOISE_FREQ_PROC 42151 ( 0xa4a7 )
+BGMDRIVER_SOUND_EFFECT_PROC 42102 ( 0xa476 )
+BGMDRIVER_SOUND_EFFECT_VOLUME_PROC 42143 ( 0xa49f )
+BGMDRIVER_SOUND_EFFECT_WAIT_PROC 42159 ( 0xa4af )
+BGMDRIVER_SOUND_FONT 41562 ( 0xa25a )
 BGMDRIVER_STOP 41100 ( 0xa08c )
-BGMDRIVER_UPDATE_FREQ 41838 ( 0xa36e )
-BGMDRIVER_UPDATE_VIBRATO 41785 ( 0xa339 )
-BGMDRIVER_VIBRATO_ACTIVE 41804 ( 0xa34c )
-BGMDRIVER_VIBRATO_ACTIVE_SKIP 41836 ( 0xa36c )
-BGMDRIVER_VOLUME 41535 ( 0xa23f )
+BGMDRIVER_UPDATE_FREQ 41851 ( 0xa37b )
+BGMDRIVER_UPDATE_VIBRATO 41798 ( 0xa346 )
+BGMDRIVER_VIBRATO_ACTIVE 41817 ( 0xa359 )
+BGMDRIVER_VIBRATO_ACTIVE_SKIP 41849 ( 0xa379 )
+BGMDRIVER_VOLUME 41548 ( 0xa24c )
+BGMPDRIVER_INIT_DATA 41188 ( 0xa0e4 )
 BGM_DRUM1_FONT 107 ( 0x6b )
 BGM_DRUM2_FONT 108 ( 0x6c )
 BGM_DRUM3_FONT 109 ( 0x6d )
@@ -3275,7 +3277,7 @@ DCOMPR 32 ( 0x20 )
 DISSCR 65 ( 0x41 )
 ENASCR 71 ( 0x47 )
 ENASLT 36 ( 0x24 )
-END_ADDRESS 43100 ( 0xa85c )
+END_ADDRESS 43113 ( 0xa869 )
 ENTRY_POINT 40960 ( 0xa000 )
 EXBRSA 64248 ( 0xfaf8 )
 EXPTBL0 64705 ( 0xfcc1 )
@@ -3288,7 +3290,7 @@ FADEOUT_BGM001 40974 ( 0xa00e )
 FILVRM 86 ( 0x56 )
 FORCLR 62441 ( 0xf3e9 )
 FORMAT 327 ( 0x147 )
-FREQ_DATA 42434 ( 0xa5c2 )
+FREQ_DATA 42447 ( 0xa5cf )
 GETYPR 40 ( 0x28 )
 GICINI 144 ( 0x90 )
 GRPDL 222 ( 0xde )
@@ -3354,28 +3356,28 @@ NMI 102 ( 0x66 )
 OUTDO 24 ( 0x18 )
 PHYDIO 324 ( 0x144 )
 PLAY_BGM001 40963 ( 0xa003 )
-PLAY_BGM_DATA_ADR 42636 ( 0xa68c )
-PLAY_DRUM_FONT1 42641 ( 0xa691 )
-PLAY_DRUM_FONT2 42643 ( 0xa693 )
-PLAY_DRUM_FONT3 42645 ( 0xa695 )
-PLAY_DRUM_FONT4 42647 ( 0xa697 )
-PLAY_DRUM_FONT5 42649 ( 0xa699 )
-PLAY_INFO_CH0 42651 ( 0xa69b )
-PLAY_INFO_CH1 42670 ( 0xa6ae )
-PLAY_INFO_CH2 42689 ( 0xa6c1 )
-PLAY_MASTER_VOLUME 42640 ( 0xa690 )
-PLAY_MASTER_VOLUME_SPEED 42639 ( 0xa68f )
-PLAY_MASTER_VOLUME_WAIT 42638 ( 0xa68e )
-PLAY_NOISE_FREQ 42635 ( 0xa68b )
+PLAY_BGM_DATA_ADR 42649 ( 0xa699 )
+PLAY_DRUM_FONT1 42654 ( 0xa69e )
+PLAY_DRUM_FONT2 42656 ( 0xa6a0 )
+PLAY_DRUM_FONT3 42658 ( 0xa6a2 )
+PLAY_DRUM_FONT4 42660 ( 0xa6a4 )
+PLAY_DRUM_FONT5 42662 ( 0xa6a6 )
+PLAY_INFO_CH0 42664 ( 0xa6a8 )
+PLAY_INFO_CH1 42683 ( 0xa6bb )
+PLAY_INFO_CH2 42702 ( 0xa6ce )
+PLAY_MASTER_VOLUME 42653 ( 0xa69d )
+PLAY_MASTER_VOLUME_SPEED 42652 ( 0xa69c )
+PLAY_MASTER_VOLUME_WAIT 42651 ( 0xa69b )
+PLAY_NOISE_FREQ 42648 ( 0xa698 )
 PLAY_SE001 40978 ( 0xa012 )
 PLAY_SE002 40985 ( 0xa019 )
-PLAY_SOUND_EFFECT_ACTIVE 42626 ( 0xa682 )
-PLAY_SOUND_EFFECT_ADR 42632 ( 0xa688 )
-PLAY_SOUND_EFFECT_FREQ 42628 ( 0xa684 )
-PLAY_SOUND_EFFECT_NOISE_FREQ 42630 ( 0xa686 )
-PLAY_SOUND_EFFECT_PRIORITY 42634 ( 0xa68a )
-PLAY_SOUND_EFFECT_VOLUME 42631 ( 0xa687 )
-PLAY_SOUND_EFFECT_WAIT_COUNT 42627 ( 0xa683 )
+PLAY_SOUND_EFFECT_ACTIVE 42639 ( 0xa68f )
+PLAY_SOUND_EFFECT_ADR 42645 ( 0xa695 )
+PLAY_SOUND_EFFECT_FREQ 42641 ( 0xa691 )
+PLAY_SOUND_EFFECT_NOISE_FREQ 42643 ( 0xa693 )
+PLAY_SOUND_EFFECT_PRIORITY 42647 ( 0xa697 )
+PLAY_SOUND_EFFECT_VOLUME 42644 ( 0xa694 )
+PLAY_SOUND_EFFECT_WAIT_COUNT 42640 ( 0xa690 )
 PRINTC 333 ( 0x14d )
 PSG_REG_ADR 160 ( 0xa0 )
 PSG_REG_WRT 161 ( 0xa1 )
@@ -3466,8 +3468,8 @@ SFONT_SL 34 ( 0x22 )
 SFONT_SR 35 ( 0x23 )
 SFONT_VIB_WAIT 37 ( 0x25 )
 SFONT_VIB_WAVE 0 ( 0x0 )
-SOUND_EFFECT001 43025 ( 0xa811 )
-SOUND_EFFECT002 43069 ( 0xa83d )
+SOUND_EFFECT001 43038 ( 0xa81e )
+SOUND_EFFECT002 43082 ( 0xa84a )
 START_ADDRESS 40960 ( 0xa000 )
 STATFL 62439 ( 0xf3e7 )
 STOP_BGM001 40970 ( 0xa00a )

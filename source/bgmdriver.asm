@@ -25,6 +25,7 @@
 ; =============================================================================
 ;	2009/09/30	t.hara
 ;	2019/07/15	t.hara	Modified for ZMA
+;	2021/11/21	t.hara	Modified initialize of PSG registers
 ; -----------------------------------------------------------------------------
 
 include "bgmdriver_d.asm"
@@ -231,24 +232,24 @@ bgmdriver_fadeout::
 ; -----------------------------------------------------------------------------
 bgmdriver_mute_psg::
 		di
-		xor		a, a
-		ld		d, a
+		ld		d, 0
+		ld		hl, bgmpdriver_init_data
 		ld		c, PSG_REG_ADR
 		ld		b, 16
 
 bgmdriver_mute_psg_loop:
 		out		[c], d					; FOR b=0 TO 15:SOUND b, 0:NEXT
 		inc		d
+		ld		a, [hl]
 		out		[PSG_REG_WRT], a
+		inc		hl
 		djnz	bgmdriver_mute_psg_loop
-
-		ld		d, 7					; SOUND 7, &H80 + &H3F
-		out		[c], d
-		ld		a, 0x80 + 0x3F
-		out		[PSG_REG_WRT], a
 		ei
-
 		ret
+
+bgmpdriver_init_data:
+		;		0  1  2  3  4  5  6  7            8  9 10 11 12 13 14 15
+		db		0, 0, 0, 0, 0, 0, 0, 0x80 + 0x3F, 0, 0, 0, 0, 0, 0, 0, 0
 
 ; -----------------------------------------------------------------------------
 ;	å¯â âπäJénèàóù
