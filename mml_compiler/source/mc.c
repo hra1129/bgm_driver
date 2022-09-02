@@ -20,7 +20,7 @@ typedef struct {
 typedef struct {
 	int			tempo;
 	double		default_length;
-	double		length_error;		/* —İÏŒë· */
+	double		length_error;		/* ç´¯ç©èª¤å·® */
 	double		count;
 	char		*p_music_data;
 	int			index;
@@ -70,7 +70,7 @@ static char *load_file_image( const char *p_in_name ) {
 	in_size = ftell( p_in );
 	fseek( p_in, 0, SEEK_SET );
 
-	p_image = (char*) calloc( in_size + 1, 1 );		/* +1 ‚ÍA’[––•¶š '\0' ‚Ì•ª */
+	p_image = (char*) calloc( in_size + 1, 1 );		/* +1 ã¯ã€ç«¯æœ«æ–‡å­— 'Â¥0' ã®åˆ† */
 	if( p_image == NULL ) {
 		fclose( p_in );
 		return NULL;
@@ -85,9 +85,9 @@ static void skip_white_space( TEXT_T *p_text_info ) {
 	char c;
 	int is_comment = 0;
 
-	while( (c = p_text_info->p_text[ p_text_info->index ]) != '\0' ) {
+	while( (c = p_text_info->p_text[ p_text_info->index ]) != 'Â¥0' ) {
 		if( is_comment ) {
-			if( c == '\n' ) {
+			if( c == 'Â¥n' ) {
 				is_comment = 0;
 				p_text_info->line_no++;
 			}
@@ -95,7 +95,7 @@ static void skip_white_space( TEXT_T *p_text_info ) {
 		else if( c == ';' ) {
 			is_comment = 1;
 		}
-		else if( c == '\n' ) {
+		else if( c == 'Â¥n' ) {
 			p_text_info->line_no++;
 		}
 		else if( !isspace( c & 255 ) ) {
@@ -134,7 +134,7 @@ static int compile_sound_font( char *p_sound_font, TEXT_T *p_text_info ) {
 	skip_white_space( p_text_info );
 	c = p_text_info->p_text[ p_text_info->index ];
 	if( c != '{' ) {
-		fprintf( stderr, "ERROR: ‰¹Fİ’è‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ(%d)\n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: éŸ³è‰²è¨­å®šãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“(%d)Â¥n", p_text_info->line_no );
 		return 0;
 	}
 	p_text_info->index++;
@@ -155,7 +155,7 @@ static int compile_sound_font( char *p_sound_font, TEXT_T *p_text_info ) {
 		sound_font_count++;
 		skip_white_space( p_text_info );
 		c = p_text_info->p_text[ p_text_info->index ];
-	} while( c != '}' && c != '\0' );
+	} while( c != '}' && c != 'Â¥0' );
 	if( c == '}' ) {
 		p_text_info->index++;
 	}
@@ -169,7 +169,7 @@ static double get_length( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 
 	c = p_text_info->p_text[ p_text_info->index ];
 	if( isdigit( c & 255 ) ) {
-		/* ”’lw’è‚ª‚ ‚ê‚Î“Ç‚İæ‚é */
+		/* æ•°å€¤æŒ‡å®šãŒã‚ã‚Œã°èª­ã¿å–ã‚‹ */
 		for(;;) {
 			c = p_text_info->p_text[ p_text_info->index ];
 			if( !isdigit( c & 255 ) ) break;
@@ -178,10 +178,10 @@ static double get_length( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 		}
 	}
 	else {
-		/* ”’lw’è‚ª‚È‚¯‚ê‚ÎƒfƒtƒHƒ‹ƒg’l */
+		/* æ•°å€¤æŒ‡å®šãŒãªã‘ã‚Œã°ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤ */
 		length = p_music_info->default_length;
 	}
-	/* •t“_‚ÌŠm”F */
+	/* ä»˜ç‚¹ã®ç¢ºèª */
 	for(;;) {
 		c = p_text_info->p_text[ p_text_info->index ];
 		if( c != '.' ) {
@@ -199,24 +199,24 @@ static void put_length( MUSIC_T *p_music_info, double length, int ratio, int wit
 	int wait_count;
 
 	/* tempo											 */
-	/*		ˆê•ªŠÔ‚Ìl•ª‰¹•„‚Ì”						 */
+	/*		ä¸€åˆ†é–“ã®å››åˆ†éŸ³ç¬¦ã®æ•°						 */
 	/* tempo/4											 */
-	/*		ˆê•ªŠÔ‚Ì‘S‰¹•„‚Ì”							 */
+	/*		ä¸€åˆ†é–“ã®å…¨éŸ³ç¬¦ã®æ•°							 */
 	/* 60*60											 */
-	/*		ˆê•ªŠÔ‚ÌƒJƒEƒ“ƒg”							 */
+	/*		ä¸€åˆ†é–“ã®ã‚«ã‚¦ãƒ³ãƒˆæ•°							 */
 	/* 60*60/(tempo/4)									 */
-	/*		‘S‰¹•„‚ÌƒJƒEƒ“ƒg”							 */
+	/*		å…¨éŸ³ç¬¦ã®ã‚«ã‚¦ãƒ³ãƒˆæ•°							 */
 	/* length											 */
-	/*		Šó–]‚Ì‰¹•„‚Ì’·‚³ length•ª‰¹•„				 */
+	/*		å¸Œæœ›ã®éŸ³ç¬¦ã®é•·ã• lengthåˆ†éŸ³ç¬¦				 */
 	/* (60*60/(tempo/4))/length							 */
-	/*		Šó–]‚Ì‰¹•„‚ÌƒJƒEƒ“ƒg”						 */
+	/*		å¸Œæœ›ã®éŸ³ç¬¦ã®ã‚«ã‚¦ãƒ³ãƒˆæ•°						 */
 	/* 14400/(tempo*length)								 */
-	/*		ã‚Ì®‚ğ®—								 */
+	/*		ä¸Šã®å¼ã‚’æ•´ç†								 */
 
 	length_time = (14400. * ratio / (p_music_info->tempo* length * 8)) + p_music_info->length_error;
 	wait_count = (int)length_time;
-	p_music_info->length_error = length_time - (double)wait_count;	/* Œë·‚ğŠo‚¦‚Ä‚¨‚­ */
-	/* ‰¹’·‚ğo—Í */
+	p_music_info->length_error = length_time - (double)wait_count;	/* èª¤å·®ã‚’è¦šãˆã¦ãŠã */
+	/* éŸ³é•·ã‚’å‡ºåŠ› */
 	if( with_tie ){
 		p_music_info->tie_length += wait_count;
 	}
@@ -250,7 +250,7 @@ static void process_drum_data( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	p_text_info->index++;
 	length = get_length( p_music_info, p_text_info );
 
-	/* W‚ß‚½î•ñ‚ÉŠî‚Ã‚¢‚Äƒf[ƒ^‚ğ‘‚«o‚· */
+	/* é›†ã‚ãŸæƒ…å ±ã«åŸºã¥ã„ã¦ãƒ‡ãƒ¼ã‚¿ã‚’æ›¸ãå‡ºã™ */
 	p_music_info->p_music_data[ p_music_info->index++ ] = tone_id;
 	p_music_info->size++;
 	if( p_music_info->ratio != 8 ) {
@@ -293,7 +293,7 @@ static void process_tone_data( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	}
 	tone_id += p_music_info->octave * 12;
 	if( tone_id < 0 || tone_id >= 96 ) {
-		fprintf( stderr, "ERROR: ‰¹’öw’è‚ª”ÍˆÍŠO‚Å‚·(%d)\n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: éŸ³ç¨‹æŒ‡å®šãŒç¯„å›²å¤–ã§ã™(%d)Â¥n", p_text_info->line_no );
 	}
 	length = get_length( p_music_info, p_text_info );
 
@@ -307,16 +307,16 @@ static void process_tone_data( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	}
 
 	if( p_music_info->tie && p_music_info->tie_tone_id != tone_id ){
-		/* ‘O‚Ì‰¹‚ÆA¡‚Ì‰¹‚ÌŠÔ‚É & ‚ª‚ ‚é‚ªA‰¹’ö‚ªˆÙ‚È‚éê‡ */
+		/* å‰ã®éŸ³ã¨ã€ä»Šã®éŸ³ã®é–“ã« & ãŒã‚ã‚‹ãŒã€éŸ³ç¨‹ãŒç•°ãªã‚‹å ´åˆ */
 		put_length( p_music_info, 0, p_music_info->ratio, 0 );
 		p_music_info->tie = 0;
 		p_music_info->tie_tone_id = tone_id;
-		/* W‚ß‚½î•ñ‚ÉŠî‚Ã‚¢‚Äƒf[ƒ^‚ğ‘‚«o‚· */
+		/* é›†ã‚ãŸæƒ…å ±ã«åŸºã¥ã„ã¦ãƒ‡ãƒ¼ã‚¿ã‚’æ›¸ãå‡ºã™ */
 		p_music_info->p_music_data[ p_music_info->index++ ] = tone_id;
 		p_music_info->size++;
 	}
 	else if( !p_music_info->tie ){
-		/* W‚ß‚½î•ñ‚ÉŠî‚Ã‚¢‚Äƒf[ƒ^‚ğ‘‚«o‚· */
+		/* é›†ã‚ãŸæƒ…å ±ã«åŸºã¥ã„ã¦ãƒ‡ãƒ¼ã‚¿ã‚’æ›¸ãå‡ºã™ */
 		p_music_info->p_music_data[ p_music_info->index++ ] = tone_id;
 		p_music_info->size++;
 	}
@@ -350,7 +350,7 @@ static void process_tempo( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	p_text_info->index++;
 	p_music_info->tempo = get_number( p_text_info );
 	if( p_music_info->tempo < 20 || p_music_info->tempo > 240 ) {
-		fprintf( stderr, "ERROR: T ‚Ìw’è‚ª”ÍˆÍŠO‚Å‚·(%d)\n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: T ã®æŒ‡å®šãŒç¯„å›²å¤–ã§ã™(%d)Â¥n", p_text_info->line_no );
 		p_music_info->tempo = 120;
 	}
 }
@@ -361,7 +361,7 @@ static void process_ratio( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	p_text_info->index++;
 	p_music_info->ratio = get_number( p_text_info );
 	if( p_music_info->ratio < 1 || p_music_info->ratio > 8 ) {
-		fprintf( stderr, "ERROR: Q ‚Ìw’è‚ª”ÍˆÍŠO‚Å‚·(%d)\n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: Q ã®æŒ‡å®šãŒç¯„å›²å¤–ã§ã™(%d)Â¥n", p_text_info->line_no );
 		p_music_info->tempo = 120;
 	}
 }
@@ -385,12 +385,12 @@ static void process_sound_font( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	}
 	sound_font = get_number( p_text_info );
 	if( sound_font >= p_music_info->sound_font_count ) {
-		fprintf( stderr, "ERROR: @ ‚Ìw’è‚ª”ÍˆÍŠO‚Å‚·(%d)\n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: @ ã®æŒ‡å®šãŒç¯„å›²å¤–ã§ã™(%d)Â¥n", p_text_info->line_no );
 		sound_font = 0;
 	}
 	p_music_info->p_music_data[ p_music_info->index++ ] = id;
 	p_music_info->size++;
-	/* Œ»’iŠK‚Å‚Í‰¹Fƒf[ƒ^‚ÌƒAƒhƒŒƒX‚ª•sŠm’è‚È‚Ì‚ÅA‘ã‚í‚è‚É‰¹F”Ô†‚ğ‹L˜^‚µ‚Ä‚¨‚­ */
+	/* ç¾æ®µéšã§ã¯éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ãŒä¸ç¢ºå®šãªã®ã§ã€ä»£ã‚ã‚Šã«éŸ³è‰²ç•ªå·ã‚’è¨˜éŒ²ã—ã¦ãŠã */
 	p_music_info->p_music_data[ p_music_info->index++ ] = (char)sound_font;
 	p_music_info->size++;
 	p_music_info->p_music_data[ p_music_info->index++ ] = 0;
@@ -404,7 +404,7 @@ static void process_volume( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	p_text_info->index++;
 	volume = get_number( p_text_info );
 	if( volume > 15 ) {
-		fprintf( stderr, "ERROR: V ‚Ìw’è‚ª”ÍˆÍŠO‚Å‚·(%d)\n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: V ã®æŒ‡å®šãŒç¯„å›²å¤–ã§ã™(%d)Â¥n", p_text_info->line_no );
 		volume = 15;
 	}
 	p_music_info->p_music_data[ p_music_info->index++ ] = BGM_VOL;
@@ -419,7 +419,7 @@ static void process_octave( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	p_text_info->index++;
 	p_music_info->octave = get_number( p_text_info ) - 1;
 	if( p_music_info->octave < 0 || p_music_info->octave > 7 ) {
-		fprintf( stderr, "ERROR: O ‚Ìw’è‚ª”ÍˆÍŠO‚Å‚·(%d)\n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: O ã®æŒ‡å®šãŒç¯„å›²å¤–ã§ã™(%d)Â¥n", p_text_info->line_no );
 		p_music_info->octave = 4;
 	}
 }
@@ -430,7 +430,7 @@ static void process_octave_inc( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	p_text_info->index++;
 	p_music_info->octave++;
 	if( p_music_info->octave < 0 || p_music_info->octave > 7 ) {
-		fprintf( stderr, "ERROR: > w’è‚É‚æ‚è”ÍˆÍŠOƒIƒNƒ^[ƒu‚É‚È‚è‚Ü‚µ‚½(%d)\n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: > æŒ‡å®šã«ã‚ˆã‚Šç¯„å›²å¤–ã‚ªã‚¯ã‚¿ãƒ¼ãƒ–ã«ãªã‚Šã¾ã—ãŸ(%d)Â¥n", p_text_info->line_no );
 		p_music_info->octave = 7;
 	}
 }
@@ -441,7 +441,7 @@ static void process_octave_dec( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	p_text_info->index++;
 	p_music_info->octave--;
 	if( p_music_info->octave < 0 || p_music_info->octave > 7 ) {
-		fprintf( stderr, "ERROR: < w’è‚É‚æ‚è”ÍˆÍŠOƒIƒNƒ^[ƒu‚É‚È‚è‚Ü‚µ‚½(%d)\n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: < æŒ‡å®šã«ã‚ˆã‚Šç¯„å›²å¤–ã‚ªã‚¯ã‚¿ãƒ¼ãƒ–ã«ãªã‚Šã¾ã—ãŸ(%d)Â¥n", p_text_info->line_no );
 		p_music_info->octave = 0;
 	}
 }
@@ -462,7 +462,7 @@ static void process_loop_start( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 
 	p_text_info->index++;
 	if( p_music_info->loop_index != -1 ) {
-		fprintf( stderr, "WARNNING: “¯ˆêƒ`ƒƒƒ“ƒlƒ‹“à‚É $w’è‚ª•¡”‘¶İ‚µ‚Ü‚·(%d)\n", p_text_info->line_no );
+		fprintf( stderr, "WARNNING: åŒä¸€ãƒãƒ£ãƒ³ãƒãƒ«å†…ã« $æŒ‡å®šãŒè¤‡æ•°å­˜åœ¨ã—ã¾ã™(%d)Â¥n", p_text_info->line_no );
 	}
 	p_music_info->loop_index = p_music_info->index;
 }
@@ -490,7 +490,7 @@ static int compile_music_data( char *p_music_data, TEXT_T *p_text_info, int soun
 	skip_white_space( p_text_info );
 	c = p_text_info->p_text[ p_text_info->index ];
 	if( c != '{' ) {
-		fprintf( stderr, "ERROR: ‹Èƒf[ƒ^‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ(%d)\n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: æ›²ãƒ‡ãƒ¼ã‚¿ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“(%d)Â¥n", p_text_info->line_no );
 		return 0;
 	}
 	p_text_info->index++;
@@ -503,7 +503,7 @@ static int compile_music_data( char *p_music_data, TEXT_T *p_text_info, int soun
 			break;
 		}
 		switch( toupper(c) ) {
-		case '\0':	
+		case 'Â¥0':	
 			break;
 		case 'C':	case 'D':	case 'E':	case 'F':	case 'G':	case 'A':	case 'B':
 			process_tone_data( &music_info, p_text_info );
@@ -542,7 +542,7 @@ static int compile_music_data( char *p_music_data, TEXT_T *p_text_info, int soun
 			process_drum_data( &music_info, p_text_info );
 			break;
 		default:
-			fprintf( stderr, "ERROR: ‰ğß‚Å‚«‚È‚¢‹L†‚ª‚ ‚è‚Ü‚·(%d)\n", p_text_info->line_no );
+			fprintf( stderr, "ERROR: è§£é‡ˆã§ããªã„è¨˜å·ãŒã‚ã‚Šã¾ã™(%d)Â¥n", p_text_info->line_no );
 			p_text_info->index++;
 			break;
 		}
@@ -569,16 +569,16 @@ static void fwrite_text( const char *p_buffer, int size, FILE *p_out ) {
 	for( i = 0; i < size; i++ ) {
 		mod16 = i & 15;
 		if( mod16 == 0 ) {
-			fprintf( p_out, "\t\tdb\t\t" );
+			fprintf( p_out, "Â¥tÂ¥tdbÂ¥tÂ¥t" );
 		}
 		if( mod16 == 15 || i == (size - 1) ) {
-			fprintf( p_out, "0x%02X\n", (int)p_buffer[i] & 255 );
+			fprintf( p_out, "0x%02XÂ¥n", (int)p_buffer[i] & 255 );
 		}
 		else {
 			fprintf( p_out, "0x%02X, ", (int)p_buffer[i] & 255 );
 		}
 	}
-	fprintf( p_out, "\n" );
+	fprintf( p_out, "Â¥n" );
 }
 
 /* ----------------------------------------------------- */
@@ -590,7 +590,7 @@ static void link_music_data( const char *p_out_name, char *p_sound_font_memory, 
 	offset2 = p_music_data_size[1] + offset1;
 	offset3 = p_music_data_size[2] + offset2;
 
-	/* ƒwƒbƒ_‚ğXV‚·‚é */
+	/* ãƒ˜ãƒƒãƒ€ã‚’æ›´æ–°ã™ã‚‹ */
 	p_music_data_memory[0] = BGM_HEADER_SIZE;
 	p_music_data_memory[1] = 0;
 	p_music_data_memory[2] = (char)(offset1 & 255);
@@ -598,7 +598,7 @@ static void link_music_data( const char *p_out_name, char *p_sound_font_memory, 
 	p_music_data_memory[4] = (char)(offset2 & 255);
 	p_music_data_memory[5] = (char)(offset2 >> 8);
 
-	/* ‰¹Fƒf[ƒ^”Ô†‚ğ‰¹Fƒf[ƒ^ƒAƒhƒŒƒX‚Ö•ÏŠ· */
+	/* éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ç•ªå·ã‚’éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹ã¸å¤‰æ› */
 	for( i = 6; i < offset3; i++ ) {
 		if( p_music_data_memory[i] <= BGM_REST ) {
 			do {
@@ -622,15 +622,15 @@ static void link_music_data( const char *p_out_name, char *p_sound_font_memory, 
 		}
 	}
 
-	/* ƒtƒ@ƒCƒ‹‚Ö‘‚«o‚· */
+	/* ãƒ•ã‚¡ã‚¤ãƒ«ã¸æ›¸ãå‡ºã™ */
 	p_out = fopen( p_out_name, "w" );
 	if( p_out == NULL ) {
-		fprintf( stderr, "ERROR: %s ‚ğ‘‚«o‚¹‚Ü‚¹‚ñ\n", p_out_name );
+		fprintf( stderr, "ERROR: %s ã‚’æ›¸ãå‡ºã›ã¾ã›ã‚“Â¥n", p_out_name );
 		return;
 	}
-	fprintf( p_out, "\t\t; ‹Èƒf[ƒ^\n" );
+	fprintf( p_out, "Â¥tÂ¥t; æ›²ãƒ‡ãƒ¼ã‚¿Â¥n" );
 	fwrite_text( p_music_data_memory, offset3, p_out );
-	fprintf( p_out, "\t\t; ‰¹Fƒf[ƒ^\n" );
+	fprintf( p_out, "Â¥tÂ¥t; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿Â¥n" );
 	fwrite_text( p_sound_font_memory, SOUND_FONT_SIZE * sound_font_count, p_out );
 	fclose( p_out );
 }
@@ -647,33 +647,33 @@ static void mml_compile( const char *p_out_name, const char *p_text ) {
 	text_info.line_no = 1;
 	sound_font_count = compile_sound_font( sound_font_memory, &text_info );
 	if( sound_font_count == 0 ) {
-		fprintf( stderr, "ERROR: ‰¹Fƒf[ƒ^‚ª‚P‚Â‚à‚ ‚è‚Ü‚¹‚ñ(%d)\n", text_info.line_no );
+		fprintf( stderr, "ERROR: éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ãŒï¼‘ã¤ã‚‚ã‚ã‚Šã¾ã›ã‚“(%d)Â¥n", text_info.line_no );
 	}
 	else {
-		printf( "‰¹Fƒf[ƒ^ %d ŒÂ\n", sound_font_count );
+		printf( "éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ %d å€‹Â¥n", sound_font_count );
 	}
 	music_data_size[0] = compile_music_data( music_data_memory, &text_info, sound_font_count, BGM_HEADER_SIZE );
-	printf( "ch.0 ƒf[ƒ^ƒTƒCƒY %d[byte]\n", music_data_size[0] );
+	printf( "ch.0 ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚º %d[byte]Â¥n", music_data_size[0] );
 	music_data_size[1] = compile_music_data( music_data_memory, &text_info, sound_font_count, BGM_HEADER_SIZE + music_data_size[0] );
-	printf( "ch.1 ƒf[ƒ^ƒTƒCƒY %d[byte]\n", music_data_size[1] );
+	printf( "ch.1 ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚º %d[byte]Â¥n", music_data_size[1] );
 	music_data_size[2] = compile_music_data( music_data_memory, &text_info, sound_font_count, BGM_HEADER_SIZE + music_data_size[0] + music_data_size[1] );
-	printf( "ch.2 ƒf[ƒ^ƒTƒCƒY %d[byte]\n", music_data_size[2] );
+	printf( "ch.2 ãƒ‡ãƒ¼ã‚¿ã‚µã‚¤ã‚º %d[byte]Â¥n", music_data_size[2] );
 	link_music_data( p_out_name, sound_font_memory, sound_font_count, music_data_memory, music_data_size );
 }
 
 /* ----------------------------------------------------- */
 static void usage( const char *p_name ) {
 
-	fprintf( stderr, "Usage> %s <in.mml> <out.asm>\n", p_name );
+	fprintf( stderr, "Usage> %s <in.mml> <out.asm>Â¥n", p_name );
 }
 
 /* ----------------------------------------------------- */
 int main( int argc, char *argv[] ) {
 	char *p_text;
 
-	printf( "MML Compiler\n" );
-	printf( "===========================================\n" );
-	printf( "2009/10/03 t.hara\n" );
+	printf( "MML CompilerÂ¥n" );
+	printf( "===========================================Â¥n" );
+	printf( "2009/10/03 t.haraÂ¥n" );
 
 	if( argc < 3 ) {
 		usage( argv[0] );
@@ -682,11 +682,11 @@ int main( int argc, char *argv[] ) {
 
 	p_text = load_file_image( argv[1] );
 	if( p_text == NULL ) {
-		fprintf( stderr, "ERROR: \"%s\" ‚ğ“Ç‚İ‚ß‚Ü‚¹‚ñ\n", argv[1] );
+		fprintf( stderr, "ERROR: Â¥"%sÂ¥" ã‚’èª­ã¿è¾¼ã‚ã¾ã›ã‚“Â¥n", argv[1] );
 		return 2;
 	}
 	mml_compile( argv[2], p_text );
 	free( p_text );
-	printf( "Completed.\n" );
+	printf( "Completed.Â¥n" );
 	return 0;
 }
