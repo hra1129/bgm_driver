@@ -31,67 +31,67 @@
 include "bgmdriver_d.asm"
 
 ; -----------------------------------------------------------------------------
-;	AY-3-8910 [PSG] ƒŒƒWƒXƒ^’è‹`
+;	AY-3-8910 [PSG] ãƒ¬ã‚¸ã‚¹ã‚¿å®šç¾©
 ; -----------------------------------------------------------------------------
-PSG_REG_ADR			= 0xA0		; ƒAƒhƒŒƒXƒ‰ƒbƒ`
-PSG_REG_WRT			= 0xA1		; ƒf[ƒ^ƒ‰ƒCƒg
+PSG_REG_ADR			= 0xA0		; ã‚¢ãƒ‰ãƒ¬ã‚¹ãƒ©ãƒƒãƒ
+PSG_REG_WRT			= 0xA1		; ãƒ‡ãƒ¼ã‚¿ãƒ©ã‚¤ãƒˆ
 
 ; -----------------------------------------------------------------------------
-;	BIOSŠÖ˜A
+;	BIOSé–¢é€£
 ; -----------------------------------------------------------------------------
-BASE_SLOT			= 0xA8		; Šî–{ƒXƒƒbƒgw’èƒ|[ƒg
-EXT_SLOT			= 0xFFFF	; Šg’£ƒXƒƒbƒgw’èƒ|[ƒg
+BASE_SLOT			= 0xA8		; åŸºæœ¬ã‚¹ãƒ­ãƒƒãƒˆæŒ‡å®šãƒãƒ¼ãƒˆ
+EXT_SLOT			= 0xFFFF	; æ‹¡å¼µã‚¹ãƒ­ãƒƒãƒˆæŒ‡å®šãƒãƒ¼ãƒˆ
 
 ; -----------------------------------------------------------------------------
-;	‰‰‘tƒ^ƒXƒNî•ñ\‘¢‘ÌƒIƒtƒZƒbƒg’è‹`
+;	æ¼”å¥ã‚¿ã‚¹ã‚¯æƒ…å ±æ§‹é€ ä½“ã‚ªãƒ•ã‚»ãƒƒãƒˆå®šç¾©
 ;	INFO_*
 ; -----------------------------------------------------------------------------
-INFO_PLAY_ADR_L		= 0			; ‰‰‘t’†ƒAƒhƒŒƒX [0‚È‚ç’â~’†]
-INFO_PLAY_ADR_H		= 1			; V
-INFO_WAIT_COUNT_L	= 2			; ‘Ò‹@ŠÔ
-INFO_WAIT_COUNT_H	= 3			; V
-INFO_EFF_FREQ_L		= 4			; ÀŒøü”g”
-INFO_EFF_FREQ_H		= 5			; V
-INFO_TONE_FREQ_L	= 6			; İ’èü”g”
-INFO_TONE_FREQ_H	= 7			; V
-INFO_EFF_VOL		= 8			; ÀŒø‰¹—Ê
-INFO_TONE_VOL		= 9			; İ’è‰¹—Ê
-INFO_VIB_WAIT		= 10		; ƒrƒuƒ‰[ƒg’x‰„ŠÔ
-INFO_ENV_STATE		= 11		; ƒGƒ“ƒxƒ[ƒvƒXƒe[ƒg
-INFO_ENV_VOL		= 12		; ƒGƒ“ƒxƒ[ƒv‰¹—Ê
-INFO_VIB_INDEX		= 13		; ƒrƒuƒ‰[ƒgƒCƒ“ƒfƒbƒNƒX
-INFO_SOUND_FONT_L	= 14		; Ä¶’†‚Ì‰¹Fƒf[ƒ^‚ÌƒAƒhƒŒƒX
-INFO_SOUND_FONT_H	= 15		; V
-INFO_NOISE_FREQ		= 16		; ƒmƒCƒYü”g”
-INFO_SEL_SFONT_L	= 17		; ‰¹Fƒf[ƒ^‚ÌƒAƒhƒŒƒX
-INFO_SEL_SFONT_H	= 18		; ‰¹Fƒf[ƒ^‚ÌƒAƒhƒŒƒX
-INFO_SIZE			= 19		; INFO\‘¢‘Ì‚ÌƒTƒCƒY
+INFO_PLAY_ADR_L		= 0			; æ¼”å¥ä¸­ã‚¢ãƒ‰ãƒ¬ã‚¹ [0ãªã‚‰åœæ­¢ä¸­]
+INFO_PLAY_ADR_H		= 1			; ã€ƒ
+INFO_WAIT_COUNT_L	= 2			; å¾…æ©Ÿæ™‚é–“
+INFO_WAIT_COUNT_H	= 3			; ã€ƒ
+INFO_EFF_FREQ_L		= 4			; å®ŸåŠ¹å‘¨æ³¢æ•°
+INFO_EFF_FREQ_H		= 5			; ã€ƒ
+INFO_TONE_FREQ_L	= 6			; è¨­å®šå‘¨æ³¢æ•°
+INFO_TONE_FREQ_H	= 7			; ã€ƒ
+INFO_EFF_VOL		= 8			; å®ŸåŠ¹éŸ³é‡
+INFO_TONE_VOL		= 9			; è¨­å®šéŸ³é‡
+INFO_VIB_WAIT		= 10		; ãƒ“ãƒ–ãƒ©ãƒ¼ãƒˆé…å»¶æ™‚é–“
+INFO_ENV_STATE		= 11		; ã‚¨ãƒ³ãƒ™ãƒ­ãƒ¼ãƒ—ã‚¹ãƒ†ãƒ¼ãƒˆ
+INFO_ENV_VOL		= 12		; ã‚¨ãƒ³ãƒ™ãƒ­ãƒ¼ãƒ—éŸ³é‡
+INFO_VIB_INDEX		= 13		; ãƒ“ãƒ–ãƒ©ãƒ¼ãƒˆã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
+INFO_SOUND_FONT_L	= 14		; å†ç”Ÿä¸­ã®éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+INFO_SOUND_FONT_H	= 15		; ã€ƒ
+INFO_NOISE_FREQ		= 16		; ãƒã‚¤ã‚ºå‘¨æ³¢æ•°
+INFO_SEL_SFONT_L	= 17		; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+INFO_SEL_SFONT_H	= 18		; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+INFO_SIZE			= 19		; INFOæ§‹é€ ä½“ã®ã‚µã‚¤ã‚º
 
 ; -----------------------------------------------------------------------------
-;	‰¹Fƒf[ƒ^\‘¢‘ÌƒIƒtƒZƒbƒg’è‹`
+;	éŸ³è‰²ãƒ‡ãƒ¼ã‚¿æ§‹é€ ä½“ã‚ªãƒ•ã‚»ãƒƒãƒˆå®šç¾©
 ;	SFONT_*
 ; -----------------------------------------------------------------------------
-SFONT_VIB_WAVE		= 0			; ƒrƒuƒ‰[ƒg”gŒ`
-SFONT_AR			= 32		; ƒGƒ“ƒxƒ[ƒv‚Ì AR
-SFONT_DR			= 33		; ƒGƒ“ƒxƒ[ƒv‚Ì DR
-SFONT_SL			= 34		; ƒGƒ“ƒxƒ[ƒv‚Ì SL
-SFONT_SR			= 35		; ƒGƒ“ƒxƒ[ƒv‚Ì SR
-SFONT_RR			= 36		; ƒGƒ“ƒxƒ[ƒv‚Ì RR
-SFONT_VIB_WAIT		= 37		; ƒrƒuƒ‰[ƒg’x‰„ŠÔ
-SFONT_NOISE			= 38		; ƒmƒCƒYü”g” [SFONT_VIB_WAIT + 1 ‚Å‚ ‚é‚±‚Æ‚ª‘O’ñ]
-SFONT_FREQ_L		= 39		; ƒhƒ‰ƒ€—pŠî€ü”g”[L]
-SFONT_FREQ_H		= 40		; ƒhƒ‰ƒ€—pŠî€ü”g”[H]
+SFONT_VIB_WAVE		= 0			; ãƒ“ãƒ–ãƒ©ãƒ¼ãƒˆæ³¢å½¢
+SFONT_AR			= 32		; ã‚¨ãƒ³ãƒ™ãƒ­ãƒ¼ãƒ—ã® AR
+SFONT_DR			= 33		; ã‚¨ãƒ³ãƒ™ãƒ­ãƒ¼ãƒ—ã® DR
+SFONT_SL			= 34		; ã‚¨ãƒ³ãƒ™ãƒ­ãƒ¼ãƒ—ã® SL
+SFONT_SR			= 35		; ã‚¨ãƒ³ãƒ™ãƒ­ãƒ¼ãƒ—ã® SR
+SFONT_RR			= 36		; ã‚¨ãƒ³ãƒ™ãƒ­ãƒ¼ãƒ—ã® RR
+SFONT_VIB_WAIT		= 37		; ãƒ“ãƒ–ãƒ©ãƒ¼ãƒˆé…å»¶æ™‚é–“
+SFONT_NOISE			= 38		; ãƒã‚¤ã‚ºå‘¨æ³¢æ•° [SFONT_VIB_WAIT + 1 ã§ã‚ã‚‹ã“ã¨ãŒå‰æ]
+SFONT_FREQ_L		= 39		; ãƒ‰ãƒ©ãƒ ç”¨åŸºæº–å‘¨æ³¢æ•°[L]
+SFONT_FREQ_H		= 40		; ãƒ‰ãƒ©ãƒ ç”¨åŸºæº–å‘¨æ³¢æ•°[H]
 
 ; -----------------------------------------------------------------------------
-;	‰Šú‰»ˆ—
+;	åˆæœŸåŒ–å‡¦ç†
 ;	input:
-;		‚È‚µ
+;		ãªã—
 ;	output
-;		‚È‚µ
+;		ãªã—
 ;	break
 ;		a, b, c, d, e, f, h, l
 ;	comment
-;		‚È‚µ
+;		ãªã—
 ; -----------------------------------------------------------------------------
 bgmdriver_initialize::
 		ld		hl, play_info_ch0
@@ -103,44 +103,44 @@ bgmdriver_initialize::
 		ret
 
 ; -----------------------------------------------------------------------------
-;	‰‰‘tŠJnˆ—
+;	æ¼”å¥é–‹å§‹å‡¦ç†
 ;	input:
-;		hl	...	BGMƒf[ƒ^‚ÌƒAƒhƒŒƒX
+;		hl	...	BGMãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 ;	output
-;		‚È‚µ
+;		ãªã—
 ;	break
 ;		a, b, c, d, e, f, h, l, ix
 ;	comment
-;		‚È‚µ
+;		ãªã—
 ; -----------------------------------------------------------------------------
 bgmdriver_play::
-		; ‚Ü‚¸Œ»ó‚Ì‰‰‘t‚ğ’â~‚·‚é
+		; ã¾ãšç¾çŠ¶ã®æ¼”å¥ã‚’åœæ­¢ã™ã‚‹
 		push	hl
 		call	bgmdriver_stop
-		; ‰‰‘tŠJn‚Ì‚½‚ß‚Ì‰Šú‰»ˆ—‚ğÀ{‚·‚é
+		; æ¼”å¥é–‹å§‹ã®ãŸã‚ã®åˆæœŸåŒ–å‡¦ç†ã‚’å®Ÿæ–½ã™ã‚‹
 		pop		hl
 		di
-		; BGMƒf[ƒ^‚ÌƒAƒhƒŒƒX‚ğ•Û‘¶
+		; BGMãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’ä¿å­˜
 		ld		[play_bgm_data_adr], hl
 		ld		ix, [play_bgm_data_adr]
-		; ch0 ‚Ì‰‰‘tƒf[ƒ^ƒAƒhƒŒƒX‚ğæ“¾
+		; ch0 ã®æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—
 		ld		e, [ix + 0]
 		ld		d, [ix + 1]
 		add		hl, de
 		ld		[play_info_ch0 + INFO_PLAY_ADR_L], hl
-		; ch1 ‚Ì‰‰‘tƒf[ƒ^ƒAƒhƒŒƒX‚ğæ“¾
+		; ch1 ã®æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—
 		ld		hl, [play_bgm_data_adr]
 		ld		e, [ix + 2]
 		ld		d, [ix + 3]
 		add		hl, de
 		ld		[play_info_ch1 + INFO_PLAY_ADR_L], hl
-		; ch2 ‚Ì‰‰‘tƒf[ƒ^ƒAƒhƒŒƒX‚ğæ“¾
+		; ch2 ã®æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—
 		ld		hl, [play_bgm_data_adr]
 		ld		e, [ix + 4]
 		ld		d, [ix + 5]
 		add		hl, de
 		ld		[play_info_ch2 + INFO_PLAY_ADR_L], hl
-		; ƒtƒF[ƒhƒAƒEƒg’†‚È‚çƒtƒF[ƒhƒAƒEƒg‚ğ’â~‚·‚é
+		; ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆä¸­ãªã‚‰ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆã‚’åœæ­¢ã™ã‚‹
 		xor		a, a
 		ld		[play_master_volume_speed], a
 		ld		[play_master_volume_wait], a
@@ -149,40 +149,40 @@ bgmdriver_play::
 		ret
 
 ; -----------------------------------------------------------------------------
-;	‰‰‘t’â~ˆ—
+;	æ¼”å¥åœæ­¢å‡¦ç†
 ;	input:
-;		‚È‚µ
+;		ãªã—
 ;	output
-;		‚È‚µ
+;		ãªã—
 ;	break
 ;		a, b, c, d, e, f, h, l
 ;	comment
-;		‚È‚µ
+;		ãªã—
 ; -----------------------------------------------------------------------------
 bgmdriver_stop::
-		; ’â~ˆ—‚Ì“r’†‚ÅŠ„‚è‚Ü‚ê‚Ä‹““®•sR‚É‚È‚ç‚È‚¢‚æ‚¤‚ÉŠ„‹Ö
+		; åœæ­¢å‡¦ç†ã®é€”ä¸­ã§å‰²ã‚Šè¾¼ã¾ã‚Œã¦æŒ™å‹•ä¸å¯©ã«ãªã‚‰ãªã„ã‚ˆã†ã«å‰²ç¦
 		di
-		; ’â~ˆ—
+		; åœæ­¢å‡¦ç†
 		ld		hl, play_info_ch0
 		call	bgmdriver_init_play_info
 		ld		hl, play_info_ch1
 		call	bgmdriver_init_play_info
 		ld		hl, play_info_ch2
 		call	bgmdriver_init_play_info
-		; Š„‹Ö‰ğœ
+		; å‰²ç¦è§£é™¤
 		ei
 		ret
 
 ; -----------------------------------------------------------------------------
-;	‰‰‘t’†ƒ`ƒFƒbƒN
+;	æ¼”å¥ä¸­ãƒã‚§ãƒƒã‚¯
 ;	input:
-;		‚È‚µ
+;		ãªã—
 ;	output
-;		Zƒtƒ‰ƒO ... 1 ‚È‚ç’â~’†, 0 ‚È‚ç‰‰‘t’†
+;		Zãƒ•ãƒ©ã‚° ... 1 ãªã‚‰åœæ­¢ä¸­, 0 ãªã‚‰æ¼”å¥ä¸­
 ;	break
 ;		a, f, ix
 ;	comment
-;		‚È‚µ
+;		ãªã—
 ; -----------------------------------------------------------------------------
 bgmdriver_check_playing::
 		di
@@ -199,18 +199,18 @@ bgmdriver_check_playing::
 		ret
 
 ; -----------------------------------------------------------------------------
-;	ƒtƒF[ƒhƒAƒEƒgˆ—
+;	ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆå‡¦ç†
 ;	input:
-;		a	...	ƒtƒF[ƒhƒAƒEƒg‘¬“x[1`255]
+;		a	...	ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆé€Ÿåº¦[1ã€œ255]
 ;	output
-;		‚È‚µ
+;		ãªã—
 ;	break
 ;		a
 ;	comment
-;		‚È‚µ
+;		ãªã—
 ; -----------------------------------------------------------------------------
 bgmdriver_fadeout::
-		; ’â~ˆ—‚Ì“r’†‚ÅŠ„‚è‚Ü‚ê‚Ä‹““®•sR‚É‚È‚ç‚È‚¢‚æ‚¤‚ÉŠ„‹Ö
+		; åœæ­¢å‡¦ç†ã®é€”ä¸­ã§å‰²ã‚Šè¾¼ã¾ã‚Œã¦æŒ™å‹•ä¸å¯©ã«ãªã‚‰ãªã„ã‚ˆã†ã«å‰²ç¦
 		di
 		ld		[play_master_volume_speed], a
 		xor		a, a
@@ -220,15 +220,15 @@ bgmdriver_fadeout::
 		ret
 
 ; -----------------------------------------------------------------------------
-;	‰¹’â~ˆ—
+;	éŸ³åœæ­¢å‡¦ç†
 ;	input:
-;		‚È‚µ
+;		ãªã—
 ;	output
-;		‚È‚µ
+;		ãªã—
 ;	break
 ;		a, b, c, d, e, f, h, l
 ;	comment
-;		‚È‚µ
+;		ãªã—
 ; -----------------------------------------------------------------------------
 bgmdriver_mute_psg::
 		di
@@ -252,50 +252,50 @@ bgmpdriver_init_data:
 		db		0, 0, 0, 0, 0, 0, 0, 0x80 + 0x3F, 0, 0, 0, 0, 0, 0, 0, 0
 
 ; -----------------------------------------------------------------------------
-;	Œø‰Ê‰¹ŠJnˆ—
+;	åŠ¹æœéŸ³é–‹å§‹å‡¦ç†
 ;	input:
-;		hl	...	Œø‰Ê‰¹ƒf[ƒ^‚ÌƒAƒhƒŒƒX
+;		hl	...	åŠ¹æœéŸ³ãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 ;	output
-;		‚È‚µ
+;		ãªã—
 ;	break
-;		a
+;		a, f
 ;	comment
-;		‚È‚µ
+;		ãªã—
 ; -----------------------------------------------------------------------------
 bgmdriver_play_sound_effect::
-		; Œø‰Ê‰¹ŠJn‚Ì‚½‚ß‚Ì‰Šú‰»ˆ—‚ğÀ{‚·‚é
+		; åŠ¹æœéŸ³é–‹å§‹ã®ãŸã‚ã®åˆæœŸåŒ–å‡¦ç†ã‚’å®Ÿæ–½ã™ã‚‹
 		push	hl
 		di
-		ld		a, [play_sound_effect_priority]			; Ä¶’†‚ÌŒø‰Ê‰¹‚æ‚èƒvƒ‰ƒCƒIƒŠƒeƒB‚ª‚‚¢‚©H
+		ld		a, [play_sound_effect_priority]			; å†ç”Ÿä¸­ã®åŠ¹æœéŸ³ã‚ˆã‚Šãƒ—ãƒ©ã‚¤ã‚ªãƒªãƒ†ã‚£ãŒé«˜ã„ã‹ï¼Ÿ
 		cp		a, [hl]
-		jp		c, bgmdriver_play_sound_effect_skip		; ’á‚¯‚ê‚ÎÄ¶‚µ‚È‚¢
+		jp		c, bgmdriver_play_sound_effect_skip		; ä½ã‘ã‚Œã°å†ç”Ÿã—ãªã„
 		ld		a, [hl]
-		ld		[play_sound_effect_priority], a			; ƒvƒ‰ƒCƒIƒŠƒeƒB‚ğXV
+		ld		[play_sound_effect_priority], a			; ãƒ—ãƒ©ã‚¤ã‚ªãƒªãƒ†ã‚£ã‚’æ›´æ–°
 		inc		hl
-		ld		[play_sound_effect_adr], hl				; Œø‰Ê‰¹ƒf[ƒ^‚ÌƒAƒhƒŒƒX
+		ld		[play_sound_effect_adr], hl				; åŠ¹æœéŸ³ãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 		xor		a, a
-		ld		[play_sound_effect_wait_count], a		; ‘Ò‹@ŠÔ 0
-		ld		[play_sound_effect_freq+0], a			; Ä¶ü”g” 0
+		ld		[play_sound_effect_wait_count], a		; å¾…æ©Ÿæ™‚é–“ 0
+		ld		[play_sound_effect_freq+0], a			; å†ç”Ÿå‘¨æ³¢æ•° 0
 		ld		[play_sound_effect_freq+1], a
-		ld		[play_sound_effect_noise_freq], a		; ƒmƒCƒYü”g” 0
-		ld		[play_sound_effect_volume], a			; ‰¹—Ê 0
+		ld		[play_sound_effect_noise_freq], a		; ãƒã‚¤ã‚ºå‘¨æ³¢æ•° 0
+		ld		[play_sound_effect_volume], a			; éŸ³é‡ 0
 		inc		a
-		ld		[play_sound_effect_active], a			; Œø‰Ê‰¹Ä¶ŠJn
+		ld		[play_sound_effect_active], a			; åŠ¹æœéŸ³å†ç”Ÿé–‹å§‹
 bgmdriver_play_sound_effect_skip:
 		pop		hl
 		ei
 		ret
 
 ; -----------------------------------------------------------------------------
-;	‰‰‘tƒ^ƒXƒNî•ñ‚ğ‰Šú‰»‚·‚é[“à•”]
+;	æ¼”å¥ã‚¿ã‚¹ã‚¯æƒ…å ±ã‚’åˆæœŸåŒ–ã™ã‚‹[å†…éƒ¨]
 ;	input:
-;		hl	...	‰Šú‰»‚·‚é‰‰‘tƒ^ƒXƒNî•ñ‚ÌƒAƒhƒŒƒX
+;		hl	...	åˆæœŸåŒ–ã™ã‚‹æ¼”å¥ã‚¿ã‚¹ã‚¯æƒ…å ±ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 ;	output
-;		‚È‚µ
+;		ãªã—
 ;	break
 ;		a, b, c, d, e, h, l
 ;	comment
-;		‚È‚µ
+;		ãªã—
 ; -----------------------------------------------------------------------------
 bgmdriver_init_play_info:
 		ld		e, l
@@ -308,120 +308,120 @@ bgmdriver_init_play_info:
 		ret
 
 ; -----------------------------------------------------------------------------
-;	‰‰‘tˆ—ƒ‹[ƒ`ƒ“
+;	æ¼”å¥å‡¦ç†ãƒ«ãƒ¼ãƒãƒ³
 ;	input:
-;		‚È‚µ
+;		ãªã—
 ;	output
-;		‚È‚µ
+;		ãªã—
 ;	break
-;		‚È‚µ
+;		ã™ã¹ã¦
 ;	comment
-;		1/60•bŠÔŠu‚Å call ‚³‚ê‚é‚±‚Æ‚ğŠú‘Ò‚µ‚Ä‚¢‚éƒ‹[ƒ`ƒ“‚Å‚ ‚èA’Êí‚Í
-;		H_TIMI ‚ğƒtƒbƒN‚µ‚½ƒ‹[ƒ`ƒ“‚©‚çŒÄ‚Ño‚·B
-;		Š„‚è‚İˆ—‚ğ‘z’è‚µ‚Ä‚¢‚é‚½‚ßAƒŒƒWƒXƒ^‚Í”j‰ó‚µ‚È‚¢B
+;		1/60ç§’é–“éš”ã§ call ã•ã‚Œã‚‹ã“ã¨ã‚’æœŸå¾…ã—ã¦ã„ã‚‹ãƒ«ãƒ¼ãƒãƒ³ã§ã‚ã‚Šã€é€šå¸¸ã¯
+;		H_TIMI ã‚’ãƒ•ãƒƒã‚¯ã—ãŸãƒ«ãƒ¼ãƒãƒ³ã‹ã‚‰å‘¼ã³å‡ºã™ã€‚
+;		å‰²ã‚Šè¾¼ã¿å‡¦ç†ã‚’æƒ³å®šã—ã¦ã„ã‚‹ãŸã‚ã€ãƒ¬ã‚¸ã‚¹ã‚¿ã¯ç ´å£Šã—ãªã„ã€‚
 ; -----------------------------------------------------------------------------
 bgmdriver_interrupt_handler::
-		; ‰‰‘tƒ‹[ƒ`ƒ“ŒÄ‚Ño‚µ
+		; æ¼”å¥ãƒ«ãƒ¼ãƒãƒ³å‘¼ã³å‡ºã—
 		ld		ix, play_info_ch0
 		call	bgmdriver_play_ch
 		ld		ix, play_info_ch1
 		call	bgmdriver_play_ch
 		ld		ix, play_info_ch2
 		call	bgmdriver_play_ch
-		; Œø‰Ê‰¹ˆ—ƒ‹[ƒ`ƒ“ŒÄ‚Ño‚µ
+		; åŠ¹æœéŸ³å‡¦ç†ãƒ«ãƒ¼ãƒãƒ³å‘¼ã³å‡ºã—
 		call	bgmdriver_sound_effect
-		; ƒtƒF[ƒhƒAƒEƒgˆ—
+		; ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆå‡¦ç†
 		call	bgmdriver_fadeout_proc
-		; ƒ~ƒLƒT[ƒ‹[ƒ`ƒ“ŒÄ‚Ño‚µ
+		; ãƒŸã‚­ã‚µãƒ¼ãƒ«ãƒ¼ãƒãƒ³å‘¼ã³å‡ºã—
 		call	bgmdriver_mixer
 		ret
 
 ; -----------------------------------------------------------------------------
-;	‰‰‘tˆ—ƒ‹[ƒ`ƒ“[1ch•ª] [“à•”]
+;	æ¼”å¥å‡¦ç†ãƒ«ãƒ¼ãƒãƒ³[1chåˆ†] [å†…éƒ¨]
 ;	input:
-;		ix	...	‰‰‘tˆ—‚ğÀ{‚·‚é‰‰‘tƒ^ƒXƒNî•ñ‚ÌƒAƒhƒŒƒX
+;		ix	...	æ¼”å¥å‡¦ç†ã‚’å®Ÿæ–½ã™ã‚‹æ¼”å¥ã‚¿ã‚¹ã‚¯æƒ…å ±ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 ;	output
-;		‚È‚µ
+;		ãªã—
 ;	break
 ;		a, b, c, d, e, f, h, l
 ;	comment
-;		‚È‚µ
+;		ãªã—
 ; -----------------------------------------------------------------------------
 bgmdriver_play_ch:
-		; ‰‰‘t’†‚Å‚ ‚é‚©’²‚×‚é
+		; æ¼”å¥ä¸­ã§ã‚ã‚‹ã‹èª¿ã¹ã‚‹
 		ld		a, [ix + INFO_PLAY_ADR_L]
 		or		a, [ix + INFO_PLAY_ADR_H]
-		ret		z									; ‰‰‘t’†‚Å‚È‚¯‚ê‚Î‰½‚à‚¹‚¸‚É’E‚¯‚é
-		; ‘Ò‹@ŠÔ‚Å‚ ‚é‚©’²‚×‚é
+		ret		z									; æ¼”å¥ä¸­ã§ãªã‘ã‚Œã°ä½•ã‚‚ã›ãšã«è„±ã‘ã‚‹
+		; å¾…æ©Ÿæ™‚é–“ã§ã‚ã‚‹ã‹èª¿ã¹ã‚‹
 		ld		l, [ix + INFO_WAIT_COUNT_L]
 		ld		h, [ix + INFO_WAIT_COUNT_H]
 		ld		a, l
 		or		a, h
 		jr		z, bgmdriver_check_next_data
-		; ‘Ò‹@ŠÔ‚ğXV
+		; å¾…æ©Ÿæ™‚é–“ã‚’æ›´æ–°
 		dec		hl
 		ld		[ix + INFO_WAIT_COUNT_L], l
 		ld		[ix + INFO_WAIT_COUNT_H], h
 		jp		bgmdriver_update_vibrato
-		; Ÿ‚Ì‰‰‘tƒf[ƒ^‚ğ“Ç‚İæ‚é
+		; æ¬¡ã®æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚’èª­ã¿å–ã‚‹
 bgmdriver_check_next_data:
 		ld		l, [ix + INFO_PLAY_ADR_L]
 		ld		h, [ix + INFO_PLAY_ADR_H]
 		ld		a, [hl]
 		inc		hl
-		; ‰‰‘tƒf[ƒ^‚ğƒfƒR[ƒh
+		; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ‡ã‚³ãƒ¼ãƒ‰
 		cp		a, 96
-		jp		c, bgmdriver_keyon					; 0`95 ‚Í KeyOn ƒƒbƒZ[ƒW
+		jp		c, bgmdriver_keyon					; 0ã€œ95 ã¯ KeyOn ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 		cp		a, 101
-		jp		c, bgmdriver_drum_keyon				; 96`100 ‚Í KeyOn ƒƒbƒZ[ƒW
-		jp		z, bgmdriver_keyoff					; 101 ‚Í KeyOff ƒƒbƒZ[ƒW
+		jp		c, bgmdriver_drum_keyon				; 96ã€œ100 ã¯ KeyOn ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+		jp		z, bgmdriver_keyoff					; 101 ã¯ KeyOff ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 		cp		a, 103
-		jp		c, bgmdriver_rest					; 102 ‚Í ‹x•„ƒƒbƒZ[ƒW
-		jp		z, bgmdriver_volume					; 103 ‚Í ‰¹—Êİ’èƒƒbƒZ[ƒW
+		jp		c, bgmdriver_rest					; 102 ã¯ ä¼‘ç¬¦ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+		jp		z, bgmdriver_volume					; 103 ã¯ éŸ³é‡è¨­å®šãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 		cp		a, 105
-		jp		c, bgmdriver_sound_font				; 104 ‚Í ‰¹Fİ’èƒƒbƒZ[ƒW
-		jp		z, bgmdriver_jump					; 105 ‚Í ƒAƒhƒŒƒXƒWƒƒƒ“ƒvƒƒbƒZ[ƒW
+		jp		c, bgmdriver_sound_font				; 104 ã¯ éŸ³è‰²è¨­å®šãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+		jp		z, bgmdriver_jump					; 105 ã¯ ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚¸ãƒ£ãƒ³ãƒ—ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 		cp		a, 107
-		jp		c, bgmdriver_play_end				; 106 ‚Í ‰‰‘t’â~ƒƒbƒZ[ƒW
-		jp		z, bgmdriver_drum1_font				; 107 ‚Í ƒhƒ‰ƒ€‚P‰¹Fİ’èƒƒbƒZ[ƒW
+		jp		c, bgmdriver_play_end				; 106 ã¯ æ¼”å¥åœæ­¢ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+		jp		z, bgmdriver_drum1_font				; 107 ã¯ ãƒ‰ãƒ©ãƒ ï¼‘éŸ³è‰²è¨­å®šãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 		cp		a, 109
-		jp		c, bgmdriver_drum2_font				; 108 ‚Í ƒhƒ‰ƒ€‚Q‰¹Fİ’èƒƒbƒZ[ƒW
-		jp		z, bgmdriver_drum3_font				; 109 ‚Í ƒhƒ‰ƒ€‚R‰¹Fİ’èƒƒbƒZ[ƒW
+		jp		c, bgmdriver_drum2_font				; 108 ã¯ ãƒ‰ãƒ©ãƒ ï¼’éŸ³è‰²è¨­å®šãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+		jp		z, bgmdriver_drum3_font				; 109 ã¯ ãƒ‰ãƒ©ãƒ ï¼“éŸ³è‰²è¨­å®šãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 		cp		a, 111
-		jp		c, bgmdriver_drum4_font				; 110 ‚Í ƒhƒ‰ƒ€‚S‰¹Fİ’èƒƒbƒZ[ƒW
-		jp		z, bgmdriver_drum5_font				; 111 ‚Í ƒhƒ‰ƒ€‚T‰¹Fİ’èƒƒbƒZ[ƒW
+		jp		c, bgmdriver_drum4_font				; 110 ã¯ ãƒ‰ãƒ©ãƒ ï¼”éŸ³è‰²è¨­å®šãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+		jp		z, bgmdriver_drum5_font				; 111 ã¯ ãƒ‰ãƒ©ãƒ ï¼•éŸ³è‰²è¨­å®šãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 		ret
 
-		; KeyOnˆ— -----------------------------------------------------------
+		; KeyOnå‡¦ç† -----------------------------------------------------------
 bgmdriver_keyon:
-		ld		c, a								; ”j‰ó‚³‚ê‚È‚¢ƒŒƒWƒXƒ^‚ÉƒoƒbƒNƒAƒbƒv
+		ld		c, a								; ç ´å£Šã•ã‚Œãªã„ãƒ¬ã‚¸ã‚¹ã‚¿ã«ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—
 		call	bgmdriver_get_wait_time
-		ld		[ix + INFO_WAIT_COUNT_L], e			; ‘Ò‚¿ŠÔXV
+		ld		[ix + INFO_WAIT_COUNT_L], e			; å¾…ã¡æ™‚é–“æ›´æ–°
 		ld		[ix + INFO_WAIT_COUNT_H], d
-		ld		[ix + INFO_PLAY_ADR_L], l				; ‰‰‘tƒf[ƒ^‚ğŸ‚Ö
+		ld		[ix + INFO_PLAY_ADR_L], l				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚’æ¬¡ã¸
 		ld		[ix + INFO_PLAY_ADR_H], h
-		ld		a, c								; •œŒ³
-		; ‰¹ŠK‚ğü”g”‚É•ÏŠ·‚·‚é
+		ld		a, c								; å¾©å…ƒ
+		; éŸ³éšã‚’å‘¨æ³¢æ•°ã«å¤‰æ›ã™ã‚‹
 		rlca
 		ld		l, a
 		ld		h, 0
 		ld		de, freq_data
-		add		hl, de								; hl © freq_data + a * 2
+		add		hl, de								; hl â† freq_data + a * 2
 		ld		e, [hl]
 		inc		hl
 		ld		d, [hl]
-		; ‰¹Fƒf[ƒ^‚ğæ“¾‚·‚é
+		; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
 		ld		l, [ix + INFO_SEL_SFONT_L]
 		ld		h, [ix + INFO_SEL_SFONT_H]
-		; İ’èü”g”‚ğXV‚·‚é
+		; è¨­å®šå‘¨æ³¢æ•°ã‚’æ›´æ–°ã™ã‚‹
 bgmdriver_set_freq:
 		ld		[ix + INFO_TONE_FREQ_L], e
 		ld		[ix + INFO_TONE_FREQ_H], d
-		; Šeí‰Šú‰»‚·‚é
+		; å„ç¨®åˆæœŸåŒ–ã™ã‚‹
 		xor		a, a
 		ld		[ix + INFO_ENV_STATE], a
 		ld		[ix + INFO_ENV_VOL], a
-		; ƒrƒuƒ‰[ƒg‚ğ‰Šú‰»‚·‚é
+		; ãƒ“ãƒ–ãƒ©ãƒ¼ãƒˆã‚’åˆæœŸåŒ–ã™ã‚‹
 		ld		[ix + INFO_VIB_INDEX], a
 		ld		[ix + INFO_SOUND_FONT_L], l
 		ld		[ix + INFO_SOUND_FONT_H], h
@@ -429,254 +429,254 @@ bgmdriver_set_freq:
 		add		hl, de
 		ld		a, [hl]
 		ld		[ix + INFO_VIB_WAIT], a
-		; ƒmƒCƒYü”g”‚ğ‰Šú‰»‚·‚é
+		; ãƒã‚¤ã‚ºå‘¨æ³¢æ•°ã‚’åˆæœŸåŒ–ã™ã‚‹
 		inc		hl
 		ld		a, [hl]
 		ld		[ix + INFO_NOISE_FREQ], a
 		jp		bgmdriver_update_vibrato
 
-		; DRUM KeyOnˆ— -------------------------------------------------------
+		; DRUM KeyOnå‡¦ç† -------------------------------------------------------
 bgmdriver_drum_keyon:
-		ld		c, a								; ”j‰ó‚³‚ê‚È‚¢ƒŒƒWƒXƒ^‚ÉƒoƒbƒNƒAƒbƒv
+		ld		c, a								; ç ´å£Šã•ã‚Œãªã„ãƒ¬ã‚¸ã‚¹ã‚¿ã«ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—
 		call	bgmdriver_get_wait_time
-		ld		[ix + INFO_WAIT_COUNT_L], e			; ‘Ò‚¿ŠÔXV
+		ld		[ix + INFO_WAIT_COUNT_L], e			; å¾…ã¡æ™‚é–“æ›´æ–°
 		ld		[ix + INFO_WAIT_COUNT_H], d
-		ld		[ix + INFO_PLAY_ADR_L], l				; ‰‰‘tƒf[ƒ^‚ğŸ‚Ö
+		ld		[ix + INFO_PLAY_ADR_L], l				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚’æ¬¡ã¸
 		ld		[ix + INFO_PLAY_ADR_H], h
-		ld		a, c								; •œŒ³
-		; ‰¹Fî•ñ‚ğæ“¾‚·‚é
-		sub		a, 96								; hl © [a - 96] * 2 + play_drum_font1
+		ld		a, c								; å¾©å…ƒ
+		; éŸ³è‰²æƒ…å ±ã‚’å–å¾—ã™ã‚‹
+		sub		a, 96								; hl â† [a - 96] * 2 + play_drum_font1
 		rlca
 		ld		hl, play_drum_font1
 		add		a, l
-		ld		l, a								; ¦ƒtƒ‰ƒO•s•Ï
-		ld		a, 0								; ¦ƒtƒ‰ƒO•s•Ï
+		ld		l, a								; â€»ãƒ•ãƒ©ã‚°ä¸å¤‰
+		ld		a, 0								; â€»ãƒ•ãƒ©ã‚°ä¸å¤‰
 		adc		a, h
-		ld		h, a								; hl ‚Éƒhƒ‰ƒ€‰¹F‚ÌƒAƒhƒŒƒX‚Ì“ü‚Á‚Ä‚¢‚éƒAƒhƒŒƒX
+		ld		h, a								; hl ã«ãƒ‰ãƒ©ãƒ éŸ³è‰²ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã®å…¥ã£ã¦ã„ã‚‹ã‚¢ãƒ‰ãƒ¬ã‚¹
 		ld		e, [hl]
 		inc		hl
 		ld		d, [hl]
-		ex		de, hl								; hl ‚Éƒhƒ‰ƒ€‰¹F‚ÌƒAƒhƒŒƒX
+		ex		de, hl								; hl ã«ãƒ‰ãƒ©ãƒ éŸ³è‰²ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 		push	hl
 		ld		de, SFONT_FREQ_L
 		add		hl, de
 		ld		e, [hl]
 		inc		hl
-		ld		d, [hl]								; de ‚Éƒhƒ‰ƒ€—pÄ¶ü”g”
-		pop		hl									; hl ‚Éƒhƒ‰ƒ€‰¹F‚ÌƒAƒhƒŒƒX
+		ld		d, [hl]								; de ã«ãƒ‰ãƒ©ãƒ ç”¨å†ç”Ÿå‘¨æ³¢æ•°
+		pop		hl									; hl ã«ãƒ‰ãƒ©ãƒ éŸ³è‰²ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 		jp		bgmdriver_set_freq
 
-		; KeyOffˆ— -----------------------------------------------------------
+		; KeyOffå‡¦ç† -----------------------------------------------------------
 bgmdriver_keyoff:
 		call	bgmdriver_get_wait_time
-		ld		[ix + INFO_WAIT_COUNT_L], e			; ‘Ò‚¿ŠÔXV
+		ld		[ix + INFO_WAIT_COUNT_L], e			; å¾…ã¡æ™‚é–“æ›´æ–°
 		ld		[ix + INFO_WAIT_COUNT_H], d
-		ld		[ix + INFO_PLAY_ADR_L], l				; ‰‰‘tƒf[ƒ^‚ğŸ‚Ö
+		ld		[ix + INFO_PLAY_ADR_L], l				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚’æ¬¡ã¸
 		ld		[ix + INFO_PLAY_ADR_H], h
-		; ƒGƒ“ƒxƒ[ƒv‚ğƒŠƒŠ[ƒXó‘Ô‚É•ÏX‚·‚é
+		; ã‚¨ãƒ³ãƒ™ãƒ­ãƒ¼ãƒ—ã‚’ãƒªãƒªãƒ¼ã‚¹çŠ¶æ…‹ã«å¤‰æ›´ã™ã‚‹
 		ld		a, [ix + INFO_ENV_STATE]
 		cp		a, 3
 		jp		nc, bgmdriver_update_vibrato
 		ld		[ix + INFO_ENV_STATE], 3
 		jp		bgmdriver_update_vibrato
 
-		; ‹x•„‚Ìˆ— ----------------------------------------------------------
+		; ä¼‘ç¬¦ã®å‡¦ç† ----------------------------------------------------------
 bgmdriver_rest:
 		call	bgmdriver_get_wait_time
-		ld		[ix + INFO_WAIT_COUNT_L], e			; ‘Ò‚¿ŠÔXV
+		ld		[ix + INFO_WAIT_COUNT_L], e			; å¾…ã¡æ™‚é–“æ›´æ–°
 		ld		[ix + INFO_WAIT_COUNT_H], d
-		ld		[ix + INFO_PLAY_ADR_L], l				; ‰‰‘tƒf[ƒ^‚ğŸ‚Ö
+		ld		[ix + INFO_PLAY_ADR_L], l				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚’æ¬¡ã¸
 		ld		[ix + INFO_PLAY_ADR_H], h
 		ld		[ix + INFO_ENV_STATE], 4
 		ld		[ix + INFO_ENV_VOL], 0
 		jp		bgmdriver_update_vibrato
 
-		; ‰¹—Êİ’è ------------------------------------------------------------
+		; éŸ³é‡è¨­å®š ------------------------------------------------------------
 bgmdriver_volume:
-		ld		a, [hl]								; ‰¹—Êæ“¾
+		ld		a, [hl]								; éŸ³é‡å–å¾—
 		inc		hl
-		ld		[ix + INFO_PLAY_ADR_L], l				; ‰‰‘tƒf[ƒ^‚ğŸ‚Ö
+		ld		[ix + INFO_PLAY_ADR_L], l				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚’æ¬¡ã¸
 		ld		[ix + INFO_PLAY_ADR_H], h
-		ld		[ix + INFO_TONE_VOL], a				; İ’è‰¹—ÊXV
-		jp		bgmdriver_check_next_data			; ‘±‚¯‚ÄŸ‚Ìƒf[ƒ^‚ğˆ—‚·‚é
+		ld		[ix + INFO_TONE_VOL], a				; è¨­å®šéŸ³é‡æ›´æ–°
+		jp		bgmdriver_check_next_data			; ç¶šã‘ã¦æ¬¡ã®ãƒ‡ãƒ¼ã‚¿ã‚’å‡¦ç†ã™ã‚‹
 
-		; ‰¹Fİ’è ------------------------------------------------------------
+		; éŸ³è‰²è¨­å®š ------------------------------------------------------------
 bgmdriver_sound_font:
-		ld		e, [hl]								; ‰¹Fƒf[ƒ^‚ÌƒAƒhƒŒƒX‚ğæ“¾
+		ld		e, [hl]								; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—
 		inc		hl
 		ld		d, [hl]
 		inc		hl
-		ld		[ix + INFO_PLAY_ADR_L], l				; ‰‰‘tƒf[ƒ^‚ğŸ‚Ö
+		ld		[ix + INFO_PLAY_ADR_L], l				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚’æ¬¡ã¸
 		ld		[ix + INFO_PLAY_ADR_H], h
-		ld		hl, [play_bgm_data_adr]				; ‰‰‘tƒf[ƒ^‚Ìæ“ªƒAƒhƒŒƒX
+		ld		hl, [play_bgm_data_adr]				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 		add		hl, de
-		ld		[ix + INFO_SEL_SFONT_L], l				; ‰¹Fƒf[ƒ^ƒAƒhƒŒƒX‚ğXV
+		ld		[ix + INFO_SEL_SFONT_L], l				; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ›´æ–°
 		ld		[ix + INFO_SEL_SFONT_H], h
-		xor		a, a									; Šeí‰Šú‰»
+		xor		a, a									; å„ç¨®åˆæœŸåŒ–
 		ld		[ix + INFO_VIB_WAIT], a
 		ld		[ix + INFO_ENV_STATE], a
 		ld		[ix + INFO_ENV_VOL], a
 		ld		[ix + INFO_VIB_INDEX], a
-		jp		bgmdriver_check_next_data			; ‘±‚¯‚ÄŸ‚Ìƒf[ƒ^‚ğˆ—‚·‚é
+		jp		bgmdriver_check_next_data			; ç¶šã‘ã¦æ¬¡ã®ãƒ‡ãƒ¼ã‚¿ã‚’å‡¦ç†ã™ã‚‹
 
-		; ƒhƒ‰ƒ€‚P‰¹Fİ’èİ’è ------------------------------------------------
+		; ãƒ‰ãƒ©ãƒ ï¼‘éŸ³è‰²è¨­å®šè¨­å®š ------------------------------------------------
 bgmdriver_drum1_font:
-		ld		e, [hl]								; ‰¹Fƒf[ƒ^‚ÌƒAƒhƒŒƒX‚ğæ“¾
+		ld		e, [hl]								; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—
 		inc		hl
 		ld		d, [hl]
 		inc		hl
-		ld		[ix + INFO_PLAY_ADR_L], l				; ‰‰‘tƒf[ƒ^‚ğŸ‚Ö
+		ld		[ix + INFO_PLAY_ADR_L], l				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚’æ¬¡ã¸
 		ld		[ix + INFO_PLAY_ADR_H], h
-		ld		hl, [play_bgm_data_adr]				; ‰‰‘tƒf[ƒ^‚Ìæ“ªƒAƒhƒŒƒX
+		ld		hl, [play_bgm_data_adr]				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 		add		hl, de
-		ld		[play_drum_font1], hl				; ‰¹Fƒf[ƒ^ƒAƒhƒŒƒX‚ğXV
-		xor		a, a									; Šeí‰Šú‰»
+		ld		[play_drum_font1], hl				; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ›´æ–°
+		xor		a, a									; å„ç¨®åˆæœŸåŒ–
 		ld		[ix + INFO_VIB_WAIT], a
 		ld		[ix + INFO_ENV_STATE], a
 		ld		[ix + INFO_ENV_VOL], a
 		ld		[ix + INFO_VIB_INDEX], a
-		jp		bgmdriver_check_next_data			; ‘±‚¯‚ÄŸ‚Ìƒf[ƒ^‚ğˆ—‚·‚é
+		jp		bgmdriver_check_next_data			; ç¶šã‘ã¦æ¬¡ã®ãƒ‡ãƒ¼ã‚¿ã‚’å‡¦ç†ã™ã‚‹
 
-		; ƒhƒ‰ƒ€‚Q‰¹Fİ’èİ’è ------------------------------------------------
+		; ãƒ‰ãƒ©ãƒ ï¼’éŸ³è‰²è¨­å®šè¨­å®š ------------------------------------------------
 bgmdriver_drum2_font:
-		ld		e, [hl]								; ‰¹Fƒf[ƒ^‚ÌƒAƒhƒŒƒX‚ğæ“¾
+		ld		e, [hl]								; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—
 		inc		hl
 		ld		d, [hl]
 		inc		hl
-		ld		[ix + INFO_PLAY_ADR_L], l				; ‰‰‘tƒf[ƒ^‚ğŸ‚Ö
+		ld		[ix + INFO_PLAY_ADR_L], l				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚’æ¬¡ã¸
 		ld		[ix + INFO_PLAY_ADR_H], h
-		ld		hl, [play_bgm_data_adr]				; ‰‰‘tƒf[ƒ^‚Ìæ“ªƒAƒhƒŒƒX
+		ld		hl, [play_bgm_data_adr]				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 		add		hl, de
-		ld		[play_drum_font2], hl				; ‰¹Fƒf[ƒ^ƒAƒhƒŒƒX‚ğXV
-		xor		a, a									; Šeí‰Šú‰»
+		ld		[play_drum_font2], hl				; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ›´æ–°
+		xor		a, a									; å„ç¨®åˆæœŸåŒ–
 		ld		[ix + INFO_VIB_WAIT], a
 		ld		[ix + INFO_ENV_STATE], a
 		ld		[ix + INFO_ENV_VOL], a
 		ld		[ix + INFO_VIB_INDEX], a
-		jp		bgmdriver_check_next_data			; ‘±‚¯‚ÄŸ‚Ìƒf[ƒ^‚ğˆ—‚·‚é
+		jp		bgmdriver_check_next_data			; ç¶šã‘ã¦æ¬¡ã®ãƒ‡ãƒ¼ã‚¿ã‚’å‡¦ç†ã™ã‚‹
 
-		; ƒhƒ‰ƒ€‚R‰¹Fİ’èİ’è ------------------------------------------------
+		; ãƒ‰ãƒ©ãƒ ï¼“éŸ³è‰²è¨­å®šè¨­å®š ------------------------------------------------
 bgmdriver_drum3_font:
-		ld		e, [hl]								; ‰¹Fƒf[ƒ^‚ÌƒAƒhƒŒƒX‚ğæ“¾
+		ld		e, [hl]								; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—
 		inc		hl
 		ld		d, [hl]
 		inc		hl
-		ld		[ix + INFO_PLAY_ADR_L], l				; ‰‰‘tƒf[ƒ^‚ğŸ‚Ö
+		ld		[ix + INFO_PLAY_ADR_L], l				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚’æ¬¡ã¸
 		ld		[ix + INFO_PLAY_ADR_H], h
-		ld		hl, [play_bgm_data_adr]				; ‰‰‘tƒf[ƒ^‚Ìæ“ªƒAƒhƒŒƒX
+		ld		hl, [play_bgm_data_adr]				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 		add		hl, de
-		ld		[play_drum_font3], hl				; ‰¹Fƒf[ƒ^ƒAƒhƒŒƒX‚ğXV
-		xor		a, a									; Šeí‰Šú‰»
+		ld		[play_drum_font3], hl				; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ›´æ–°
+		xor		a, a									; å„ç¨®åˆæœŸåŒ–
 		ld		[ix + INFO_VIB_WAIT], a
 		ld		[ix + INFO_ENV_STATE], a
 		ld		[ix + INFO_ENV_VOL], a
 		ld		[ix + INFO_VIB_INDEX], a
-		jp		bgmdriver_check_next_data			; ‘±‚¯‚ÄŸ‚Ìƒf[ƒ^‚ğˆ—‚·‚é
+		jp		bgmdriver_check_next_data			; ç¶šã‘ã¦æ¬¡ã®ãƒ‡ãƒ¼ã‚¿ã‚’å‡¦ç†ã™ã‚‹
 
-		; ƒhƒ‰ƒ€‚S‰¹Fİ’èİ’è ------------------------------------------------
+		; ãƒ‰ãƒ©ãƒ ï¼”éŸ³è‰²è¨­å®šè¨­å®š ------------------------------------------------
 bgmdriver_drum4_font:
-		ld		e, [hl]								; ‰¹Fƒf[ƒ^‚ÌƒAƒhƒŒƒX‚ğæ“¾
+		ld		e, [hl]								; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—
 		inc		hl
 		ld		d, [hl]
 		inc		hl
-		ld		[ix + INFO_PLAY_ADR_L], l				; ‰‰‘tƒf[ƒ^‚ğŸ‚Ö
+		ld		[ix + INFO_PLAY_ADR_L], l				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚’æ¬¡ã¸
 		ld		[ix + INFO_PLAY_ADR_H], h
-		ld		hl, [play_bgm_data_adr]				; ‰‰‘tƒf[ƒ^‚Ìæ“ªƒAƒhƒŒƒX
+		ld		hl, [play_bgm_data_adr]				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 		add		hl, de
-		ld		[play_drum_font4], hl				; ‰¹Fƒf[ƒ^ƒAƒhƒŒƒX‚ğXV
-		xor		a, a									; Šeí‰Šú‰»
+		ld		[play_drum_font4], hl				; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ›´æ–°
+		xor		a, a									; å„ç¨®åˆæœŸåŒ–
 		ld		[ix + INFO_VIB_WAIT], a
 		ld		[ix + INFO_ENV_STATE], a
 		ld		[ix + INFO_ENV_VOL], a
 		ld		[ix + INFO_VIB_INDEX], a
-		jp		bgmdriver_check_next_data			; ‘±‚¯‚ÄŸ‚Ìƒf[ƒ^‚ğˆ—‚·‚é
+		jp		bgmdriver_check_next_data			; ç¶šã‘ã¦æ¬¡ã®ãƒ‡ãƒ¼ã‚¿ã‚’å‡¦ç†ã™ã‚‹
 
-		; ƒhƒ‰ƒ€‚T‰¹Fİ’èİ’è ------------------------------------------------
+		; ãƒ‰ãƒ©ãƒ ï¼•éŸ³è‰²è¨­å®šè¨­å®š ------------------------------------------------
 bgmdriver_drum5_font:
-		ld		e, [hl]								; ‰¹Fƒf[ƒ^‚ÌƒAƒhƒŒƒX‚ğæ“¾
+		ld		e, [hl]								; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’å–å¾—
 		inc		hl
 		ld		d, [hl]
 		inc		hl
-		ld		[ix + INFO_PLAY_ADR_L], l				; ‰‰‘tƒf[ƒ^‚ğŸ‚Ö
+		ld		[ix + INFO_PLAY_ADR_L], l				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚’æ¬¡ã¸
 		ld		[ix + INFO_PLAY_ADR_H], h
-		ld		hl, [play_bgm_data_adr]				; ‰‰‘tƒf[ƒ^‚Ìæ“ªƒAƒhƒŒƒX
+		ld		hl, [play_bgm_data_adr]				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 		add		hl, de
-		ld		[play_drum_font5], hl				; ‰¹Fƒf[ƒ^ƒAƒhƒŒƒX‚ğXV
-		xor		a, a									; Šeí‰Šú‰»
+		ld		[play_drum_font5], hl				; éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’æ›´æ–°
+		xor		a, a									; å„ç¨®åˆæœŸåŒ–
 		ld		[ix + INFO_VIB_WAIT], a
 		ld		[ix + INFO_ENV_STATE], a
 		ld		[ix + INFO_ENV_VOL], a
 		ld		[ix + INFO_VIB_INDEX], a
-		jp		bgmdriver_check_next_data			; ‘±‚¯‚ÄŸ‚Ìƒf[ƒ^‚ğˆ—‚·‚é
+		jp		bgmdriver_check_next_data			; ç¶šã‘ã¦æ¬¡ã®ãƒ‡ãƒ¼ã‚¿ã‚’å‡¦ç†ã™ã‚‹
 
-		; ƒAƒhƒŒƒXƒWƒƒƒ“ƒv ----------------------------------------------------
+		; ã‚¢ãƒ‰ãƒ¬ã‚¹ã‚¸ãƒ£ãƒ³ãƒ— ----------------------------------------------------
 bgmdriver_jump:
-		ld		e, [hl]								; ”ò‚ÑæƒAƒhƒŒƒXæ“¾
+		ld		e, [hl]								; é£›ã³å…ˆã‚¢ãƒ‰ãƒ¬ã‚¹å–å¾—
 		inc		hl
 		ld		d, [hl]
-		ld		hl, [play_bgm_data_adr]				; ‰‰‘tƒf[ƒ^‚Ìæ“ªƒAƒhƒŒƒX
+		ld		hl, [play_bgm_data_adr]				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã®å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 		add		hl, de
-		ld		[ix + INFO_PLAY_ADR_L], l				; ‰‰‘tƒf[ƒ^‚ğŸ‚Ö
+		ld		[ix + INFO_PLAY_ADR_L], l				; æ¼”å¥ãƒ‡ãƒ¼ã‚¿ã‚’æ¬¡ã¸
 		ld		[ix + INFO_PLAY_ADR_H], h
-		jp		bgmdriver_check_next_data			; ‘±‚¯‚ÄŸ‚Ìƒf[ƒ^‚ğˆ—‚·‚é
+		jp		bgmdriver_check_next_data			; ç¶šã‘ã¦æ¬¡ã®ãƒ‡ãƒ¼ã‚¿ã‚’å‡¦ç†ã™ã‚‹
 
-		; ‰‰‘t’â~ ------------------------------------------------------------
+		; æ¼”å¥åœæ­¢ ------------------------------------------------------------
 bgmdriver_play_end:
 		xor		a, a
-		ld		[ix + INFO_PLAY_ADR_L], a				; ‰‰‘t’â~
+		ld		[ix + INFO_PLAY_ADR_L], a				; æ¼”å¥åœæ­¢
 		ld		[ix + INFO_PLAY_ADR_H], a
 		ld		[ix + INFO_TONE_VOL], a
 		ld		[ix + INFO_ENV_STATE], a
 		ld		[ix + INFO_ENV_VOL], a
-		jp		bgmdriver_envelope_end				; ’â~‚µ‚½‚Ì‚Åƒrƒuƒ‰[ƒg‚âƒGƒ“ƒxƒ[ƒvˆ—‚ÍƒXƒLƒbƒv
+		jp		bgmdriver_envelope_end				; åœæ­¢ã—ãŸã®ã§ãƒ“ãƒ–ãƒ©ãƒ¼ãƒˆã‚„ã‚¨ãƒ³ãƒ™ãƒ­ãƒ¼ãƒ—å‡¦ç†ã¯ã‚¹ã‚­ãƒƒãƒ—
 
-		; ƒrƒuƒ‰[ƒg‚Ìˆ— ----------------------------------------------------
+		; ãƒ“ãƒ–ãƒ©ãƒ¼ãƒˆã®å‡¦ç† ----------------------------------------------------
 bgmdriver_update_vibrato:
-		; ƒrƒuƒ‰[ƒg’x‰„ŠÔ‚ÌÅ’†‚Å‚ ‚é‚©’²‚×‚é
+		; ãƒ“ãƒ–ãƒ©ãƒ¼ãƒˆé…å»¶æ™‚é–“ã®æœ€ä¸­ã§ã‚ã‚‹ã‹èª¿ã¹ã‚‹
 		ld		a, [ix + INFO_VIB_WAIT]
 		or		a, a
 		jr		z, bgmdriver_vibrato_active
-		; ƒrƒuƒ‰[ƒg’x‰„ŠÔ‚ÌÅ’†‚Ìê‡
+		; ãƒ“ãƒ–ãƒ©ãƒ¼ãƒˆé…å»¶æ™‚é–“ã®æœ€ä¸­ã®å ´åˆ
 		dec		a
-		ld		[ix + INFO_VIB_WAIT], a				; ’x‰„ŠÔ1ƒJƒEƒ“ƒgŒo‰ß
-		; İ’èü”g”‚ğæ“¾
+		ld		[ix + INFO_VIB_WAIT], a				; é…å»¶æ™‚é–“1ã‚«ã‚¦ãƒ³ãƒˆçµŒé
+		; è¨­å®šå‘¨æ³¢æ•°ã‚’å–å¾—
 		ld		l, [ix + INFO_TONE_FREQ_L]
 		ld		h, [ix + INFO_TONE_FREQ_H]
 		jp		bgmdriver_update_freq
-		; ƒrƒuƒ‰[ƒg’x‰„ŠÔ‚ğ’E‚µ‚Ä‚¢‚éê‡
+		; ãƒ“ãƒ–ãƒ©ãƒ¼ãƒˆé…å»¶æ™‚é–“ã‚’è„±ã—ã¦ã„ã‚‹å ´åˆ
 bgmdriver_vibrato_active:
-		; ƒrƒuƒ‰[ƒgˆÊ‘ŠˆÊ’u‚ğæ“¾
+		; ãƒ“ãƒ–ãƒ©ãƒ¼ãƒˆä½ç›¸ä½ç½®ã‚’å–å¾—
 		ld		a, [ix + INFO_VIB_INDEX]
 		ld		e, a
 		inc		a
 		and		a, 31
-		ld		[ix + INFO_VIB_INDEX], a				; Ÿ‚ÌˆÊ‘Š‚Öi‚ß‚Ä‚¨‚­
-		; ˆÊ‘ŠˆÊ’u‚É‘Î‰‚·‚éƒrƒuƒ‰[ƒg”gŒ`‚ğæ“¾
+		ld		[ix + INFO_VIB_INDEX], a				; æ¬¡ã®ä½ç›¸ã¸é€²ã‚ã¦ãŠã
+		; ä½ç›¸ä½ç½®ã«å¯¾å¿œã™ã‚‹ãƒ“ãƒ–ãƒ©ãƒ¼ãƒˆæ³¢å½¢ã‚’å–å¾—
 		ld		d, 0
 		ld		l, [ix + INFO_SOUND_FONT_L]
 		ld		h, [ix + INFO_SOUND_FONT_H]
 		add		hl, de
-		ld		a, [hl]								; a © INFO_SOUND_FONT->SFONT_VIB_WAVE[ INFO_VIB_INDEX ]
-		; İ’èü”g”‚ğæ“¾
+		ld		a, [hl]								; a â† INFO_SOUND_FONT->SFONT_VIB_WAVE[ INFO_VIB_INDEX ]
+		; è¨­å®šå‘¨æ³¢æ•°ã‚’å–å¾—
 		ld		l, [ix + INFO_TONE_FREQ_L]
 		ld		h, [ix + INFO_TONE_FREQ_H]
-		; ƒrƒuƒ‰[ƒg”gŒ`‚ğ‰ÁZ
+		; ãƒ“ãƒ–ãƒ©ãƒ¼ãƒˆæ³¢å½¢ã‚’åŠ ç®—
 		or		a, a
 		jp		p, bgmdriver_vibrato_active_skip
 		ld		d, 255
 bgmdriver_vibrato_active_skip:
 		ld		e, a
 		add		hl, de
-		; PSG‚Éİ’è‚³‚ê‚éü”g”î•ñ‚ğXV
+		; PSGã«è¨­å®šã•ã‚Œã‚‹å‘¨æ³¢æ•°æƒ…å ±ã‚’æ›´æ–°
 bgmdriver_update_freq:
 		ld		[ix + INFO_EFF_FREQ_L], l
 		ld		[ix + INFO_EFF_FREQ_H], h
 
-		; ƒGƒ“ƒxƒ[ƒv‚Ìˆ— --------------------------------------------------
+		; ã‚¨ãƒ³ãƒ™ãƒ­ãƒ¼ãƒ—ã®å‡¦ç† --------------------------------------------------
 		ld		l, [ix + INFO_SOUND_FONT_L]
 		ld		h, [ix + INFO_SOUND_FONT_H]
 		ld		d, 0
-		ld		a, [ix + INFO_ENV_STATE]				; 0: AR, 1: DR, 2: SR, 3: RR, 4: ’â~’†
+		ld		a, [ix + INFO_ENV_STATE]				; 0: AR, 1: DR, 2: SR, 3: RR, 4: åœæ­¢ä¸­
 		sub		a, 1
 		jr		c, bgmdriver_envelope_ar
 		jr		z, bgmdriver_envelope_dr
@@ -684,31 +684,31 @@ bgmdriver_update_freq:
 		jr		c, bgmdriver_envelope_sr
 		jr		z, bgmdriver_envelope_rr
 		jp		bgmdriver_envelope_end
-		; ƒŠƒŠ[ƒXƒŒƒCƒg‚Ìˆ—
+		; ãƒªãƒªãƒ¼ã‚¹ãƒ¬ã‚¤ãƒˆã®å‡¦ç†
 bgmdriver_envelope_rr:
 		ld		a, [ix + INFO_ENV_VOL]
 		ld		e, SFONT_RR
 		add		hl, de
 		ld		b, [hl]
 		sub		a, b
-		ld		[ix + INFO_ENV_VOL], a					; ¦ƒtƒ‰ƒO•s•Ï
+		ld		[ix + INFO_ENV_VOL], a					; â€»ãƒ•ãƒ©ã‚°ä¸å¤‰
 		jr		nc, bgmdriver_envelope_end
 		ld		[ix + INFO_ENV_VOL], 0
-		ld		[ix + INFO_ENV_STATE], 4				; ’â~’†‚ÉˆÚs
+		ld		[ix + INFO_ENV_STATE], 4				; åœæ­¢ä¸­ã«ç§»è¡Œ
 		jp		bgmdriver_envelope_end
-		; ƒTƒXƒeƒBƒ“ƒŒƒCƒg‚Ìˆ—
+		; ã‚µã‚¹ãƒ†ã‚£ãƒ³ãƒ¬ã‚¤ãƒˆã®å‡¦ç†
 bgmdriver_envelope_sr:
 		ld		a, [ix + INFO_ENV_VOL]
 		ld		e, SFONT_SR
 		add		hl, de
 		ld		b, [hl]
 		sub		a, b
-		ld		[ix + INFO_ENV_VOL], a					; ¦ƒtƒ‰ƒO•s•Ï
+		ld		[ix + INFO_ENV_VOL], a					; â€»ãƒ•ãƒ©ã‚°ä¸å¤‰
 		jr		nc, bgmdriver_envelope_end
 		ld		[ix + INFO_ENV_VOL], 0
-		ld		[ix + INFO_ENV_STATE], 4				; ’â~’†‚ÉˆÚs
+		ld		[ix + INFO_ENV_STATE], 4				; åœæ­¢ä¸­ã«ç§»è¡Œ
 		jp		bgmdriver_envelope_end
-		; ƒfƒBƒPƒCƒŒƒCƒg‚Ìˆ—
+		; ãƒ‡ã‚£ã‚±ã‚¤ãƒ¬ã‚¤ãƒˆã®å‡¦ç†
 bgmdriver_envelope_dr:
 		ld		a, [ix + INFO_ENV_VOL]
 		ld		e, SFONT_DR
@@ -717,27 +717,27 @@ bgmdriver_envelope_dr:
 		inc		hl
 		ld		c, [hl]								; SFONT_SL
 		sub		a, b
-		ld		[ix + INFO_ENV_VOL], a					; ¦ƒtƒ‰ƒO•s•Ï
+		ld		[ix + INFO_ENV_VOL], a					; â€»ãƒ•ãƒ©ã‚°ä¸å¤‰
 		cp		a, c
 		jr		nc, bgmdriver_envelope_end
 		ld		[ix + INFO_ENV_VOL], c
-		ld		[ix + INFO_ENV_STATE], 2				; SR ‚ÉˆÚs
+		ld		[ix + INFO_ENV_STATE], 2				; SR ã«ç§»è¡Œ
 		jp		bgmdriver_envelope_end
-		; ƒAƒ^ƒbƒNƒŒƒCƒg‚Ìˆ—
+		; ã‚¢ã‚¿ãƒƒã‚¯ãƒ¬ã‚¤ãƒˆã®å‡¦ç†
 bgmdriver_envelope_ar:
 		ld		a, [ix + INFO_ENV_VOL]
 		ld		e, SFONT_AR
 		add		hl, de
 		ld		b, [hl]
 		add		a, b
-		ld		[ix + INFO_ENV_VOL], a					; ¦ƒtƒ‰ƒO•s•Ï
+		ld		[ix + INFO_ENV_VOL], a					; â€»ãƒ•ãƒ©ã‚°ä¸å¤‰
 		jr		nc, bgmdriver_envelope_end
 		ld		[ix + INFO_ENV_VOL], 255
-		ld		[ix + INFO_ENV_STATE], 1				; DR ‚ÉˆÚs
+		ld		[ix + INFO_ENV_STATE], 1				; DR ã«ç§»è¡Œ
 		jp		bgmdriver_envelope_end
 bgmdriver_envelope_end:
 
-		; ÀŒø‰¹—Ê‚ğŒvZ ------------------------------------------------------
+		; å®ŸåŠ¹éŸ³é‡ã‚’è¨ˆç®— ------------------------------------------------------
 		ld		a, [ix + INFO_TONE_VOL]
 		xor		a, 15
 		ld		b, a
@@ -754,16 +754,16 @@ bgmdriver_calc_eff_vol:
 		ret
 
 ; -----------------------------------------------------------------------------
-;	‘Ò‚¿ŠÔ“Ç‚İæ‚èˆ— [“à•”]
+;	å¾…ã¡æ™‚é–“èª­ã¿å–ã‚Šå‡¦ç† [å†…éƒ¨]
 ;	input:
-;		hl	...	‘Ò‚¿ŠÔ‚ª‹L˜^‚³‚ê‚Ä‚¢‚éƒƒ‚ƒŠ‚ÌƒAƒhƒŒƒX
+;		hl	...	å¾…ã¡æ™‚é–“ãŒè¨˜éŒ²ã•ã‚Œã¦ã„ã‚‹ãƒ¡ãƒ¢ãƒªã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 ;	output
-;		hl	...	‘Ò‚¿ŠÔ‚ÌŸ‚ÌƒAƒhƒŒƒX
-;		de	...	“Ç‚İæ‚Á‚½‘Ò‚¿ŠÔ
+;		hl	...	å¾…ã¡æ™‚é–“ã®æ¬¡ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+;		de	...	èª­ã¿å–ã£ãŸå¾…ã¡æ™‚é–“
 ;	break
 ;		a, f, d, e, h, l
 ;	comment
-;		‚È‚µ
+;		ãªã—
 ; -----------------------------------------------------------------------------
 bgmdriver_get_wait_time:
 		ld		de, 0
@@ -787,47 +787,47 @@ bgmdriver_get_wait_time_skip:
 		ret
 
 ; -----------------------------------------------------------------------------
-;	ƒtƒF[ƒhƒAƒEƒgˆ— [“à•”]
+;	ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆå‡¦ç† [å†…éƒ¨]
 ;	input:
-;		‚È‚µ
+;		ãªã—
 ;	output
-;		‚È‚µ
+;		ãªã—
 ;	break
 ;		
 ;	comment
-;		‚È‚µ
+;		ãªã—
 ; -----------------------------------------------------------------------------
 bgmdriver_fadeout_proc:
-		; ƒtƒF[ƒhƒAƒEƒgˆ—“®ì’†‚©”»’f
+		; ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆå‡¦ç†å‹•ä½œä¸­ã‹åˆ¤æ–­
 		ld		a, [play_master_volume_speed]
 		or		a, a
 		ret		z
 
-		; ‘Ò‹@’†‚©”»’f
+		; å¾…æ©Ÿä¸­ã‹åˆ¤æ–­
 		ld		a, [play_master_volume_wait]
 		or		a, a
 		jr		z, bgmdriver_fadeout_skip1
-		; ‘Ò‹@’†‚È‚ç‘Ò‚¿ŠÔŒ¸
+		; å¾…æ©Ÿä¸­ãªã‚‰å¾…ã¡æ™‚é–“æ¸›
 		dec		a
 		ld		[play_master_volume_wait], a
 		ret
-		; ‘Ò‹@’†‚Å‚È‚¢
+		; å¾…æ©Ÿä¸­ã§ãªã„
 bgmdriver_fadeout_skip1:
-		; Ÿ‚Ì‘Ò‚¿ŠÔ‚ğİ’è
+		; æ¬¡ã®å¾…ã¡æ™‚é–“ã‚’è¨­å®š
 		ld		a, [play_master_volume_speed]
 		ld		[play_master_volume_wait], a
-		; ‰¹—ÊŒ¸
+		; éŸ³é‡æ¸›
 		ld		a, [play_master_volume]
-		inc		a								; 0‚ªÅ‘å‰¹—Ê, 15‚ª–³‰¹‚È‚Ì‚ÅAinc a ‚Å‰¹—ÊŒ¸
+		inc		a								; 0ãŒæœ€å¤§éŸ³é‡, 15ãŒç„¡éŸ³ãªã®ã§ã€inc a ã§éŸ³é‡æ¸›
 		ld		[play_master_volume], a
 		cp		a, 15
 		ret		nz
-		; –³‰¹‚É‚È‚Á‚½‚çƒtƒF[ƒhƒAƒEƒg‚ğ’â~‚·‚é
+		; ç„¡éŸ³ã«ãªã£ãŸã‚‰ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆã‚’åœæ­¢ã™ã‚‹
 		xor		a, a
 		ld		[play_master_volume_speed], a
-		; ƒ}ƒXƒ^[‰¹—Ê‚àÅ‘å‚É–ß‚·
+		; ãƒã‚¹ã‚¿ãƒ¼éŸ³é‡ã‚‚æœ€å¤§ã«æˆ»ã™
 		ld		[play_master_volume], a
-		; ‰‰‘t‚à’â~‚·‚é
+		; æ¼”å¥ã‚‚åœæ­¢ã™ã‚‹
 		ld		hl, play_info_ch0
 		call	bgmdriver_init_play_info
 		ld		hl, play_info_ch1
@@ -837,40 +837,40 @@ bgmdriver_fadeout_skip1:
 		ret
 
 ; -----------------------------------------------------------------------------
-;	Œø‰Ê‰¹ˆ— [“à•”]
+;	åŠ¹æœéŸ³å‡¦ç† [å†…éƒ¨]
 ;	input:
-;		‚È‚µ
+;		ãªã—
 ;	output
-;		‚È‚µ
+;		ãªã—
 ;	break
 ;		
 ;	comment
-;		‚È‚µ
+;		ãªã—
 ; -----------------------------------------------------------------------------
 bgmdriver_sound_effect:
-		; Œø‰Ê‰¹Ä¶’†‚©”»’f
+		; åŠ¹æœéŸ³å†ç”Ÿä¸­ã‹åˆ¤æ–­
 		ld		a, [play_sound_effect_active]
 		or		a, a
 		ret		z
 
-		; ‘Ò‹@ŠÔ’†‚©”»’f
+		; å¾…æ©Ÿæ™‚é–“ä¸­ã‹åˆ¤æ–­
 		ld		a, [play_sound_effect_wait_count]
 		or		a, a
 		jr		z, bgmdriver_sound_effect_proc
-		; ‘Ò‹@ŠÔŒo‰ß
+		; å¾…æ©Ÿæ™‚é–“çµŒé
 		dec		a
 		ld		[play_sound_effect_wait_count], a
 		ret
 
-		; Œø‰Ê‰¹ˆ—
+		; åŠ¹æœéŸ³å‡¦ç†
 bgmdriver_sound_effect_proc:
 		ld		hl, [play_sound_effect_adr]
 bgmdriver_sound_effect_loop:
 		ld		a, [hl]
 		inc		hl
-		ld		[play_sound_effect_adr], hl				; Ÿ‚ÌƒAƒhƒŒƒX
+		ld		[play_sound_effect_adr], hl				; æ¬¡ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 
-		; ˆ—ƒR[ƒh‚Ì‰ğÍ
+		; å‡¦ç†ã‚³ãƒ¼ãƒ‰ã®è§£æ
 		cp		a, BGM_SE_VOL
 		jp		c, bgmdriver_sound_effect_freq_proc
 		jp		z, bgmdriver_sound_effect_volume_proc
@@ -879,63 +879,63 @@ bgmdriver_sound_effect_loop:
 		jp		z, bgmdriver_sound_effect_wait_proc
 		jp		bgmdriver_sound_effect_end_proc
 
-		; Œø‰Ê‰¹‚Ìü”g”İ’è
+		; åŠ¹æœéŸ³ã®å‘¨æ³¢æ•°è¨­å®š
 bgmdriver_sound_effect_freq_proc:
 		ld		e, [hl]
 		inc		hl
 		ld		d, [hl]
 		inc		hl
-		ld		[play_sound_effect_adr], hl				; Ÿ‚ÌƒAƒhƒŒƒX
-		ld		[play_sound_effect_freq], de			; ü”g”‚ğXV
+		ld		[play_sound_effect_adr], hl				; æ¬¡ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+		ld		[play_sound_effect_freq], de			; å‘¨æ³¢æ•°ã‚’æ›´æ–°
 		jp		bgmdriver_sound_effect_loop
 
-		; Œø‰Ê‰¹‚Ì‰¹—Êİ’è
+		; åŠ¹æœéŸ³ã®éŸ³é‡è¨­å®š
 bgmdriver_sound_effect_volume_proc:
-		ld		a, [hl]									; ‰¹—Ê‚ğæ“¾‚·‚é
+		ld		a, [hl]									; éŸ³é‡ã‚’å–å¾—ã™ã‚‹
 		inc		hl
-		ld		[play_sound_effect_volume], a			; ‰¹—Ê‚ğXV
+		ld		[play_sound_effect_volume], a			; éŸ³é‡ã‚’æ›´æ–°
 		jp		bgmdriver_sound_effect_loop
 
-		; Œø‰Ê‰¹‚ÌƒmƒCƒYü”g”İ’è
+		; åŠ¹æœéŸ³ã®ãƒã‚¤ã‚ºå‘¨æ³¢æ•°è¨­å®š
 bgmdriver_sound_effect_noise_freq_proc:
-		ld		a, [hl]									; ƒmƒCƒYü”g”‚ğæ“¾‚·‚é
+		ld		a, [hl]									; ãƒã‚¤ã‚ºå‘¨æ³¢æ•°ã‚’å–å¾—ã™ã‚‹
 		inc		hl
-		ld		[play_sound_effect_noise_freq], a		; ƒmƒCƒYü”g”‚ğXV
+		ld		[play_sound_effect_noise_freq], a		; ãƒã‚¤ã‚ºå‘¨æ³¢æ•°ã‚’æ›´æ–°
 		jp		bgmdriver_sound_effect_loop
 
-		; ’Pƒ‘Ò‹@
+		; å˜ç´”å¾…æ©Ÿ
 bgmdriver_sound_effect_wait_proc:
-		ld		a, [hl]									; ‘Ò‹@ŠÔ‚ğæ“¾‚·‚é
+		ld		a, [hl]									; å¾…æ©Ÿæ™‚é–“ã‚’å–å¾—ã™ã‚‹
 		inc		hl
-		ld		[play_sound_effect_adr], hl				; Ÿ‚ÌƒAƒhƒŒƒX
-		ld		[play_sound_effect_wait_count], a		; ‘Ò‹@ŠÔ‚ğXV
+		ld		[play_sound_effect_adr], hl				; æ¬¡ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
+		ld		[play_sound_effect_wait_count], a		; å¾…æ©Ÿæ™‚é–“ã‚’æ›´æ–°
 		ret
 
-		; Œø‰Ê‰¹’â~
+		; åŠ¹æœéŸ³åœæ­¢
 bgmdriver_sound_effect_end_proc:
 		xor		a, a
 		ld		[play_sound_effect_active], a
 		dec		a
-		ld		[play_sound_effect_priority], a			; Å’áƒvƒ‰ƒCƒIƒŠƒeƒB‚ÉXV
+		ld		[play_sound_effect_priority], a			; æœ€ä½ãƒ—ãƒ©ã‚¤ã‚ªãƒªãƒ†ã‚£ã«æ›´æ–°
 		ret
 
 ; -----------------------------------------------------------------------------
-;	ƒ~ƒLƒT[ˆ— [“à•”]
+;	ãƒŸã‚­ã‚µãƒ¼å‡¦ç† [å†…éƒ¨]
 ;	input:
-;		‚È‚µ
+;		ãªã—
 ;	output
-;		‚È‚µ
+;		ãªã—
 ;	break
 ;		a, b, c, d, e, f, h, l, ix
 ;	comment
-;		‚È‚µ
+;		ãªã—
 ; -----------------------------------------------------------------------------
 bgmdriver_mixer:
-		ld		b, 0							; tone ‚Ì on/off ƒtƒ‰ƒO [1 ‚Å on]
-		ld		e, 0							; noise ‚Ì on/off ƒtƒ‰ƒO [1 ‚Å on]
+		ld		b, 0							; tone ã® on/off ãƒ•ãƒ©ã‚° [1 ã§ on]
+		ld		e, 0							; noise ã® on/off ãƒ•ãƒ©ã‚° [1 ã§ on]
 		ld		c, PSG_REG_ADR
 
-		; ch0 ü”g”İ’è
+		; ch0 å‘¨æ³¢æ•°è¨­å®š
 		ld		d, 0
 		ld		ix, play_info_ch0
 		ld		a, [ix + INFO_EFF_FREQ_L]			; SOUND 0, [ix + INFO_EFF_FREQ_L]
@@ -946,20 +946,20 @@ bgmdriver_mixer:
 		out		[c], d
 		inc		d
 		out		[PSG_REG_WRT], a
-		; ch0 ‚Ìí—Ş”»’è
+		; ch0 ã®ç¨®é¡åˆ¤å®š
 		and		a, 0x80
-		jr		nz, bgmdriver_mixer_skip1_ch0	; ƒg[ƒ“off ‚È‚çƒXƒLƒbƒv
-		inc		b								; ch0 ‚Ìƒg[ƒ“on ‚ğ•Û
+		jr		nz, bgmdriver_mixer_skip1_ch0	; ãƒˆãƒ¼ãƒ³off ãªã‚‰ã‚¹ã‚­ãƒƒãƒ—
+		inc		b								; ch0 ã®ãƒˆãƒ¼ãƒ³on ã‚’ä¿æŒ
 bgmdriver_mixer_skip1_ch0:
 		ld		a, [ix + INFO_NOISE_FREQ]
 		bit		7, a
-		jr		z, bgmdriver_mixer_skip2_ch0	; ƒmƒCƒYoff ‚È‚çƒXƒLƒbƒv
+		jr		z, bgmdriver_mixer_skip2_ch0	; ãƒã‚¤ã‚ºoff ãªã‚‰ã‚¹ã‚­ãƒƒãƒ—
 		and		a, 31
-		ld		[play_noise_freq], a			; ƒmƒCƒYü”g”‚ğŠo‚¦‚Ä‚¨‚­
-		ld		e, 8							; ch0 ‚ÌƒmƒCƒYon ‚ğ•Û
+		ld		[play_noise_freq], a			; ãƒã‚¤ã‚ºå‘¨æ³¢æ•°ã‚’è¦šãˆã¦ãŠã
+		ld		e, 8							; ch0 ã®ãƒã‚¤ã‚ºon ã‚’ä¿æŒ
 bgmdriver_mixer_skip2_ch0:
 
-		; ch1 ü”g”İ’è
+		; ch1 å‘¨æ³¢æ•°è¨­å®š
 		ld		ix, play_info_ch1
 		ld		a, [ix + INFO_EFF_FREQ_L]			; SOUND 2, [ix + INFO_EFF_FREQ_L]
 		out		[c], d
@@ -969,28 +969,28 @@ bgmdriver_mixer_skip2_ch0:
 		out		[c], d
 		inc		d
 		out		[PSG_REG_WRT], a
-		; ch1 ‚Ìí—Ş”»’è
+		; ch1 ã®ç¨®é¡åˆ¤å®š
 		and		a, 0x80
-		jr		nz, bgmdriver_mixer_skip1_ch1	; ƒg[ƒ“off ‚È‚çƒXƒLƒbƒv
-		inc		b								; ch0 ‚Ìƒg[ƒ“on ‚ğ•Û
+		jr		nz, bgmdriver_mixer_skip1_ch1	; ãƒˆãƒ¼ãƒ³off ãªã‚‰ã‚¹ã‚­ãƒƒãƒ—
+		inc		b								; ch0 ã®ãƒˆãƒ¼ãƒ³on ã‚’ä¿æŒ
 		inc		b
 bgmdriver_mixer_skip1_ch1:
 		ld		a, [ix + INFO_NOISE_FREQ]
 		bit		7, a
-		jr		z, bgmdriver_mixer_skip2_ch1	; ƒmƒCƒYoff ‚È‚çƒXƒLƒbƒv
+		jr		z, bgmdriver_mixer_skip2_ch1	; ãƒã‚¤ã‚ºoff ãªã‚‰ã‚¹ã‚­ãƒƒãƒ—
 		and		a, 31
-		ld		[play_noise_freq], a			; ƒmƒCƒYü”g”‚ğŠo‚¦‚Ä‚¨‚­
-		ld		a, 16							; ch1 ‚ÌƒmƒCƒYon ‚ğ•Û
+		ld		[play_noise_freq], a			; ãƒã‚¤ã‚ºå‘¨æ³¢æ•°ã‚’è¦šãˆã¦ãŠã
+		ld		a, 16							; ch1 ã®ãƒã‚¤ã‚ºon ã‚’ä¿æŒ
 		add		a, e
 		ld		e, a
 bgmdriver_mixer_skip2_ch1:
 
-		; ch2 ‚Í BGM‚© Œø‰Ê‰¹‚©
+		; ch2 ã¯ BGMã‹ åŠ¹æœéŸ³ã‹
 		ld		a, [play_sound_effect_active]
 		or		a, a
 		jr		z, bgmdriver_mixer_tone_ch2
 
-		; ch2 Œø‰Ê‰¹‚Ìü”g”İ’è
+		; ch2 åŠ¹æœéŸ³ã®å‘¨æ³¢æ•°è¨­å®š
 		ld		hl, [play_sound_effect_freq]
 		ld		a, l							; SOUND 4, l
 		out		[c], d
@@ -1000,16 +1000,16 @@ bgmdriver_mixer_skip2_ch1:
 		out		[c], d
 		inc		d
 		out		[PSG_REG_WRT], a
-		; ch2 Œø‰Ê‰¹‚Ìƒg[ƒ“”­¶”»’è
+		; ch2 åŠ¹æœéŸ³ã®ãƒˆãƒ¼ãƒ³ç™ºç”Ÿåˆ¤å®š
 		and		a, 0x80
-		jr		nz, bgmdriver_mixer_skip0_ch2	; ƒg[ƒ“off ‚È‚çƒXƒLƒbƒv
+		jr		nz, bgmdriver_mixer_skip0_ch2	; ãƒˆãƒ¼ãƒ³off ãªã‚‰ã‚¹ã‚­ãƒƒãƒ—
 		inc		b
 		inc		b
 		inc		b
 		inc		b
 
 bgmdriver_mixer_skip0_ch2:
-		; ch2 Œø‰Ê‰¹‚ÌƒmƒCƒYü”g”İ’è
+		; ch2 åŠ¹æœéŸ³ã®ãƒã‚¤ã‚ºå‘¨æ³¢æ•°è¨­å®š
 		ld		a, [play_sound_effect_noise_freq]
 		bit		7, a
 		jp		z, bgmdriver_mixer_noise_freq
@@ -1017,13 +1017,13 @@ bgmdriver_mixer_skip0_ch2:
 		out		[c], d							; SOUND 6, play_sound_effect_noise_freq
 		inc		d
 		out		[PSG_REG_WRT], a
-		ld		a, 32							; ch1 ‚ÌƒmƒCƒYon ‚ğ•Û
+		ld		a, 32							; ch1 ã®ãƒã‚¤ã‚ºon ã‚’ä¿æŒ
 		add		a, e
 		ld		e, a
 		jp		bgmdriver_mixer_mix
 
 bgmdriver_mixer_tone_ch2:
-		; ch2 ü”g”İ’è
+		; ch2 å‘¨æ³¢æ•°è¨­å®š
 		ld		ix, play_info_ch2
 		ld		a, [ix + INFO_EFF_FREQ_L]		; SOUND 4, [ix + INFO_EFF_FREQ_L]
 		out		[c], d
@@ -1033,9 +1033,9 @@ bgmdriver_mixer_tone_ch2:
 		out		[c], d
 		inc		d
 		out		[PSG_REG_WRT], a
-		; ch2 ‚Ìí—Ş”»’è
+		; ch2 ã®ç¨®é¡åˆ¤å®š
 		and		a, 0x80
-		jr		nz, bgmdriver_mixer_skip1_ch2	; ƒg[ƒ“off ‚È‚çƒXƒLƒbƒv
+		jr		nz, bgmdriver_mixer_skip1_ch2	; ãƒˆãƒ¼ãƒ³off ãªã‚‰ã‚¹ã‚­ãƒƒãƒ—
 		inc		b
 		inc		b
 		inc		b
@@ -1043,23 +1043,23 @@ bgmdriver_mixer_tone_ch2:
 bgmdriver_mixer_skip1_ch2:
 		ld		a, [ix + INFO_NOISE_FREQ]
 		bit		7, a
-		jr		z, bgmdriver_mixer_skip2_ch2	; ƒmƒCƒYoff ‚È‚çƒXƒLƒbƒv
+		jr		z, bgmdriver_mixer_skip2_ch2	; ãƒã‚¤ã‚ºoff ãªã‚‰ã‚¹ã‚­ãƒƒãƒ—
 		and		a, 31
-		ld		[play_noise_freq], a			; ƒmƒCƒYü”g”‚ğŠo‚¦‚Ä‚¨‚­
-		ld		a, 32							; ch1 ‚ÌƒmƒCƒYon ‚ğ•Û
+		ld		[play_noise_freq], a			; ãƒã‚¤ã‚ºå‘¨æ³¢æ•°ã‚’è¦šãˆã¦ãŠã
+		ld		a, 32							; ch1 ã®ãƒã‚¤ã‚ºon ã‚’ä¿æŒ
 		add		a, e
 		ld		e, a
 bgmdriver_mixer_skip2_ch2:
 
 bgmdriver_mixer_noise_freq:
-		; ƒmƒCƒYü”g”
+		; ãƒã‚¤ã‚ºå‘¨æ³¢æ•°
 		out		[c], d							; SOUND 6, play_noise_freq
 		inc		d
 		ld		a, [play_noise_freq]
 		out		[PSG_REG_WRT], a
 
 bgmdriver_mixer_mix:
-		; ƒ~ƒLƒT[
+		; ãƒŸã‚­ã‚µãƒ¼
 		ld		hl, play_master_volume
 		out		[c], d							; SOUND 7, [b | e | 0x80] ^ 0x3F
 		inc		d
@@ -1069,7 +1069,7 @@ bgmdriver_mixer_mix:
 		xor		a, 0x3F
 		out		[PSG_REG_WRT], a
 
-		; ch0 ‰¹—Êİ’è
+		; ch0 éŸ³é‡è¨­å®š
 		ld		ix, play_info_ch0				; SOUND 8, [ix + INFO_EFF_VOL]
 		ld		a, [ix + INFO_EFF_VOL]
 		sub		a, [hl]
@@ -1080,7 +1080,7 @@ bgmdriver_mixer_mix_skip1:
 		inc		d
 		out		[PSG_REG_WRT], a
 
-		; ch1 ‰¹—Êİ’è
+		; ch1 éŸ³é‡è¨­å®š
 		ld		ix, play_info_ch1				; SOUND 9, [ix + INFO_EFF_VOL]
 		ld		a, [ix + INFO_EFF_VOL]
 		sub		a, [hl]
@@ -1091,14 +1091,14 @@ bgmdriver_mixer_mix_skip2:
 		inc		d
 		out		[PSG_REG_WRT], a
 
-		; ch2 ‚Í BGM‚© Œø‰Ê‰¹‚©
+		; ch2 ã¯ BGMã‹ åŠ¹æœéŸ³ã‹
 		ld		a, [play_sound_effect_active]
 		or		a, a
 		jr		z, bgmdriver_mixer_volume_ch2
 		ld		a, [play_sound_effect_volume]
 		jp		bgmdriver_mixer_volume_ch2_skip1
 bgmdriver_mixer_volume_ch2:
-		; ch2 ‰¹—Êİ’è
+		; ch2 éŸ³é‡è¨­å®š
 		ld		ix, play_info_ch2				; SOUND 10, [ix + INFO_EFF_VOL]
 		ld		a, [ix + INFO_EFF_VOL]
 		sub		a, [hl]
@@ -1114,7 +1114,7 @@ bgmdriver_mixer_volume_ch2_skip1:
 		ret
 
 ; -----------------------------------------------------------------------------
-;	ƒf[ƒ^ƒGƒŠƒA
+;	ãƒ‡ãƒ¼ã‚¿ã‚¨ãƒªã‚¢
 ; -----------------------------------------------------------------------------
 freq_data:
 		dw		3420, 3228, 3047, 2876, 2714, 2562, 2418, 2282, 2154, 2033, 1919, 1811
@@ -1127,56 +1127,56 @@ freq_data:
 		dw		  26,   25,   23,   22,   21,   20,   18,   17,   16,   15,   14,   14
 
 ; -----------------------------------------------------------------------------
-;	ƒ[ƒNƒGƒŠƒA
+;	ãƒ¯ãƒ¼ã‚¯ã‚¨ãƒªã‚¢
 ; -----------------------------------------------------------------------------
 play_sound_effect_active:
-		db		0				; Œø‰Ê‰¹Ä¶’†‚Í 1
+		db		0				; åŠ¹æœéŸ³å†ç”Ÿä¸­ã¯ 1
 play_sound_effect_wait_count:
-		db		0				; Œø‰Ê‰¹‚Ì‘Ò‹@ŠÔ
+		db		0				; åŠ¹æœéŸ³ã®å¾…æ©Ÿæ™‚é–“
 play_sound_effect_freq:
-		dw		0				; Œø‰Ê‰¹‚ÌÄ¶ü”g”
+		dw		0				; åŠ¹æœéŸ³ã®å†ç”Ÿå‘¨æ³¢æ•°
 play_sound_effect_noise_freq:
-		db		0				; Œø‰Ê‰¹‚ÌƒmƒCƒYü”g”
+		db		0				; åŠ¹æœéŸ³ã®ãƒã‚¤ã‚ºå‘¨æ³¢æ•°
 play_sound_effect_volume:
-		db		0				; Œø‰Ê‰¹‚Ì‰¹—Ê
+		db		0				; åŠ¹æœéŸ³ã®éŸ³é‡
 play_sound_effect_adr:
-		dw		0				; Ä¶’†‚ÌŒø‰Ê‰¹ƒf[ƒ^‚ÌƒAƒhƒŒƒX
+		dw		0				; å†ç”Ÿä¸­ã®åŠ¹æœéŸ³ãƒ‡ãƒ¼ã‚¿ã®ã‚¢ãƒ‰ãƒ¬ã‚¹
 play_sound_effect_priority:
-		db		255				; Ä¶’†‚ÌŒø‰Ê‰¹‚Ìƒvƒ‰ƒCƒIƒŠƒeƒB [0‚ªÅ‚]
+		db		255				; å†ç”Ÿä¸­ã®åŠ¹æœéŸ³ã®ãƒ—ãƒ©ã‚¤ã‚ªãƒªãƒ†ã‚£ [0ãŒæœ€é«˜]
 
 play_noise_freq:
-		db		0				; ÀÛ‚ÉÄ¶‚·‚éƒmƒCƒYü”g”Œˆ’è—pì‹Æ•Ï”
+		db		0				; å®Ÿéš›ã«å†ç”Ÿã™ã‚‹ãƒã‚¤ã‚ºå‘¨æ³¢æ•°æ±ºå®šç”¨ä½œæ¥­å¤‰æ•°
 
 play_bgm_data_adr:
-		dw		0				; Ä¶’†‚Ì BGMƒf[ƒ^æ“ªƒAƒhƒŒƒX
+		dw		0				; å†ç”Ÿä¸­ã® BGMãƒ‡ãƒ¼ã‚¿å…ˆé ­ã‚¢ãƒ‰ãƒ¬ã‚¹
 
 play_master_volume_wait:
-		db		0				; ƒtƒF[ƒhƒAƒEƒg—p‘Ò‹@ŠÔ
+		db		0				; ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆç”¨å¾…æ©Ÿæ™‚é–“
 play_master_volume_speed:
-		db		0				; ƒtƒF[ƒhƒAƒEƒg—p‘Ò‹@ŠÔ‰Šú’l[0‚ÍƒtƒF[ƒhƒAƒEƒg’â~’†]
+		db		0				; ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆç”¨å¾…æ©Ÿæ™‚é–“åˆæœŸå€¤[0ã¯ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆåœæ­¢ä¸­]
 play_master_volume:
-		db		0				; ƒ}ƒXƒ^[‰¹—Ê[0‚ªÅ‘å‰¹—Ê, 15‚ª–³‰¹]
+		db		0				; ãƒã‚¹ã‚¿ãƒ¼éŸ³é‡[0ãŒæœ€å¤§éŸ³é‡, 15ãŒç„¡éŸ³]
 
 play_drum_font1:
-		dw		0				; ƒhƒ‰ƒ€‰¹‚P‚Ì‰¹Fƒf[ƒ^ƒAƒhƒŒƒX
+		dw		0				; ãƒ‰ãƒ©ãƒ éŸ³ï¼‘ã®éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹
 play_drum_font2:
-		dw		0				; ƒhƒ‰ƒ€‰¹‚Q‚Ì‰¹Fƒf[ƒ^ƒAƒhƒŒƒX
+		dw		0				; ãƒ‰ãƒ©ãƒ éŸ³ï¼’ã®éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹
 play_drum_font3:
-		dw		0				; ƒhƒ‰ƒ€‰¹‚R‚Ì‰¹Fƒf[ƒ^ƒAƒhƒŒƒX
+		dw		0				; ãƒ‰ãƒ©ãƒ éŸ³ï¼“ã®éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹
 play_drum_font4:
-		dw		0				; ƒhƒ‰ƒ€‰¹‚S‚Ì‰¹Fƒf[ƒ^ƒAƒhƒŒƒX
+		dw		0				; ãƒ‰ãƒ©ãƒ éŸ³ï¼”ã®éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹
 play_drum_font5:
-		dw		0				; ƒhƒ‰ƒ€‰¹‚T‚Ì‰¹Fƒf[ƒ^ƒAƒhƒŒƒX
+		dw		0				; ãƒ‰ãƒ©ãƒ éŸ³ï¼•ã®éŸ³è‰²ãƒ‡ãƒ¼ã‚¿ã‚¢ãƒ‰ãƒ¬ã‚¹
 
 play_info_ch0:
 		repeat i, INFO_SIZE
-			db		0			; ch0 ‚Ì‰‰‘tƒf[ƒ^î•ñ
+			db		0			; ch0 ã®æ¼”å¥ãƒ‡ãƒ¼ã‚¿æƒ…å ±
 		endr
 play_info_ch1:
 		repeat i, INFO_SIZE
-			db		0			; ch1 ‚Ì‰‰‘tƒf[ƒ^î•ñ
+			db		0			; ch1 ã®æ¼”å¥ãƒ‡ãƒ¼ã‚¿æƒ…å ±
 		endr
 play_info_ch2:
 		repeat i, INFO_SIZE
-			db		0			; ch2 ‚Ì‰‰‘tƒf[ƒ^î•ñ
+			db		0			; ch2 ã®æ¼”å¥ãƒ‡ãƒ¼ã‚¿æƒ…å ±
 		endr

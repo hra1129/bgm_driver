@@ -1,5 +1,5 @@
 ; =============================================================================
-;	BGM Driver “®ìƒTƒ“ƒvƒ‹
+;	BGM Driver å‹•ä½œã‚µãƒ³ãƒ—ãƒ«
 ; -----------------------------------------------------------------------------
 ;	2020/07/15	t.hara
 ; =============================================================================
@@ -11,29 +11,29 @@
 	org			0xA000
 start_address::
 entry_point::
-	call		interrupt_initializer		; Š„‚è‚İ“o˜^
+	call		interrupt_initializer		; å‰²ã‚Šè¾¼ã¿ç™»éŒ²
 
 play_bgm001::
-	ld			hl, bgm001					; Ä¶‚·‚éBGM‚Ì’u‚©‚ê‚Ä‚éƒAƒhƒŒƒX
-	call		bgmdriver_play				; BGMÄ¶ŠJn
+	ld			hl, bgm001					; å†ç”Ÿã™ã‚‹BGMã®ç½®ã‹ã‚Œã¦ã‚‹ã‚¢ãƒ‰ãƒ¬ã‚¹
+	call		bgmdriver_play				; BGMå†ç”Ÿé–‹å§‹
 	ret
 
 stop_bgm001::
-	call		bgmdriver_stop				; BGM’â~
+	call		bgmdriver_stop				; BGMåœæ­¢
 	ret
 
 fadeout_bgm001::
-	call		bgmdriver_fadeout			; BGM‚ğ™X‚É’â~ (‰¹—Ê‚ÌƒtƒF[ƒhƒAƒEƒg)
+	call		bgmdriver_fadeout			; BGMã‚’å¾ã€…ã«åœæ­¢ (éŸ³é‡ã®ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆ)
 	ret
 
 play_se001::
-	ld			hl, sound_effect001			; Ä¶‚·‚éŒø‰Ê‰¹ƒf[ƒ^‚Ì’u‚©‚ê‚Ä‚éƒAƒhƒŒƒX
-	call		bgmdriver_play_sound_effect	; Œø‰Ê‰¹Ä¶ŠJn
+	ld			hl, sound_effect001			; å†ç”Ÿã™ã‚‹åŠ¹æœéŸ³ãƒ‡ãƒ¼ã‚¿ã®ç½®ã‹ã‚Œã¦ã‚‹ã‚¢ãƒ‰ãƒ¬ã‚¹
+	call		bgmdriver_play_sound_effect	; åŠ¹æœéŸ³å†ç”Ÿé–‹å§‹
 	ret
 
 play_se002::
-	ld			hl, sound_effect002			; Ä¶‚·‚éŒø‰Ê‰¹ƒf[ƒ^‚Ì’u‚©‚ê‚Ä‚éƒAƒhƒŒƒX
-	call		bgmdriver_play_sound_effect	; Œø‰Ê‰¹Ä¶ŠJn
+	ld			hl, sound_effect002			; å†ç”Ÿã™ã‚‹åŠ¹æœéŸ³ãƒ‡ãƒ¼ã‚¿ã®ç½®ã‹ã‚Œã¦ã‚‹ã‚¢ãƒ‰ãƒ¬ã‚¹
+	call		bgmdriver_play_sound_effect	; åŠ¹æœéŸ³å†ç”Ÿé–‹å§‹
 	ret
 
 ; =============================================================================
@@ -62,7 +62,9 @@ interrupt_initializer::
 ; =============================================================================
 	scope		h_timi_interrupt_handler
 h_timi_interrupt_handler::
+	push		af
 	call		bgmdriver_interrupt_handler
+	pop			af
 h_timi_next::
 	ret
 	ret
@@ -78,7 +80,7 @@ h_timi_next::
 bgm001::
 	include		"bgm.asm"
 sound_effect001:
-		db		32					; priority [¬‚³‚¢•û‚ª—Dæ]
+		db		32					; priority [å°ã•ã„æ–¹ãŒå„ªå…ˆ]
 		db		BGM_SE_VOL
 		db		12
 		db		BGM_SE_FREQ
@@ -115,11 +117,11 @@ sound_effect001:
 		db		1
 		db		BGM_SE_END
 sound_effect002:
-		db		128				; priority [¬‚³‚¢•û‚ª—Dæ]
+		db		128				; priority [å°ã•ã„æ–¹ãŒå„ªå…ˆ]
 		db		BGM_SE_VOL
 		db		12
 		db		BGM_SE_FREQ
-		dw		32768				; 32768 ‚É‚·‚é‚Æ TONE OFF
+		dw		32768				; 32768 ã«ã™ã‚‹ã¨ TONE OFF
 		db		BGM_SE_NOISE_FREQ
 		db		20 + 0x80
 		db		BGM_SE_WAIT
