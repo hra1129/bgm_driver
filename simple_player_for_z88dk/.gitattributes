@@ -1,0 +1,2 @@
+*.asm		diff=sjis encoding=sjis working-tree-encoding=sjis eol=CRLF
+*.txt		diff=sjis encoding=sjis working-tree-encoding=sjis eol=CRLF
