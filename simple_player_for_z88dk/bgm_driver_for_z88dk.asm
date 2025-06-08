@@ -7,7 +7,7 @@
 		include "msx.asm"
 		include "config.txt"
 
-		org		start_address					; BGMDRV.BIN は start_address〜 に読み込まれることを前提
+		org		start_address					; BGMDRV.BIN は start_address～ に読み込まれることを前提
 
 		include	"bgmdriver.asm"
 

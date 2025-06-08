@@ -439,7 +439,7 @@ USE_VDP_COMMAND		MACRO	intr_ctrl
 		message		"**********************************************************"
 		message		" VDP_COMMAND"
 		message		" input)"
-		message		"    HL ... R#32〜46 にセットする内容を格納したテーブルのアドレス"
+		message		"    HL ... R#32～46 にセットする内容を格納したテーブルのアドレス"
 		message		" output)"
 		message		"    none."
 		message		" break)"
