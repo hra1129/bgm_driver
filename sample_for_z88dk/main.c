@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------
-//	bgm_driver ‚ğ z88dk ‚©‚ç—˜—p‚·‚é‚½‚ß‚ÌƒTƒ“ƒvƒ‹
+//	bgm_driver ã‚’ z88dk ã‹ã‚‰åˆ©ç”¨ã™ã‚‹ãŸã‚ã®ã‚µãƒ³ãƒ—ãƒ«
 // ====================================================================
 //	2021/04/23	HRA!
 // --------------------------------------------------------------------
@@ -28,11 +28,11 @@ static const char se_data[] = {
 };
 
 static const char music_data[] = {
-	// ‹Èƒf[ƒ^
+	// æ›²ãƒ‡ãƒ¼ã‚¿
 	0x06, 0x00, 0x18, 0x00, 0x28, 0x00, 0x67, 0x0F, 0x68, 0x29, 0x00, 0x30, 0x07, 0x32, 0x07, 0x34,
 	0x08, 0x35, 0x07, 0x37, 0x07, 0x37, 0x08, 0x6A, 0x67, 0x0F, 0x68, 0x29, 0x00, 0x34, 0x07, 0x35,
 	0x07, 0x37, 0x08, 0x39, 0x07, 0x3B, 0x07, 0x6A, 0x6A,
-	// ‰¹Fƒf[ƒ^
+	// éŸ³è‰²ãƒ‡ãƒ¼ã‚¿
 	0x00, 0x01, 0x02, 0x02, 0x02, 0x00, 0xFE, 0xFD, 0xFD, 0xFD, 0xFE, 0x00, 0x02, 0x02, 0x02, 0x01,
 	0x00, 0xFE, 0xFD, 0xFD, 0xFD, 0xFF, 0x01, 0x02, 0x03, 0x02, 0x01, 0xFF, 0xFD, 0xFD, 0xFD, 0xFE,
 	0xFF, 0x02, 0xE0, 0x01, 0x1E, 0x14, 0x00, 0x00, 0x00,
@@ -47,23 +47,23 @@ int main( int argc, char *argv[] ) {
 
 	printf( "BGM Driver Sample Program.\n" );
 	if( !bgmdrv_init() ) {
-		//	BGMDRV.BIN “Ç‚ß‚È‚©‚Á‚½
+		//	BGMDRV.BIN èª­ã‚ãªã‹ã£ãŸ
 		return 1;
 	}
 	puts( "Success Load BGMDRV.BIN.\n" );
 
-	// ‹Èƒf[ƒ^EŒø‰Ê‰¹ƒf[ƒ^‚Í 4000hˆÈ~‚É‚È‚¯‚ê‚Î‚È‚ç‚È‚¢‚Ì‚ÅƒRƒs[‚·‚é
+	// æ›²ãƒ‡ãƒ¼ã‚¿ãƒ»åŠ¹æœéŸ³ãƒ‡ãƒ¼ã‚¿ã¯ 4000hä»¥é™ã«ãªã‘ã‚Œã°ãªã‚‰ãªã„ã®ã§ã‚³ãƒ”ãƒ¼ã™ã‚‹
 	memcpy( p_music_data, music_data, sizeof(music_data) );
 	memcpy( p_se_data, se_data, sizeof(se_data) );
 
-	// ‹ÈÄ¶
+	// æ›²å†ç”Ÿ
 	bgmdrv_play( p_music_data );
 	while( bgmdrv_check_play() ) {
 		printf( "[playing]" );
 	}
 	puts( "[stop]" );
 
-	// Œø‰Ê‰¹Ä¶
+	// åŠ¹æœéŸ³å†ç”Ÿ
 	for( j = 0; j < 4; j++ ) {
 		bgmdrv_play_se( p_se_data );
 		for( i = 0; i < 800; i++ ) {

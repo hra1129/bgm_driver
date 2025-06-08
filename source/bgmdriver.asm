@@ -201,7 +201,7 @@ bgmdriver_check_playing::
 ; -----------------------------------------------------------------------------
 ;	フェードアウト処理
 ;	input:
-;		a	...	フェードアウト速度[1〜255]
+;		a	...	フェードアウト速度[1～255]
 ;	output
 ;		なし
 ;	break
@@ -371,9 +371,9 @@ bgmdriver_check_next_data:
 		inc		hl
 		; 演奏データをデコード
 		cp		a, 96
-		jp		c, bgmdriver_keyon					; 0〜95 は KeyOn メッセージ
+		jp		c, bgmdriver_keyon					; 0～95 は KeyOn メッセージ
 		cp		a, 101
-		jp		c, bgmdriver_drum_keyon				; 96〜100 は KeyOn メッセージ
+		jp		c, bgmdriver_drum_keyon				; 96～100 は KeyOn メッセージ
 		jp		z, bgmdriver_keyoff					; 101 は KeyOff メッセージ
 		cp		a, 103
 		jp		c, bgmdriver_rest					; 102 は 休符メッセージ
