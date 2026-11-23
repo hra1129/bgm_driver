@@ -70,7 +70,7 @@ static char *load_file_image( const char *p_in_name ) {
 	in_size = ftell( p_in );
 	fseek( p_in, 0, SEEK_SET );
 
-	p_image = (char*) calloc( in_size + 1, 1 );		/* +1 は、端末文字 '¥0' の分 */
+	p_image = (char*) calloc( in_size + 1, 1 );		/* +1 は、端末文字 '\0' の分 */
 	if( p_image == NULL ) {
 		fclose( p_in );
 		return NULL;
@@ -85,9 +85,9 @@ static void skip_white_space( TEXT_T *p_text_info ) {
 	char c;
 	int is_comment = 0;
 
-	while( (c = p_text_info->p_text[ p_text_info->index ]) != '¥0' ) {
+	while( (c = p_text_info->p_text[ p_text_info->index ]) != '\0' ) {
 		if( is_comment ) {
-			if( c == '¥n' ) {
+			if( c == '\n' ) {
 				is_comment = 0;
 				p_text_info->line_no++;
 			}
@@ -95,7 +95,7 @@ static void skip_white_space( TEXT_T *p_text_info ) {
 		else if( c == ';' ) {
 			is_comment = 1;
 		}
-		else if( c == '¥n' ) {
+		else if( c == '\n' ) {
 			p_text_info->line_no++;
 		}
 		else if( !isspace( c & 255 ) ) {
@@ -134,7 +134,7 @@ static int compile_sound_font( char *p_sound_font, TEXT_T *p_text_info ) {
 	skip_white_space( p_text_info );
 	c = p_text_info->p_text[ p_text_info->index ];
 	if( c != '{' ) {
-		fprintf( stderr, "ERROR: 音色設定が見つかりません(%d)¥n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: 音色設定が見つかりません(%d)\n", p_text_info->line_no );
 		return 0;
 	}
 	p_text_info->index++;
@@ -155,7 +155,7 @@ static int compile_sound_font( char *p_sound_font, TEXT_T *p_text_info ) {
 		sound_font_count++;
 		skip_white_space( p_text_info );
 		c = p_text_info->p_text[ p_text_info->index ];
-	} while( c != '}' && c != '¥0' );
+	} while( c != '}' && c != '\0' );
 	if( c == '}' ) {
 		p_text_info->index++;
 	}
@@ -293,7 +293,7 @@ static void process_tone_data( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	}
 	tone_id += p_music_info->octave * 12;
 	if( tone_id < 0 || tone_id >= 96 ) {
-		fprintf( stderr, "ERROR: 音程指定が範囲外です(%d)¥n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: 音程指定が範囲外です(%d)\n", p_text_info->line_no );
 	}
 	length = get_length( p_music_info, p_text_info );
 
@@ -350,7 +350,7 @@ static void process_tempo( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	p_text_info->index++;
 	p_music_info->tempo = get_number( p_text_info );
 	if( p_music_info->tempo < 20 || p_music_info->tempo > 240 ) {
-		fprintf( stderr, "ERROR: T の指定が範囲外です(%d)¥n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: T の指定が範囲外です(%d)\n", p_text_info->line_no );
 		p_music_info->tempo = 120;
 	}
 }
@@ -361,7 +361,7 @@ static void process_ratio( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	p_text_info->index++;
 	p_music_info->ratio = get_number( p_text_info );
 	if( p_music_info->ratio < 1 || p_music_info->ratio > 8 ) {
-		fprintf( stderr, "ERROR: Q の指定が範囲外です(%d)¥n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: Q の指定が範囲外です(%d)\n", p_text_info->line_no );
 		p_music_info->tempo = 120;
 	}
 }
@@ -385,7 +385,7 @@ static void process_sound_font( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	}
 	sound_font = get_number( p_text_info );
 	if( sound_font >= p_music_info->sound_font_count ) {
-		fprintf( stderr, "ERROR: @ の指定が範囲外です(%d)¥n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: @ の指定が範囲外です(%d)\n", p_text_info->line_no );
 		sound_font = 0;
 	}
 	p_music_info->p_music_data[ p_music_info->index++ ] = id;
@@ -404,7 +404,7 @@ static void process_volume( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	p_text_info->index++;
 	volume = get_number( p_text_info );
 	if( volume > 15 ) {
-		fprintf( stderr, "ERROR: V の指定が範囲外です(%d)¥n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: V の指定が範囲外です(%d)\n", p_text_info->line_no );
 		volume = 15;
 	}
 	p_music_info->p_music_data[ p_music_info->index++ ] = BGM_VOL;
@@ -419,7 +419,7 @@ static void process_octave( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	p_text_info->index++;
 	p_music_info->octave = get_number( p_text_info ) - 1;
 	if( p_music_info->octave < 0 || p_music_info->octave > 7 ) {
-		fprintf( stderr, "ERROR: O の指定が範囲外です(%d)¥n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: O の指定が範囲外です(%d)\n", p_text_info->line_no );
 		p_music_info->octave = 4;
 	}
 }
@@ -430,7 +430,7 @@ static void process_octave_inc( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	p_text_info->index++;
 	p_music_info->octave++;
 	if( p_music_info->octave < 0 || p_music_info->octave > 7 ) {
-		fprintf( stderr, "ERROR: > 指定により範囲外オクターブになりました(%d)¥n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: > 指定により範囲外オクターブになりました(%d)\n", p_text_info->line_no );
 		p_music_info->octave = 7;
 	}
 }
@@ -441,7 +441,7 @@ static void process_octave_dec( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 	p_text_info->index++;
 	p_music_info->octave--;
 	if( p_music_info->octave < 0 || p_music_info->octave > 7 ) {
-		fprintf( stderr, "ERROR: < 指定により範囲外オクターブになりました(%d)¥n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: < 指定により範囲外オクターブになりました(%d)\n", p_text_info->line_no );
 		p_music_info->octave = 0;
 	}
 }
@@ -462,7 +462,7 @@ static void process_loop_start( MUSIC_T *p_music_info, TEXT_T *p_text_info ) {
 
 	p_text_info->index++;
 	if( p_music_info->loop_index != -1 ) {
-		fprintf( stderr, "WARNNING: 同一チャンネル内に $指定が複数存在します(%d)¥n", p_text_info->line_no );
+		fprintf( stderr, "WARNNING: 同一チャンネル内に $指定が複数存在します(%d)\n", p_text_info->line_no );
 	}
 	p_music_info->loop_index = p_music_info->index;
 }
@@ -490,7 +490,7 @@ static int compile_music_data( char *p_music_data, TEXT_T *p_text_info, int soun
 	skip_white_space( p_text_info );
 	c = p_text_info->p_text[ p_text_info->index ];
 	if( c != '{' ) {
-		fprintf( stderr, "ERROR: 曲データが見つかりません(%d)¥n", p_text_info->line_no );
+		fprintf( stderr, "ERROR: 曲データが見つかりません(%d)\n", p_text_info->line_no );
 		return 0;
 	}
 	p_text_info->index++;
@@ -503,7 +503,7 @@ static int compile_music_data( char *p_music_data, TEXT_T *p_text_info, int soun
 			break;
 		}
 		switch( toupper(c) ) {
-		case '¥0':	
+		case '\0':	
 			break;
 		case 'C':	case 'D':	case 'E':	case 'F':	case 'G':	case 'A':	case 'B':
 			process_tone_data( &music_info, p_text_info );
@@ -542,7 +542,7 @@ static int compile_music_data( char *p_music_data, TEXT_T *p_text_info, int soun
 			process_drum_data( &music_info, p_text_info );
 			break;
 		default:
-			fprintf( stderr, "ERROR: 解釈できない記号があります(%d)¥n", p_text_info->line_no );
+			fprintf( stderr, "ERROR: 解釈できない記号があります(%d)\n", p_text_info->line_no );
 			p_text_info->index++;
 			break;
 		}
@@ -569,16 +569,16 @@ static void fwrite_text( const char *p_buffer, int size, FILE *p_out ) {
 	for( i = 0; i < size; i++ ) {
 		mod16 = i & 15;
 		if( mod16 == 0 ) {
-			fprintf( p_out, "¥t¥tdb¥t¥t" );
+			fprintf( p_out, "\t\tdb\t\t" );
 		}
 		if( mod16 == 15 || i == (size - 1) ) {
-			fprintf( p_out, "0x%02X¥n", (int)p_buffer[i] & 255 );
+			fprintf( p_out, "0x%02X\n", (int)p_buffer[i] & 255 );
 		}
 		else {
 			fprintf( p_out, "0x%02X, ", (int)p_buffer[i] & 255 );
 		}
 	}
-	fprintf( p_out, "¥n" );
+	fprintf( p_out, "\n" );
 }
 
 /* ----------------------------------------------------- */
@@ -625,12 +625,12 @@ static void link_music_data( const char *p_out_name, char *p_sound_font_memory, 
 	/* ファイルへ書き出す */
 	p_out = fopen( p_out_name, "w" );
 	if( p_out == NULL ) {
-		fprintf( stderr, "ERROR: %s を書き出せません¥n", p_out_name );
+		fprintf( stderr, "ERROR: %s を書き出せません\n", p_out_name );
 		return;
 	}
-	fprintf( p_out, "¥t¥t; 曲データ¥n" );
+	fprintf( p_out, "\t\t; 曲データ\n" );
 	fwrite_text( p_music_data_memory, offset3, p_out );
-	fprintf( p_out, "¥t¥t; 音色データ¥n" );
+	fprintf( p_out, "\t\t; 音色データ\n" );
 	fwrite_text( p_sound_font_memory, SOUND_FONT_SIZE * sound_font_count, p_out );
 	fclose( p_out );
 }
@@ -647,33 +647,33 @@ static void mml_compile( const char *p_out_name, const char *p_text ) {
 	text_info.line_no = 1;
 	sound_font_count = compile_sound_font( sound_font_memory, &text_info );
 	if( sound_font_count == 0 ) {
-		fprintf( stderr, "ERROR: 音色データが１つもありません(%d)¥n", text_info.line_no );
+		fprintf( stderr, "ERROR: 音色データが１つもありません(%d)\n", text_info.line_no );
 	}
 	else {
-		printf( "音色データ %d 個¥n", sound_font_count );
+		printf( "音色データ %d 個\n", sound_font_count );
 	}
 	music_data_size[0] = compile_music_data( music_data_memory, &text_info, sound_font_count, BGM_HEADER_SIZE );
-	printf( "ch.0 データサイズ %d[byte]¥n", music_data_size[0] );
+	printf( "ch.0 データサイズ %d[byte]\n", music_data_size[0] );
 	music_data_size[1] = compile_music_data( music_data_memory, &text_info, sound_font_count, BGM_HEADER_SIZE + music_data_size[0] );
-	printf( "ch.1 データサイズ %d[byte]¥n", music_data_size[1] );
+	printf( "ch.1 データサイズ %d[byte]\n", music_data_size[1] );
 	music_data_size[2] = compile_music_data( music_data_memory, &text_info, sound_font_count, BGM_HEADER_SIZE + music_data_size[0] + music_data_size[1] );
-	printf( "ch.2 データサイズ %d[byte]¥n", music_data_size[2] );
+	printf( "ch.2 データサイズ %d[byte]\n", music_data_size[2] );
 	link_music_data( p_out_name, sound_font_memory, sound_font_count, music_data_memory, music_data_size );
 }
 
 /* ----------------------------------------------------- */
 static void usage( const char *p_name ) {
 
-	fprintf( stderr, "Usage> %s <in.mml> <out.asm>¥n", p_name );
+	fprintf( stderr, "Usage> %s <in.mml> <out.asm>\n", p_name );
 }
 
 /* ----------------------------------------------------- */
 int main( int argc, char *argv[] ) {
 	char *p_text;
 
-	printf( "MML Compiler¥n" );
-	printf( "===========================================¥n" );
-	printf( "2009/10/03 t.hara¥n" );
+	printf( "MML Compiler\n" );
+	printf( "===========================================\n" );
+	printf( "2009/10/03 t.hara\n" );
 
 	if( argc < 3 ) {
 		usage( argv[0] );
@@ -682,11 +682,11 @@ int main( int argc, char *argv[] ) {
 
 	p_text = load_file_image( argv[1] );
 	if( p_text == NULL ) {
-		fprintf( stderr, "ERROR: ¥"%s¥" を読み込めません¥n", argv[1] );
+		fprintf( stderr, "ERROR: \"%s\" を読み込めません\n", argv[1] );
 		return 2;
 	}
 	mml_compile( argv[2], p_text );
 	free( p_text );
-	printf( "Completed.¥n" );
+	printf( "Completed.\n" );
 	return 0;
 }

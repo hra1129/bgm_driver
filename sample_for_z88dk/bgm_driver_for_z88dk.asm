@@ -1,5 +1,5 @@
 ; --------------------------------------------------------------------
-;	bgm_driver ‚ğ z88dk ‚©‚ç—˜—p‚·‚é‚½‚ß‚ÌƒTƒ“ƒvƒ‹
+;	bgm_driver ã‚’ z88dk ã‹ã‚‰åˆ©ç”¨ã™ã‚‹ãŸã‚ã®ã‚µãƒ³ãƒ—ãƒ«
 ; ====================================================================
 ;	2021/04/23	HRA!
 ; --------------------------------------------------------------------
@@ -7,7 +7,7 @@
 		include "msx.asm"
 		include "config.txt"
 
-		org		start_address					; BGMDRV.BIN ‚Í start_address` ‚É“Ç‚İ‚Ü‚ê‚é‚±‚Æ‚ğ‘O’ñ
+		org		start_address					; BGMDRV.BIN ã¯ start_addressï½ ã«èª­ã¿è¾¼ã¾ã‚Œã‚‹ã“ã¨ã‚’å‰æ
 
 		include	"bgmdriver.asm"
 
@@ -15,7 +15,7 @@
 		scope	bgmdrv_setup_htimi
 bgmdrv_setup_htimi::
 		call	bgmdriver_initialize
-		; H.TIMI ‚É‘‚©‚ê‚Ä‚¢‚é“à—e‚ğƒoƒbƒNƒAƒbƒv‚·‚é
+		; H.TIMI ã«æ›¸ã‹ã‚Œã¦ã„ã‚‹å†…å®¹ã‚’ãƒãƒƒã‚¯ã‚¢ãƒƒãƒ—ã™ã‚‹
 		di
 		ld		hl, H_TIMI
 		ld		de, H_TIMI_BACKUP
@@ -33,7 +33,7 @@ bgmdrv_setup_htimi::
 		endif
 		ld		[h_timi_new_slot], a
 
-		; V‚µ‚¢ H.TIMI‚ğƒZƒbƒg‚·‚é
+		; æ–°ã—ã„ H.TIMIã‚’ã‚»ãƒƒãƒˆã™ã‚‹
 		ld		hl, H_TIMI_NEW
 		ld		de, H_TIMI
 		ld		bc, 5
@@ -51,7 +51,7 @@ h_timi_new_slot:
 ; --------------------------------------------------------------------
 		scope	bgmdrv_restore_htimi
 bgmdrv_restore_htimi::
-		; H.TIMI ‚É‘‚©‚ê‚Ä‚¢‚½“à—e‚ğ•œŒ³‚·‚é
+		; H.TIMI ã«æ›¸ã‹ã‚Œã¦ã„ãŸå†…å®¹ã‚’å¾©å…ƒã™ã‚‹
 		di
 		ld		hl, H_TIMI_BACKUP
 		ld		de, H_TIMI
@@ -64,8 +64,8 @@ bgmdrv_restore_htimi::
 ; --------------------------------------------------------------------
 		scope	bgmdrv_play
 bgmdrv_play::
-		pop		bc		; –ß‚èƒAƒhƒŒƒX
-		pop		hl		; ‘æ1ˆø”
+		pop		bc		; æˆ»ã‚Šã‚¢ãƒ‰ãƒ¬ã‚¹
+		pop		hl		; ç¬¬1å¼•æ•°
 		push	hl
 		push	bc
 		call	bgmdriver_play
@@ -75,8 +75,8 @@ bgmdrv_play::
 ; --------------------------------------------------------------------
 		scope	bgmdrv_play_se
 bgmdrv_play_se::
-		pop		bc		; –ß‚èƒAƒhƒŒƒX
-		pop		hl		; ‘æ1ˆø”
+		pop		bc		; æˆ»ã‚Šã‚¢ãƒ‰ãƒ¬ã‚¹
+		pop		hl		; ç¬¬1å¼•æ•°
 		push	hl
 		push	bc
 		call	bgmdriver_play_sound_effect
@@ -86,8 +86,8 @@ bgmdrv_play_se::
 ; --------------------------------------------------------------------
 		scope	bgmdrv_fade_out
 bgmdrv_fade_out::
-		pop		bc		; –ß‚èƒAƒhƒŒƒX
-		pop		hl		; ‘æ1ˆø”
+		pop		bc		; æˆ»ã‚Šã‚¢ãƒ‰ãƒ¬ã‚¹
+		pop		hl		; ç¬¬1å¼•æ•°
 		push	hl
 		push	bc
 		ld		a, h
@@ -104,9 +104,9 @@ skip1:
 bgmdrv_check_play::
 		call	bgmdriver_check_playing
 		ld		hl, 0
-		ret		z		; ’â~’†
+		ret		z		; åœæ­¢ä¸­
 		inc		hl
-		ret				; ‰‰‘t’†
+		ret				; æ¼”å¥ä¸­
 		endscope
 
 ; --------------------------------------------------------------------
